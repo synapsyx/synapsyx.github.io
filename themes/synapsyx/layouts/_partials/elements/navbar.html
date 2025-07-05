@@ -1,0 +1,55 @@
+<nav class="navbar fixed-top blur-box navbar-expand-lg">
+  <div class="container-fluid navbar-container">
+    <a href="{{ .Site.BaseURL }}" class="navbar-logo">
+      {{ $logo := resources.Get "logo/logo_dark_horizontal.svg" | minify | fingerprint }}
+      {{ if $logo }}
+        <img src="{{ $logo.RelPermalink }}" alt="{{ .Site.Title }} Logo">
+      {{ else }}
+        <span>{{ .Site.Title }}</span>
+      {{ end }}
+    </a>
+    
+    <button class="navbar-toggler" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#navbarNav" 
+            aria-controls="navbarNav" 
+            aria-expanded="false" 
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      {{ $currentPage := . }}
+      <ul class="navbar-nav ms-auto">
+      {{ range .Site.Menus.main }}
+        <li class="nav-item">
+          <a
+            href="{{ .URL | relURL }}"
+            class="nav-link">
+            {{ .Name }}
+          </a>
+        </li>
+      {{ end }}
+      </ul>
+      <div class="drag-bar"></div>  
+    </div> 
+  </div>
+
+  <!-- scroll‐progress bar -->
+  <div id="scroll-progress">
+    <div class="scroll-progress-bar"></div>
+  </div>
+</nav>
+
+<script>
+// update the progress bar on scroll
+document.addEventListener('scroll', () => {
+  const doc = document.documentElement;
+  const scrollTop = doc.scrollTop;
+  const scrollHeight = doc.scrollHeight - doc.clientHeight;
+  const pct = (scrollTop / scrollHeight) * 100;
+  const bar = document.querySelector('.scroll-progress-bar');
+  if (bar) bar.style.width = pct + '%';
+});
+</script>

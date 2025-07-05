@@ -1,0 +1,55 @@
+<!-- Loading screen overlay -->
+<div id="loading-overlay">
+    <div class="d-flex justify-content-center align-items-center h-100">
+        {{ partial "styling/animated_logo.html" . }}
+    </div>
+    <style>
+        #loading-overlay {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.96);
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        #loading-overlay.fade-out {
+            opacity: 0 !important;
+        }
+
+        .stop-scroll {
+            height: 100vh;
+            overflow: hidden;
+        }
+    </style>
+    
+    <script>
+        // Disable scrolling during loading
+        document.body.classList.add('stop-scroll');
+        
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loading-overlay');
+            // Ensure animation runs at least 2 seconds
+            setTimeout(() => {
+                loader.classList.add('fade-out');
+                // Remove overlay after fade-out transition (0.5s)
+                setTimeout(() => {
+                    loader.parentNode.removeChild(loader);
+                    document.body.classList.remove('stop-scroll');
+                }, 500);
+            }, 2000);
+        });
+
+        // Optionally skip loader on subsequent page loads
+        if (!sessionStorage.getItem('loadedOnce')) {
+            sessionStorage.setItem('loadedOnce', 'true');
+        } else {
+            const loader = document.getElementById('loading-overlay');
+            if (loader) {
+                loader.style.display = 'none';
+                document.body.classList.remove('stop-scroll');
+            }
+        }
+    </script>
+</div>

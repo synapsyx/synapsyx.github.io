@@ -1,0 +1,98 @@
+<footer class="site-footer">
+    <div class="footer-gradient-line"></div>
+
+    <div class="container py-5">
+        <div class="row">
+            <!-- Logo and About -->
+            <div class="col-lg-4 mb-4">
+                <div class="footer-logo mb-3">
+                    <a href="{{ .Site.BaseURL }}" class="navbar-logo">
+                        {{ $logo := resources.Get "logo/logo_light_horizontal.svg" | resources.Minify |
+                        resources.Fingerprint }}
+                        {{ if $logo }}
+                        <img src="{{ $logo.RelPermalink }}" alt="{{ .Site.Title }} Logo">
+                        {{ else }}
+                        <span>{{ .Site.Title }}</span>
+                        {{ end }}
+                    </a>
+                </div>
+                <p class="footer-about">
+                    Independent AI research and development, creating intelligent solutions that push technological
+                    boundaries.
+                </p>
+                <div class="social-links mt-3">
+                    <a href="https://linkedin.com/company/synapsyx" target="_blank" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/synapsyx" target="_blank" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-lg-2 col-md-4 col-6 mb-4">
+                <h5 class="footer-heading">Sections</h5>
+                <ul class="footer-links">
+                    {{ range .Site.Menus.main }}
+                    <li>
+                        <a href="{{ .URL | relURL }}" class="nav-link">
+                            {{ .Name }}
+                        </a>
+                    </li>
+                    {{ end }}
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="col-lg-4 mb-4">
+                <h5 class="footer-heading">Contact Us</h5>
+                <ul class="footer-contact">
+                    {{ with .Site.Params.contact }}
+                    {{ if .address }}
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>{{ .address }}</span>
+                    </li>
+                    {{ end }}
+
+                    {{ if .email }}
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:{{ .email }}">{{ .email }}</a>
+                    </li>
+                    {{ end }}
+
+                    {{ if .phone }}
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:{{ .phone | replaceRE " [^0-9+]" "" }}">{{ .phone }}</a>
+                    </li>
+                    {{ end }}
+                    {{ end }}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row py-3">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; {{ now.Format "2006" }} synapsy<span class="brand-highlight">x</span>. All
+                        rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <ul class="footer-legal">
+                        {{ with .Site.GetPage "privacy.md" }}
+                        <a href="{{ .RelPermalink }}">Go to subpage</a>
+                        {{ end }}
+                        <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="/terms-of-use.html">Terms of Use</a></li>
+                        <li><a href="/imprint.html">Imprint</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

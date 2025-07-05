@@ -1,0 +1,23 @@
+{{ partial "styling/svg_line_helix.html" . }}
+    
+<section class="hero-section">
+    {{ partial "styling/particles.html" . }}
+    <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+    <div class="row">
+        <div class="blur-box hero-content mx-auto col-lg-5 col-md-8 col-sm-10 text-center">
+        <h1 class="fs-1">
+            {{ .Params.title }}
+        </h1>
+        <h2 class="fs-2">
+            {{ .Params.subTitle }}
+        </h2>
+        <p class="fs-5">
+            {{ .Content | safeHTML }}
+        </p>
+        </div>
+    </div>      
+    {{ partial "elements/scroll_down.html" . }}
+    </div>
+
+    {{ partial "styling/bottom_liner.html" . }}
+</section>

@@ -1,0 +1,110 @@
+<style>
+:root {
+    --line-height: 10.2rem;
+}
+    
+html {
+    scroll-behavior: smooth;
+  }
+
+.scroll {
+    position: absolute;
+    bottom: 8rem;
+    right: 7rem;
+    text-align: center;
+    color: white;
+    z-index: 3;
+  }
+
+  .line {
+    right: -28px;
+    top: var(--line-height);
+    display: block;
+    width: 2px;
+    height: var(--line-height);
+    background-color: var(--synapsyx-theme-color);
+    background: linear-gradient(
+      to bottom,
+      rgba(var(--synapsyx-theme-color-values), 0.5),
+      rgba(var(--synapsyx-theme-color-values), 0.8) 50%,
+      rgba(var(--synapsyx-theme-color-values), 0.5)
+    );
+    z-index: 3;
+    box-shadow: 0 0 10px rgba(var(--synapsyx-theme-color-values), 0.3);
+    position: relative;
+    /* Animation for subtle effect */
+    animation: pulse 2s infinite;
+  }
+
+  @media (max-width: 992px) {
+    .hide-sm {
+      display: none;
+    }
+
+    .scroll {
+      bottom: 0;
+      right: revert;
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 0.6;
+      height: 9.5rem;
+    }
+    50% {
+      opacity: 0.8;
+      height: 10.5rem;
+    }
+    100% {
+      opacity: 0.6;
+      height: 9.5rem;
+    }
+  }
+
+  .scroll-link {
+    scroll-behavior: smooth;
+    color: #313131;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+  }
+  
+  .down-arrow {
+    bottom: 15rem;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+
+    100% {
+        opacity: 0.6;
+      transform: translateY(0);
+    }
+    50% {
+        opacity: 0.8;
+      transform: translateY(-1rem);
+    }
+    0% {
+        opacity: 0.6;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<div class="scroll">
+  <div class="line hide-sm"></div>
+  <a href="#about-us" class="scroll-link">
+    <svg
+      class="down-arrow"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width="32"
+      height="32"
+      fill="#e61264"
+      style="margin-bottom: -10px;"
+    >
+      <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z" />
+    </svg>
+    <span class="hide-sm">understand the mission</span>
+  </a>
+</div>

@@ -1,0 +1,28 @@
+{{ define "main" }}    
+    <div class="navbar-spacer"></div>
+    <section class="default-section py-5">
+    <div class="container" style="position: reltive; overflow: hidden;">
+      {{ partial "styling/diagonal_lines.html" . }}
+      <!-- Heading -->
+      <div class="row justify-content-center mb-4">
+        <div class="col-lg-8 text-center">
+          <h2 class="section-title">{{ .Title }}</h2>
+          {{ with .Params.subtitle }}
+            <div class="section-divider"></div>
+            <h3 class="section-subtitle">{{ . }}</h3>
+          {{ end }}
+        </div>
+      </div>
+      <!-- Content -->
+      <div class="row">
+        <div class="col-lg-12 mx-auto">
+          <div class="blur-box content-card">
+            {{ .Content | safeHTML }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+{{ end }}

@@ -1,0 +1,158 @@
+<style>
+    .section-partners {
+        background-color: rgba(248, 249, 250, 0.95);
+        color: #212529;
+        position: relative;
+        padding: 100px 0;
+    }
+    
+    .showcase-title {
+        text-align: center;
+        margin-bottom: 40px;
+        font-weight: 500;
+        font-size: 1.7rem;
+    }
+    
+    .highlight {
+        color: var(--synapsyx-theme-color);
+    }
+    
+    .partners-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 25px;
+    }
+    
+    .partner-item {
+        background-color: rgba(var(--synapsyx-theme-color-values), 0.05);
+        border-radius: 8px;
+        overflow: hidden;
+        height: 120px;
+        position: relative;
+        transition: transform 0.3s ease;
+    }
+    
+    .partner-item:hover {
+        transform: translateY(-5px);
+    }
+    
+    .partner-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        padding: 20px;
+    }
+    
+    .partner-logo img {
+        max-width: 100%;
+        max-height: 100%;
+        filter: grayscale(100%) brightness(1.2);
+        transition: all 0.3s ease;
+    }
+    
+    .partner-item:hover .partner-logo img {
+        filter: grayscale(0%);
+    }
+    
+    .partner-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(230, 18, 100, 0.9);
+        overflow: hidden;
+        width: 100%;
+        height: 0;
+        transition: .5s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 15px;
+    }
+    
+    .partner-item:hover .partner-overlay {
+        height: 100%;
+    }
+    
+    .partner-description {
+        color: white;
+        text-align: center;
+        margin: 0;
+        font-size: 0.9rem;
+    }
+    
+    .join-us {
+        margin-top: 30px;
+        font-size: 1.1rem;
+    }
+    
+    .contact-link {
+        color: var(--synapsyx-theme-color);
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+    
+    .contact-link:hover {
+        text-shadow: 0 0 8px rgba(230, 18, 100, 0.8);
+        color: white;
+    }
+    
+    @media (max-width: 768px) {
+        .partners-grid {
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        }
+        
+        .partner-item {
+            height: 100px;
+        }
+    }
+</style>
+
+<section id="partners" class="section-partners py-5">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <h2 class="section-title">Collaborating for Global Impact</h2>
+                <div class="section-divider"></div>
+                <h3 class="section-subtitle">Building Powerful Connections</h3>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-12 mx-auto">
+                <div class="blur-box content-card">
+                    <div class="partners-description">
+                        <p>
+                            Innovation rarely happens in isolation. At <p>synapsy<span class="brand-highlight">x</span></p>, we value strategic partnerships that enhance our capabilities and extend our reach. We actively collaborate with academic institutions, technology providers, and forward-thinking businesses both locally in Vienna and across the globe.
+                        </p>
+                        
+                        <p>
+                            Our strong emphasis on international connections allows us to participate in diverse projects and stay attuned to global trends in AI and digital transformation. We believe that by combining strengths and sharing knowledge, we can achieve more significant breakthroughs and deliver greater value. We are always open to exploring new synergistic relationships that align with our mission of pushing technological boundaries.
+                        </p>
+                    </div>
+                    
+                    <!-- Partner Logo Showcase -->
+                    <div class="partners-showcase mt-5">
+                        <h4 class="showcase-title"><span class="highlight">Our Strategic Partners</span></h4>
+                        
+                        <div class="partners-grid">
+                          {{ range .Site.Data.partners }}
+                          <div class="partner-item">
+                            <div class="partner-logo">
+                              <img src="{{ .logo | relURL }}" alt="{{ .name }}">
+                            </div>
+                            <div class="partner-overlay">
+                              <p class="partner-description">{{ .description }}</p>
+                            </div>
+                          </div>
+                          {{ end }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

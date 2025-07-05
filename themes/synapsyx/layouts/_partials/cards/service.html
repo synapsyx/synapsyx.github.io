@@ -1,0 +1,44 @@
+{{ $imageBeforeText := .Scratch.Get "imageBeforeText" }}
+{{ if $imageBeforeText }}
+<div class="row mb-5 align-items-stretch service-row">
+    <div class="col-md-6 mb-4 mb-md-0">
+        <div class="service-image-container left-image">
+            {{ $image := resources.Get .Params.image | fingerprint }}
+            <img src="{{ $image.RelPermalink }}" alt="AI Research & Development" class="img-fluid">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="blur-box service-content-card">
+            <h3>{{ .Params.title }}</h3>
+            <div class="service-divider"></div>
+            <p> {{ .Content }} </p>
+            <ul class="service-features">
+                {{ range .Params.features }}
+                <li>{{ . }}</li>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+</div>
+{{ else }}
+<div class="row mb-5 align-items-stretch service-row">
+    <div class="col-md-6 order-md-2 mb-4 mb-md-0">
+        <div class="service-image-container right-image">
+            {{ $image := resources.Get .Params.image | fingerprint }}
+            <img src="{{ $image.RelPermalink }}" alt="AI Research & Development" class="img-fluid">
+        </div>
+    </div>
+    <div class="col-md-6 order-md-1">
+        <div class="blur-box service-content-card">
+            <h3>{{ .Params.title }}</h3>
+            <div class="service-divider"></div>
+            <p> {{ .Content }} </p>
+            <ul class="service-features">
+                {{ range .Params.features }}
+                <li>{{ . }}</li>
+                {{ end }}
+            </ul>
+        </div>
+    </div>
+</div>
+{{ end }}

@@ -1,0 +1,43 @@
+<div class="hide-overflow">
+
+
+    {{ partial "styling/svg_angle_lines.html" }}
+
+    
+    <section id="services" class="services-section py-5">
+
+        <div class="container">
+            <!-- Headline -->
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title"> {{ .Params.title }} </h2>
+                    <div class="section-divider"></div>
+                    <h3 class="section-subtitle"> {{ .Params.subTitle }} </h3>
+                </div>
+            </div>
+            
+            <!-- Introduction -->
+            <div class="row mb-5">
+                <div class="col-lg-12 mx-auto">
+                    <div class="blur-box intro-card">
+                        {{ .Content | safeHTML }}
+                    </div>
+                </div>
+            </div>
+
+            {{ range $i, $content := sort .Pages "Params.weight" }}
+                {{ $isEven := eq (mod $i 2) 1 }}
+                {{ with $content }}
+                    {{ .Scratch.Set "imageBeforeText" $isEven }}
+                    {{ partial "cards/service.html" . }}
+                {{ end }}
+            {{ end }}
+            
+        </div>
+
+    </section>
+
+    <div class="flip-horizontal" style="z-index: 1;">
+        {{ partial "styling/svg_angle_lines.html" }}
+    </div>
+</div>

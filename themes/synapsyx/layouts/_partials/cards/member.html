@@ -1,0 +1,37 @@
+<div class="col-lg-3 col-md-6 mb-4">
+    <div class="card-transparet blur-box team-card h-100">
+        {{ $xMin := .Scratch.Get "xMin" }}
+        {{ $xMax := .Scratch.Get "xMax" }}
+        {{ $yMin := .Scratch.Get "yMin" }}
+        {{ $yMax := .Scratch.Get "yMax" }}
+        {{ with resources.Get .Params.image | fingerprint }}
+        <div class="fancy-border" style="
+            --x-min: {{ $xMin }};
+            --x-max: {{ $xMax }};
+            --y-min: {{ $yMin }};
+            --y-max: {{ $yMax }};
+        ">
+            <img src="{{ .RelPermalink }}" class="card-img-top" />
+        </div>
+        {{ end }}
+        <div class="card-body text-center">
+            <h5 class="card-title">{{ .Params.name }}</h5>
+            <p class="card-text text-muted">{{ .Params.position }}</p>
+            <p class="card-text small">{{ .Params.bioSummary }}</p>
+            <div class="social-links">
+                {{ if .Params.linkedin }}
+                <a href="{{ .Params.linkedin }}" target="_blank"><i class="fab fa-linkedin"></i></a>
+                {{ end }}
+                {{ if .Params.twitter }}
+                <a href="{{ .Params.twitter }}" target="_blank"><i class="fab fa-twitter"></i></a>
+                {{ end }}
+                {{ if .Params.github }}
+                <a href="{{ .Params.github }}" target="_blank"><i class="fab fa-github"></i></a>
+                {{ end }}
+                {{ if .Params.bluesky }}
+                <a href="{{ .Params.bluesky }}" target="_blank"><i class="fab fa-bluesky"></i></a>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+</div>

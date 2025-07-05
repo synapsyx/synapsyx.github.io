@@ -1,0 +1,134 @@
+<style>
+    .section-career {
+        background-color: rgba(248, 249, 250, 0.95);
+        color: #212529;
+        position: relative;
+        padding: 100px 0;
+    }
+
+    #career {        
+        .highlight {
+            color: var(--synapsyx-theme-color);
+        }
+        
+        .job-card {
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--synapsyx-theme-color);
+            transition: transform 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-card {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            border-bottom: 3px solid var(--synapsyx-theme-color);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .email-link {
+            color: var(--synapsyx-theme-color);
+            font-size: 1.3rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 15px;
+        }
+        
+        .email-link:hover {
+            color: #212529;
+            text-shadow: 0 0 5px rgba(230, 18, 100, 0.2);
+        }
+        
+        .btn-outline-theme {
+            color: var(--synapsyx-theme-color);
+            border-color: var(--synapsyx-theme-color);
+            transition: all 0.3s ease;
+            background-color: transparent;
+        }
+        
+        .btn-outline-theme:hover {
+            background-color: var(--synapsyx-theme-color);
+            color: white;
+        }
+        
+        /* Additional text color styling for the white theme */
+        p, h4, h5 {
+            color: #495057;
+        }
+        
+        .career-description p {
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .openings-container p {
+            color: #666;
+        }
+        
+        h4 {
+            color: #333;
+        }
+    }
+</style>
+
+<section id="career" class="section-career py-5">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <h2 class="section-title">Career</h2>
+                <div class="section-divider"></div>
+                <h3 class="section-subtitle">Shape the Future of AI with Us</h3>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-12 mx-auto">
+                <div class="blur-box">
+                    <div class="career-description">
+                        <p>Are you passionate about Artificial Intelligence, software innovation, and making a real impact? <p>synapsy<span class="brand-highlight">x</span></p> might be the place for you. We are a small, dynamic team of AI specialists working on cutting-edge projects at the forefront of technology.</p>
+                        <p>Based in Vienna with an international outlook, we offer a stimulating environment where you can contribute to groundbreaking research and development. We value creativity, collaboration, diverse perspectives, and a drive to find those unique "wildcard" solutions. If you thrive in an agile setting and want to grow alongside a team dedicated to technological progress, we encourage you to get in touch.</p>
+                    </div>
+                    
+                    <div class="career-openings mt-5">
+                        <h4 class="mb-4"><span class="highlight">Current Openings</span></h4>
+                        <div class="openings-container">
+                            <p>We currently have no open positions, but are always interested in hearing from talented individuals.</p>
+                            <!-- Uncomment and modify as needed when positions are available -->
+                            <!--
+                            <div class="job-card">
+                                <h5>AI Research Scientist</h5>
+                                <p>Join our research team to develop next-generation AI models and applications.</p>
+                                <a href="#" class="btn btn-outline-theme">Learn More</a>
+                            </div>
+                            
+                            <div class="job-card">
+                                <h5>Full-Stack Developer (AI Focus)</h5>
+                                <p>Help build the infrastructure and applications that bring our AI solutions to life.</p>
+                                <a href="#" class="btn btn-outline-theme">Learn More</a>
+                            </div>
+                            -->
+                        </div>
+                    </div>
+                    
+                    <div class="career-contact mt-5">
+                        <div class="contact-card">
+                            <h4 class="mb-3">Join Our Team</h4>
+                            <p>Interested in joining us? Send your resume and a cover letter explaining your passion for AI and innovation to:</p>
+                            <a href="mailto:careers@synapsyx.ai" class="email-link">careers@synapsyx.ai</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

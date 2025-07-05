@@ -1,0 +1,22 @@
+<section id="about-us" class="about-us">
+  {{ partial "styling/svg_line_fan.html" . }}
+  <div class="container about-us-content">
+    <div class="row justify-content-center mb-3">
+      <div class="col-lg-8 text-center">
+        <h2 class="section-title">{{ .Params.title }}</h2>
+        <div class="section-divider"></div>
+        <h3 class="section-subtitle">{{ .Params.subtitle }}</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+        <div class="blur-box about-content-card">
+          {{ .Content | safeHTML }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flip-horizontal">
+    {{ partial "styling/svg_line_fan.html" . }}
+  </div>
+</section>
