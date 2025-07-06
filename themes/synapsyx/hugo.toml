@@ -1,5 +1,3 @@
-baseURL = "/"
-uglyURLs = true
 relativeURLs = true
 languageCode = 'en-us'
 title = 'synapsyx'
@@ -28,7 +26,6 @@ theme = 'synapsyx'
     name = "About us"
     url = "#about-us"
     weight = 10
-
 
 [caches]
   [caches.images]
