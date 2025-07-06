@@ -1,131 +1,110 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Home on synapsyx</title>
-    <link>//localhost:1313/</link>
-    <description>Recent content in Home on synapsyx</description>
-    <generator>Hugo</generator>
+    <title>synapsyx</title>
+    <link>/</link>
+    <description>Recent content on synapsyx</description>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 04 Jul 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AI Research &amp; Development</title>
-      <link>//localhost:1313/sections/services/ai-research-development.html</link>
+      <link>/sections/services/ai-research-development/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/sections/services/ai-research-development.html</guid>
-      <description>&lt;p&gt;We&amp;rsquo;re at the forefront of artificial intelligence innovation, creating custom algorithms and models that solve complex problems. Our research team explores emerging AI technologies, including machine learning, neural networks, and natural language processing, to develop solutions that give our clients a competitive edge.&lt;/p&gt;</description>
+      <guid>/sections/services/ai-research-development/</guid>
+      <description>We&amp;rsquo;re at the forefront of artificial intelligence innovation, creating custom algorithms and models that solve complex problems. Our research team explores emerging AI technologies, including machine learning, neural networks, and natural language processing, to develop solutions that give our clients a competitive edge.</description>
     </item>
     <item>
       <title>AI Software Applications</title>
-      <link>//localhost:1313/sections/services/ai-software-applications.html</link>
+      <link>/sections/services/ai-software-applications/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/sections/services/ai-software-applications.html</guid>
-      <description>&lt;p&gt;We transform AI concepts into practical, scalable software solutions tailored to your specific business needs. Our development team creates intelligent applications that automate processes, analyze data, and provide actionable insights, helping your organization operate more efficiently.&lt;/p&gt;</description>
+      <guid>/sections/services/ai-software-applications/</guid>
+      <description>We transform AI concepts into practical, scalable software solutions tailored to your specific business needs. Our development team creates intelligent applications that automate processes, analyze data, and provide actionable insights, helping your organization operate more efficiently.</description>
     </item>
     <item>
       <title>Digitization Strategy</title>
-      <link>//localhost:1313/sections/services/digitization-strategy.html</link>
+      <link>/sections/services/digitization-strategy/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/sections/services/digitization-strategy.html</guid>
-      <description>&lt;p&gt;We guide businesses through digital transformation with comprehensive strategies that modernize operations and enhance productivity. Our approach focuses on identifying opportunities for automation, data integration, and digital workflow optimization to keep you competitive in today&amp;rsquo;s fast-paced digital economy.&lt;/p&gt;</description>
+      <guid>/sections/services/digitization-strategy/</guid>
+      <description>We guide businesses through digital transformation with comprehensive strategies that modernize operations and enhance productivity. Our approach focuses on identifying opportunities for automation, data integration, and digital workflow optimization to keep you competitive in today&amp;rsquo;s fast-paced digital economy.</description>
     </item>
     <item>
       <title>Website &amp; Platform Development</title>
-      <link>//localhost:1313/sections/services/website-platform-development.html</link>
+      <link>/sections/services/website-platform-development/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/sections/services/website-platform-development.html</guid>
-      <description>&lt;p&gt;We design and build responsive, user-friendly websites and complex digital platforms that provide exceptional user experiences. From corporate websites to sophisticated e-commerce platforms, we create digital presences that engage users and achieve business objectives.&lt;/p&gt;</description>
+      <guid>/sections/services/website-platform-development/</guid>
+      <description>We design and build responsive, user-friendly websites and complex digital platforms that provide exceptional user experiences. From corporate websites to sophisticated e-commerce platforms, we create digital presences that engage users and achieve business objectives.</description>
     </item>
     <item>
       <title>Digital Marketing Support</title>
-      <link>//localhost:1313/sections/services/digital-marketing-support.html</link>
+      <link>/sections/services/digital-marketing-support/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/sections/services/digital-marketing-support.html</guid>
-      <description>&lt;p&gt;We enhance your online visibility and engagement through strategic digital marketing solutions. Our approach combines data analytics, content strategy, and targeted campaigns to attract and convert your ideal customers, building lasting relationships and driving business growth.&lt;/p&gt;</description>
+      <guid>/sections/services/digital-marketing-support/</guid>
+      <description>We enhance your online visibility and engagement through strategic digital marketing solutions. Our approach combines data analytics, content strategy, and targeted campaigns to attract and convert your ideal customers, building lasting relationships and driving business growth.</description>
     </item>
     <item>
       <title></title>
-      <link>//localhost:1313/imprint.html</link>
+      <link>/imprint/</link>
       <pubDate>Fri, 04 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/imprint.html</guid>
-      <description>&lt;h1 id=&#34;imprint&#34;&gt;Imprint&lt;/h1&gt;&#xA;&lt;p&gt;Company Name GmbH&lt;br&gt;&#xA;1234 Sample Street&lt;br&gt;&#xA;1010 Vienna, Austria&lt;/p&gt;&#xA;&lt;h2 id=&#34;managing-directors&#34;&gt;Managing Directors&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Michael Strobl, BSc.&lt;/li&gt;&#xA;&lt;li&gt;Georg Thurnwalder, LL.B.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;contact&#34;&gt;Contact&lt;/h2&gt;&#xA;&lt;p&gt;Phone: +43 1 234 5678&lt;br&gt;&#xA;Email: &lt;a href=&#34;mailto:contact@synapsyx.com&#34;&gt;contact@synapsyx.com&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;legal-information&#34;&gt;Legal Information&lt;/h2&gt;&#xA;&lt;p&gt;This imprint complies with the requirements of Austrian law and the EU E-Commerce Directive.&lt;/p&gt;</description>
+      <guid>/imprint/</guid>
+      <description>Imprint Company Name GmbH&#xA;1234 Sample Street&#xA;1010 Vienna, Austria&#xA;Managing Directors Michael Strobl, BSc. Georg Thurnwalder, LL.B. Contact Phone: +43 1 234 5678&#xA;Email: contact@synapsyx.com&#xA;Legal Information This imprint complies with the requirements of Austrian law and the EU E-Commerce Directive.</description>
     </item>
     <item>
       <title></title>
-      <link>//localhost:1313/privacy-policy.html</link>
+      <link>/privacy-policy/</link>
       <pubDate>Fri, 04 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/privacy-policy.html</guid>
-      <description>&lt;h1 id=&#34;privacy-policy&#34;&gt;Privacy Policy&lt;/h1&gt;&#xA;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vehicula, nunc at fermentum venenatis, odio orci placerat nunc, sed facilisis tellus leo vitae purus. Phasellus vitae massa nec sapien vestibulum lobortis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed euismod, erat eu egestas suscipit, metus nisl egestas erat, sit amet luctus nisl dolor non risus.&lt;/p&gt;&#xA;&lt;h2 id=&#34;data-we-collect&#34;&gt;Data We Collect&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Vestibulum ante ipsum primis in faucibus.&lt;/li&gt;&#xA;&lt;li&gt;Proin quis nisi at urna placerat.&lt;/li&gt;&#xA;&lt;li&gt;Curabitur vel lorem et elit tincidunt dignissim.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;how-we-use-your-data&#34;&gt;How We Use Your Data&lt;/h2&gt;&#xA;&lt;p&gt;Donec a odio sit amet lacus ultrices volutpat. Integer quis dolor sit amet libero dictum tempor sed in eros.&lt;/p&gt;</description>
+      <guid>/privacy-policy/</guid>
+      <description>Privacy Policy Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vehicula, nunc at fermentum venenatis, odio orci placerat nunc, sed facilisis tellus leo vitae purus. Phasellus vitae massa nec sapien vestibulum lobortis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed euismod, erat eu egestas suscipit, metus nisl egestas erat, sit amet luctus nisl dolor non risus.&#xA;Data We Collect Vestibulum ante ipsum primis in faucibus.</description>
     </item>
     <item>
       <title></title>
-      <link>//localhost:1313/terms-of-use.html</link>
+      <link>/terms-of-use/</link>
       <pubDate>Fri, 04 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/terms-of-use.html</guid>
-      <description>&lt;h1 id=&#34;terms-of-use&#34;&gt;Terms of Use&lt;/h1&gt;&#xA;&lt;p&gt;Praesent ut ligula non mi varius sagittis. Fusce convallis, mauris imperdiet gravida bibendum, nisl ante aliquam elit, at elementum purus nunc et sapien. Aliquam erat volutpat.&lt;/p&gt;&#xA;&lt;h2 id=&#34;acceptance-of-terms&#34;&gt;Acceptance of Terms&lt;/h2&gt;&#xA;&lt;p&gt;By accessing or using this site, you agree to be bound by these Terms of Use.&lt;/p&gt;&#xA;&lt;h2 id=&#34;user-responsibilities&#34;&gt;User Responsibilities&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;You will not misuse the services.&lt;/li&gt;&#xA;&lt;li&gt;You will comply with all applicable laws.&lt;/li&gt;&#xA;&lt;li&gt;You will not attempt to disrupt site functionality.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;limitation-of-liability&#34;&gt;Limitation of Liability&lt;/h2&gt;&#xA;&lt;p&gt;Sed in libero ut nibh placerat accumsan. Praesent convallis urna a lacus interdum ut hendrerit risus congue.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Post 3</title>
-      <link>//localhost:1313/posts/post-3.html</link>
-      <pubDate>Wed, 15 Mar 2023 11:00:00 -0700</pubDate>
-      <guid>//localhost:1313/posts/post-3.html</guid>
-      <description>&lt;p&gt;Occaecat aliqua consequat laborum ut ex aute aliqua culpa quis irure esse magna dolore quis. Proident fugiat labore eu laboris officia Lorem enim. Ipsum occaecat cillum ut tempor id sint aliqua incididunt nisi incididunt reprehenderit. Voluptate ad minim sint est aute aliquip esse occaecat tempor officia qui sunt. Aute ex ipsum id ut in est velit est laborum incididunt. Aliqua qui id do esse sunt eiusmod id deserunt eu nostrud aute sit ipsum. Deserunt esse cillum Lorem non magna adipisicing mollit amet consequat.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Post 2</title>
-      <link>//localhost:1313/posts/post-2.html</link>
-      <pubDate>Wed, 15 Feb 2023 10:00:00 -0700</pubDate>
-      <guid>//localhost:1313/posts/post-2.html</guid>
-      <description>&lt;p&gt;Anim eiusmod irure incididunt sint cupidatat. Incididunt irure irure irure nisi ipsum do ut quis fugiat consectetur proident cupidatat incididunt cillum. Dolore voluptate occaecat qui mollit laborum ullamco et. Ipsum laboris officia anim laboris culpa eiusmod ex magna ex cupidatat anim ipsum aute. Mollit aliquip occaecat qui sunt velit ut cupidatat reprehenderit enim sunt laborum. Velit veniam in officia nulla adipisicing ut duis officia.&lt;/p&gt;&#xA;&lt;p&gt;Exercitation voluptate irure in irure tempor mollit Lorem nostrud ad officia. Velit id fugiat occaecat do tempor. Sit officia Lorem aliquip eu deserunt consectetur. Aute proident deserunt in nulla aliquip dolore ipsum Lorem ut cupidatat consectetur sit sint laborum. Esse cupidatat sit sint sunt tempor exercitation deserunt. Labore dolor duis laborum est do nisi ut veniam dolor et nostrud nostrud.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Post 1</title>
-      <link>//localhost:1313/posts/post-1.html</link>
-      <pubDate>Sun, 15 Jan 2023 09:00:00 -0700</pubDate>
-      <guid>//localhost:1313/posts/post-1.html</guid>
-      <description>&lt;p&gt;Tempor proident minim aliquip reprehenderit dolor et ad anim Lorem duis sint eiusmod. Labore ut ea duis dolor. Incididunt consectetur proident qui occaecat incididunt do nisi Lorem. Tempor do laborum elit laboris excepteur eiusmod do. Eiusmod nisi excepteur ut amet pariatur adipisicing Lorem.&lt;/p&gt;&#xA;&lt;p&gt;Occaecat nulla excepteur dolore excepteur duis eiusmod ullamco officia anim in voluptate ea occaecat officia. Cillum sint esse velit ea officia minim fugiat. Elit ea esse id aliquip pariatur cupidatat id duis minim incididunt ea ea. Anim ut duis sunt nisi. Culpa cillum sit voluptate voluptate eiusmod dolor. Enim nisi Lorem ipsum irure est excepteur voluptate eu in enim nisi. Nostrud ipsum Lorem anim sint labore consequat do.&lt;/p&gt;</description>
+      <guid>/terms-of-use/</guid>
+      <description>Terms of Use Praesent ut ligula non mi varius sagittis. Fusce convallis, mauris imperdiet gravida bibendum, nisl ante aliquam elit, at elementum purus nunc et sapien. Aliquam erat volutpat.&#xA;Acceptance of Terms By accessing or using this site, you agree to be bound by these Terms of Use.&#xA;User Responsibilities You will not misuse the services. You will comply with all applicable laws. You will not attempt to disrupt site functionality.</description>
     </item>
     <item>
       <title></title>
-      <link>//localhost:1313/sections/team/george.html</link>
+      <link>/sections/team/george/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/sections/team/george.html</guid>
+      <guid>/sections/team/george/</guid>
       <description></description>
     </item>
     <item>
       <title></title>
-      <link>//localhost:1313/sections/team/mathias.html</link>
+      <link>/sections/team/mathias/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/sections/team/mathias.html</guid>
+      <guid>/sections/team/mathias/</guid>
       <description></description>
     </item>
     <item>
       <title></title>
-      <link>//localhost:1313/sections/team/peter.html</link>
+      <link>/sections/team/peter/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/sections/team/peter.html</guid>
+      <guid>/sections/team/peter/</guid>
       <description></description>
     </item>
     <item>
       <title></title>
-      <link>//localhost:1313/sections/team/strudl.html</link>
+      <link>/sections/team/strudl/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/sections/team/strudl.html</guid>
+      <guid>/sections/team/strudl/</guid>
       <description></description>
     </item>
     <item>
       <title>About Us</title>
-      <link>//localhost:1313/sections/about-us.html</link>
+      <link>/sections/about-us/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/sections/about-us.html</guid>
-      <description>&lt;p&gt;synapsy&lt;!-- raw HTML omitted --&gt;x&lt;!-- raw HTML omitted --&gt; is an independent research, development, and distribution company headquartered in Vienna, Austria. We are passionate about the transformative potential of software applications, particularly in the realm of Artificial Intelligence. Our mission is to explore, innovate, and deliver intelligent solutions that redefine possibilities.&lt;/p&gt;&#xA;&lt;p&gt;While deeply rooted in the vibrant tech scene of Vienna, our perspective is inherently international. We cultivate global connections and draw upon diverse experiences to enrich our work. We aren’t just developers; we are thinkers, researchers, and problem-solvers who thrive on tackling complex challenges.&lt;/p&gt;</description>
+      <guid>/sections/about-us/</guid>
+      <description>synapsyx is an independent research, development, and distribution company headquartered in Vienna, Austria. We are passionate about the transformative potential of software applications, particularly in the realm of Artificial Intelligence. Our mission is to explore, innovate, and deliver intelligent solutions that redefine possibilities.&#xA;While deeply rooted in the vibrant tech scene of Vienna, our perspective is inherently international. We cultivate global connections and draw upon diverse experiences to enrich our work.</description>
     </item>
     <item>
       <title>Driving Innovation through Technology and Digital Excellence</title>
-      <link>//localhost:1313/sections/hero-section.html</link>
+      <link>/sections/hero-section/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>//localhost:1313/sections/hero-section.html</guid>
-      <description>&lt;p&gt;Harness the power of intelligent software that bridges ideas, data and people.&#xA;From first spark to full-scale deployment, we turn scattered insights into seamless, high-impact solutions — so every dot you connect moves business forward.&lt;/p&gt;</description>
+      <guid>/sections/hero-section/</guid>
+      <description>Harness the power of intelligent software that bridges ideas, data and people. From first spark to full-scale deployment, we turn scattered insights into seamless, high-impact solutions — so every dot you connect moves business forward.</description>
     </item>
   </channel>
 </rss>
