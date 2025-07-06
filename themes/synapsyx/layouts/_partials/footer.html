@@ -84,12 +84,15 @@
                 </div>
                 <div class="col-md-6 text-center text-md-end">
                     <ul class="footer-legal">
-                        {{ with .Site.GetPage "privacy.md" }}
-                        <a href="{{ .RelPermalink }}">Go to subpage</a>
+                        {{ with .Site.GetPage "privacy-policy.md" }}
+                        <li><a href="{{ .RelPermalink }}">Privacy Policy</a></li>
                         {{ end }}
-                        <li><a href="/privacy-policy.html">Privacy Policy</a></li>
-                        <li><a href="/terms-of-use.html">Terms of Use</a></li>
-                        <li><a href="/imprint.html">Imprint</a></li>
+                        {{ with .Site.GetPage "terms-of-use.md" }}
+                        <li><a href="{{ .RelPermalink }}">Terms of Use</a></li>
+                        {{ end }}
+                        {{ with .Site.GetPage "imprint.md" }}
+                        <li><a href="{{ .RelPermalink }}">Imprint</a></li>
+                        {{ end }}
                     </ul>
                 </div>
             </div>
