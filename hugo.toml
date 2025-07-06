@@ -1,5 +1,4 @@
-baseURL = "/"
-uglyURLs = true
+
 relativeURLs = true
 languageCode = 'en-us'
 title = 'synapsyx'
