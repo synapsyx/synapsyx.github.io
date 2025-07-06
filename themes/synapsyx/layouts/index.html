@@ -1,0 +1,7 @@
+{{ define "main" }}
+  {{ partial "disqus.html" . }}
+  {{ partial "sections/hero-section.html" (site.GetPage "sections/hero-section") }}
+  {{ partial "sections/about-us.html" (site.GetPage "sections/about-us") }}
+  {{ partial "sections/services.html" (site.GetPage "sections/services") }}
+  {{ partial "sections/team.html" (site.GetPage "sections/team") }}
+{{ end }}
