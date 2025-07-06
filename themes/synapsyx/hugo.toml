@@ -1,24 +1,35 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-US'
-title = 'My New Hugo Site'
+baseURL = "/"
+uglyURLs = true
+relativeURLs = true
+languageCode = 'en-us'
+title = 'synapsyx'
+theme = 'synapsyx'
+[params]
+  logo = 'assets/logo/logo_light.png'
+  favicon = 'favicon.ico'
+  brandword = "synapsyx"
+  brandhtml = "synapsy<span class=\"brand-highlight\">x</span>"
+  [params.contact]
+    email = "contact@synapsyx.com"
+    address = "Steigteschgasse 13, 1220 Wien"
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
 
-[menus]
-  [[menus.main]]
-    name = 'Home'
-    pageRef = '/'
+[menu]
+  [[menu.main]]
+    name = "Services"
+    url = "#services" 
+    weight = 20
+  [[menu.main]]
+    name = "Team"
+    url = "#team"
+    weight = 30
+  [[menu.main]]
+    name = "About us"
+    url = "#about-us"
     weight = 10
 
-  [[menus.main]]
-    name = 'Posts'
-    pageRef = '/posts'
-    weight = 20
 
-  [[menus.main]]
-    name = 'Tags'
-    pageRef = '/tags'
-    weight = 30
-
-[module]
-  [module.hugoVersion]
-    extended = false
-    min = '0.146.0'
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
