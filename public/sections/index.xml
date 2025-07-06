@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sections on synapsyx</title>
-    <link>/sections/</link>
+    <link>//localhost:1313/sections.html</link>
     <description>Recent content in Sections on synapsyx</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="/sections/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/sections/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About Us</title>
-      <link>/sections/about-us/</link>
+      <link>//localhost:1313/sections/about-us.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/sections/about-us/</guid>
-      <description>synapsyx is an independent research, development, and distribution company headquartered in Vienna, Austria. We are passionate about the transformative potential of software applications, particularly in the realm of Artificial Intelligence. Our mission is to explore, innovate, and deliver intelligent solutions that redefine possibilities.&#xA;While deeply rooted in the vibrant tech scene of Vienna, our perspective is inherently international. We cultivate global connections and draw upon diverse experiences to enrich our work.</description>
+      <guid>//localhost:1313/sections/about-us.html</guid>
+      <description>&lt;p&gt;synapsy&lt;!-- raw HTML omitted --&gt;x&lt;!-- raw HTML omitted --&gt; is an independent research, development, and distribution company headquartered in Vienna, Austria. We are passionate about the transformative potential of software applications, particularly in the realm of Artificial Intelligence. Our mission is to explore, innovate, and deliver intelligent solutions that redefine possibilities.&lt;/p&gt;&#xA;&lt;p&gt;While deeply rooted in the vibrant tech scene of Vienna, our perspective is inherently international. We cultivate global connections and draw upon diverse experiences to enrich our work. We aren’t just developers; we are thinkers, researchers, and problem-solvers who thrive on tackling complex challenges.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Driving Innovation through Technology and Digital Excellence</title>
-      <link>/sections/hero-section/</link>
+      <link>//localhost:1313/sections/hero-section.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/sections/hero-section/</guid>
-      <description>Harness the power of intelligent software that bridges ideas, data and people. From first spark to full-scale deployment, we turn scattered insights into seamless, high-impact solutions — so every dot you connect moves business forward.</description>
+      <guid>//localhost:1313/sections/hero-section.html</guid>
+      <description>&lt;p&gt;Harness the power of intelligent software that bridges ideas, data and people.&#xA;From first spark to full-scale deployment, we turn scattered insights into seamless, high-impact solutions — so every dot you connect moves business forward.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

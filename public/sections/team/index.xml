@@ -2,37 +2,37 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Our Team on synapsyx</title>
-    <link>/sections/team/</link>
+    <link>//localhost:1313/sections/team.html</link>
     <description>Recent content in Our Team on synapsyx</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="/sections/team/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//localhost:1313/sections/team/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
-      <link>/sections/team/george/</link>
+      <link>//localhost:1313/sections/team/george.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/sections/team/george/</guid>
+      <guid>//localhost:1313/sections/team/george.html</guid>
       <description></description>
     </item>
     <item>
       <title></title>
-      <link>/sections/team/mathias/</link>
+      <link>//localhost:1313/sections/team/mathias.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/sections/team/mathias/</guid>
+      <guid>//localhost:1313/sections/team/mathias.html</guid>
       <description></description>
     </item>
     <item>
       <title></title>
-      <link>/sections/team/peter/</link>
+      <link>//localhost:1313/sections/team/peter.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/sections/team/peter/</guid>
+      <guid>//localhost:1313/sections/team/peter.html</guid>
       <description></description>
     </item>
     <item>
       <title></title>
-      <link>/sections/team/strudl/</link>
+      <link>//localhost:1313/sections/team/strudl.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/sections/team/strudl/</guid>
+      <guid>//localhost:1313/sections/team/strudl.html</guid>
       <description></description>
     </item>
   </channel>
