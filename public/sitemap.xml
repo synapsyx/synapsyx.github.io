@@ -2,70 +2,48 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>//localhost:1313/sections/services/ai-research-development.html</loc>
+    <loc>https://synapsyx.github.io/website/sections/services/ai-research-development/</loc>
   </url><url>
-    <loc>//localhost:1313/sections/services/ai-software-applications.html</loc>
+    <loc>https://synapsyx.github.io/website/sections/services/ai-software-applications/</loc>
   </url><url>
-    <loc>//localhost:1313/sections/services/digitization-strategy.html</loc>
+    <loc>https://synapsyx.github.io/website/sections/services/digitization-strategy/</loc>
   </url><url>
-    <loc>//localhost:1313/sections/services/website-platform-development.html</loc>
+    <loc>https://synapsyx.github.io/website/sections/services/website-platform-development/</loc>
   </url><url>
-    <loc>//localhost:1313/sections/services/digital-marketing-support.html</loc>
+    <loc>https://synapsyx.github.io/website/sections/services/digital-marketing-support/</loc>
   </url><url>
-    <loc>//localhost:1313/imprint.html</loc>
+    <loc>https://synapsyx.github.io/website/imprint/</loc>
     <lastmod>2025-07-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/privacy-policy.html</loc>
+    <loc>https://synapsyx.github.io/website/privacy-policy/</loc>
     <lastmod>2025-07-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/terms-of-use.html</loc>
+    <loc>https://synapsyx.github.io/website/terms-of-use/</loc>
     <lastmod>2025-07-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/blue.html</loc>
-    <lastmod>2023-03-15T11:00:00-07:00</lastmod>
+    <loc>https://synapsyx.github.io/website/</loc>
+    <lastmod>2025-07-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/green.html</loc>
-    <lastmod>2023-03-15T11:00:00-07:00</lastmod>
+    <loc>https://synapsyx.github.io/website/sections/team/george/</loc>
   </url><url>
-    <loc>//localhost:1313/posts/post-3.html</loc>
-    <lastmod>2023-03-15T11:00:00-07:00</lastmod>
+    <loc>https://synapsyx.github.io/website/sections/team/mathias/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/red.html</loc>
-    <lastmod>2023-03-15T11:00:00-07:00</lastmod>
+    <loc>https://synapsyx.github.io/website/sections/team/peter/</loc>
   </url><url>
-    <loc>//localhost:1313/tags.html</loc>
-    <lastmod>2023-03-15T11:00:00-07:00</lastmod>
+    <loc>https://synapsyx.github.io/website/sections/team/strudl/</loc>
   </url><url>
-    <loc>//localhost:1313/posts/post-2.html</loc>
-    <lastmod>2023-02-15T10:00:00-07:00</lastmod>
+    <loc>https://synapsyx.github.io/website/sections/about-us/</loc>
   </url><url>
-    <loc>//localhost:1313/posts/post-1.html</loc>
-    <lastmod>2023-01-15T09:00:00-07:00</lastmod>
+    <loc>https://synapsyx.github.io/website/categories/</loc>
   </url><url>
-    <loc>//localhost:1313/posts.html</loc>
-    <lastmod>2023-01-01T08:30:00-07:00</lastmod>
+    <loc>https://synapsyx.github.io/website/sections/hero-section/</loc>
   </url><url>
-    <loc>//localhost:1313/</loc>
-    <lastmod>2023-01-01T08:00:00-07:00</lastmod>
+    <loc>https://synapsyx.github.io/website/sections/services/</loc>
   </url><url>
-    <loc>//localhost:1313/sections/team/george.html</loc>
+    <loc>https://synapsyx.github.io/website/sections/team/</loc>
   </url><url>
-    <loc>//localhost:1313/sections/team/mathias.html</loc>
+    <loc>https://synapsyx.github.io/website/sections/</loc>
   </url><url>
-    <loc>//localhost:1313/sections/team/strudl.html</loc>
-  </url><url>
-    <loc>//localhost:1313/sections/about-us.html</loc>
-  </url><url>
-    <loc>//localhost:1313/categories.html</loc>
-  </url><url>
-    <loc>//localhost:1313/sections/hero-section.html</loc>
-  </url><url>
-    <loc>//localhost:1313/sections/services.html</loc>
-  </url><url>
-    <loc>//localhost:1313/sections/team.html</loc>
-  </url><url>
-    <loc>//localhost:1313/sections/team/peter.html</loc>
-  </url><url>
-    <loc>//localhost:1313/sections.html</loc>
+    <loc>https://synapsyx.github.io/website/tags/</loc>
   </url>
 </urlset>
