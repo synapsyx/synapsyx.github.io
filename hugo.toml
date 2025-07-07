@@ -2,7 +2,7 @@ languageCode = 'en-us'
 title = 'synapsyx'
 theme = 'synapsyx'
 [params]
-  baseURL = 'https://synapsyx.github.io/'
+  baseURL = 'https://synapsyx.github.io/website/'
   logo = 'assets/logo/logo_light.png'
   favicon = 'favicon.ico'
   brandword = "synapsyx"
