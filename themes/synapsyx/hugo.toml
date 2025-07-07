@@ -10,7 +10,7 @@ theme = 'synapsyx'
     email = "contact@synapsyx.com"
     address = "Steigteschgasse 13, 1220 Wien"
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+  home = ["HTML"]
 
 [menu]
   [[menu.main]]
