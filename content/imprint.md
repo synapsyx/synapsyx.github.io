@@ -6,10 +6,12 @@ draft: false
 
 # Imprint
 
-synapsyx GmbH
-Steigenteschgasse 13/3/53
+synapsyx GmbHSteigenteschgasse 13/3/53
+
 1220 Vienna, Austria
+
 FN 644 982 d, Commercial Court of Vienna (Handelsgericht Wien)
+
 VAT identification number (UID) ATU 82230578
 
 ## Managing Directors
@@ -20,17 +22,21 @@ VAT identification number (UID) ATU 82230578
 ## Contact
 
 Phone: +43 699 192 179 12
+
 Email: contact@synapsyx.com  
 
 ## Legal Information
 
 Member of the Austrian Federal Economic Chamber (Wirtschaftskammer Österreich, WKO), Division “Unternehmensberatung, Buchhaltung & Informationstechnologie”
+
 Austrian Trade Regulation Act 1994 (GewO) – consolidated text available at the Federal Legal Information System (RIS): https://www.ris.bka.gv.at
+
 Share capital € 10,000; of which € 5,000 paid in (gründungsprivilegiert)
 
 ## EU Online Dispute Resolution
 
 Consumers may submit complaints to the EU’s Online Dispute Resolution platform at https://ec.europa.eu/consumers/odr.
+
 We are not obliged and not willing to participate in dispute-resolution proceedings before a consumer arbitration board.
 
 ## Liability notice
