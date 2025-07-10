@@ -5,7 +5,7 @@
         {{ $yMin := .Scratch.Get "yMin" }}
         {{ $yMax := .Scratch.Get "yMax" }}
         {{ with resources.Get .Params.image | fingerprint }}
-        <div>
+        <div class="member-card-image">
             <img src="{{ .RelPermalink }}" class="card-img-top" />
         </div>
         {{ end }}

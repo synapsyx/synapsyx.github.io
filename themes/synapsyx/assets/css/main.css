@@ -539,6 +539,11 @@ section {
     margin-bottom: 0;
   }
 
+  .member-card-image {
+    padding: 10px;
+    padding-bottom: 20px;
+  }
+
   /* Keep the team cards as is */
   .team-card {
     transition: all 0.3s ease;
@@ -552,7 +557,6 @@ section {
   }
 
   .team-card img {
-    height: fit-content;
     position: inherit;
     border-radius: 10px;
     z-index: 2;
@@ -604,7 +608,6 @@ section {
       color: white !important;
     }
   }
-
   /* Preserve the fancy border as requested */
   .fancy-border>figure {
     margin: 10%;
