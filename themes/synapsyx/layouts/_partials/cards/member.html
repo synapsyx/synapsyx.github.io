@@ -5,12 +5,7 @@
         {{ $yMin := .Scratch.Get "yMin" }}
         {{ $yMax := .Scratch.Get "yMax" }}
         {{ with resources.Get .Params.image | fingerprint }}
-        <div class="fancy-border" style="
-            --x-min: {{ $xMin }};
-            --x-max: {{ $xMax }};
-            --y-min: {{ $yMin }};
-            --y-max: {{ $yMax }};
-        ">
+        <div>
             <img src="{{ .RelPermalink }}" class="card-img-top" />
         </div>
         {{ end }}
