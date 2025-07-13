@@ -6,7 +6,9 @@ draft: false
 
 # Imprint
 
-synapsyx GmbHSteigenteschgasse 13/3/53
+synapsyx GmbH
+
+Steigenteschgasse 13/3/53
 
 1220 Vienna, Austria
 
