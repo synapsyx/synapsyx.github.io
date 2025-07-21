@@ -2,11 +2,12 @@ languageCode = 'en-us'
 title = 'synapsyx'
 theme = 'synapsyx'
 [params]
-  baseURL = 'https://synapsyx.github.io/website/'
+  baseURL = 'https://synapsyx.github.io/'
   logo = 'assets/logo/logo_light.png'
   favicon = 'favicon.ico'
   brandword = "synapsyx"
   brandhtml = "synapsy<span class=\"brand-highlight\">x</span>"
+  canonifyURLs = true
   [params.contact]
     email = "contact@synapsyx.com"
     address = "Steigteschgasse 13, 1220 Wien"
