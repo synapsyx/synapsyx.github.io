@@ -10,7 +10,7 @@ theme = 'synapsyx'
   canonifyURLs = true
   [params.contact]
     email = "contact@synapsyx.com"
-    address = "Steigteschgasse 13, 1220 Wien"
+    address = "Steigenteschgasse 13, 1220 Wien"
 [outputs]
   home = ["HTML", "RSS", "JSON"]
 
