@@ -1,7 +1,7 @@
 ---
 title: "Strategic Technology Consulting"
 image: "images/services/ai-software.png"
-alt: "Digital Marketing Support"
+alt: "Strategic Technology Consulting"
 weight: 5
 features:
   - "Creating custom AI strategies"
