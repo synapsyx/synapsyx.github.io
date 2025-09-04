@@ -4,9 +4,9 @@ image: "images/services/ai-research.png"
 alt: "AI Research & Development"
 weight: 1
 features:
-  - "Custom algorithm development"
-  - "Machine learning model training"
-  - "Neural network architecture design"
+  - "Custom AI optimisation"
+  - "Machine learning model fine-tuning"
+  - "Automatisation design"
   - "Prototype testing and validation"
 ---
 
