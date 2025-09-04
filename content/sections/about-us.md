@@ -1,5 +1,5 @@
 ---
-title: "About Us"
+title: "About us"
 id: "about-us"
 subtitle: "Pioneering AI Solutions from the Heart of Vienna"
 ---
