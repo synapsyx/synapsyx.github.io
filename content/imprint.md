@@ -35,12 +35,6 @@ Austrian Trade Regulation Act 1994 (GewO) – consolidated text available at the
 
 Share capital € 10,000; of which € 5,000 paid in (gründungsprivilegiert)
 
-## EU Online Dispute Resolution
-
-Consumers may submit complaints to the EU’s Online Dispute Resolution platform at https://ec.europa.eu/consumers/odr.
-
-We are not obliged and not willing to participate in dispute-resolution proceedings before a consumer arbitration board.
-
 ## Liability notice
 
 Despite careful content control we assume no liability for the accuracy, completeness or timeliness of the information provided. As a service provider we are responsible for our own content on these pages under general law (§ 7 ECG). We are, however, not obliged to monitor transmitted or stored third-party information or to investigate circumstances indicating unlawful activity (§§ 8-10 ECG).
