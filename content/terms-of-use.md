@@ -67,7 +67,7 @@ Both parties shall keep confidential all business and technical information mark
 
 ## 9. Data protection and security
 
-The Provider processes personal data as described in its Privacy Notice (available at https://synapsyx.com/privacy-policy.html). The Client shall ensure that it has a valid legal basis for transferring any personal data to the Provider.
+The Provider processes personal data as described in its Privacy Notice (available at https://synapsyx.com/privacy-policy/). The Client shall ensure that it has a valid legal basis for transferring any personal data to the Provider.
 
 ## 10. Export control / sanctions
 
