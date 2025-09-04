@@ -1,6 +1,6 @@
 ---
 title: "Strategic Technology Consulting"
-image: "images/services/ai-software.png"
+image: "images/services/digitization.png"
 alt: "Strategic Technology Consulting"
 weight: 5
 features:
