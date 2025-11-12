@@ -1,12 +1,10 @@
 <div class="col-lg-3 col-md-6 mb-4">
     <div class="card-transparet blur-box team-card h-100">
-        {{ $xMin := .Scratch.Get "xMin" }}
-        {{ $xMax := .Scratch.Get "xMax" }}
-        {{ $yMin := .Scratch.Get "yMin" }}
-        {{ $yMax := .Scratch.Get "yMax" }}
-        {{ with resources.Get .Params.image | fingerprint }}
+        {{ $image := resources.Get .Params.image | fingerprint }}
+        {{ with $image }}
+        {{ $cropped := .Fill "300x300" }}
         <div class="member-card-image">
-            <img src="{{ .RelPermalink }}" class="card-img-top" />
+            <img src="{{ $cropped.RelPermalink }}" class="card-img-top" />
         </div>
         {{ end }}
         <div class="card-body text-center">
