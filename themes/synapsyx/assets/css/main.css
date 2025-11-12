@@ -5,6 +5,17 @@
   --synapsyx-contrast-color: rgb(var(--synapsyx-contrast-color-values));
 }
 
+ /* Hide scrollbar for Chrome, Safari and Opera */
+:root::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+:root {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+} 
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
