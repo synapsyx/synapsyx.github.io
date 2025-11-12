@@ -1,12 +1,12 @@
 <!-- Particle container -->
 <style>
   .gradient-background {
-    --gradient-color: 80, 44, 56;
+    --gradient-color: 255, 255, 255;
     background-image: radial-gradient(
       circle farthest-corner at 10%,
       rgba(var(--synapsyx-theme-color-values), 0.005) 0%,
-      rgba(var(--synapsyx-theme-color-values), 0.02) 10%,
-      rgba(var(--synapsyx-theme-color-values), 0.05) 15%,
+      rgba(var(--synapsyx-contrast-color-values), 0.02) 10%,
+      rgba(var(--synapsyx-contrast-color-values), 0.05) 15%,
       rgba(var(--synapsyx-theme-color-values), 0.075) 75%,
       rgba(var(--gradient-color), 0.25) 100%
     ) !important;
@@ -78,12 +78,12 @@
             value: 100,
           },
           color: {
-            value: "rgb(230, 18, 100)",
+            value: "rgb(135, 135, 135)",
           },
           links: {
             enable: true,
             distance: 200,
-            color: "rgb(230, 18, 100)",
+            color: "rgb(135, 135, 135)",
             opacity: 0.25,
           },
           shape: {
@@ -104,7 +104,7 @@
           },
         },
         background: {
-          color: "rgb(230, 230, 230)",
+          color: "rgba(230, 230, 230, 0)",
         },
         poisson: {
           enable: true,

@@ -1,6 +1,8 @@
 :root {
   --synapsyx-theme-color-values: 230, 18, 100;
   --synapsyx-theme-color: rgb(var(--synapsyx-theme-color-values));
+  --synapsyx-contrast-color-values: 135, 135, 135;
+  --synapsyx-contrast-color: rgb(var(--synapsyx-contrast-color-values));
 }
 
 body {
@@ -425,6 +427,9 @@ section {
 
 /* SVG lines */
 #angle-lines {
+  stop {
+    stop-color: rgba(var(--synapsyx-contrast-color-values), 0.85) !important;
+  }
   position: absolute;
   overflow: hidden;
   width: 50vw;
@@ -490,6 +495,9 @@ section {
 }
 
 #svg-line-fan.centered-svg {
+  line {
+    stroke: rgba(var(--synapsyx-contrast-color-values), calc((1 - var(--i) * 0.1) + 0.55)) !important;
+  }
   position: absolute;
   pointer-events: none;
   overflow-x: hidden;
@@ -510,8 +518,8 @@ section {
   height: 100%;
   background-image: repeating-linear-gradient(
     45deg,
-    rgba(var(--synapsyx-theme-color-values), 0.05) 0,
-    rgba(var(--synapsyx-theme-color-values), 0.05) 1px,
+    rgba(var(--synapsyx-contrast-color-values), 0.15) 0,
+    rgba(var(--synapsyx-contrast-color-values), 0.15) 1px,
     transparent 1px,
     transparent 20px
   );
