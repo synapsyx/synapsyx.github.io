@@ -2,6 +2,8 @@
 <html lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
 <head>
   {{ partial "head.html" . }}
+  {{ $logo := resources.Get "logo/logo_dark.svg" | resources.Minify | resources.Fingerprint }}
+  <link rel="icon" href="{{ $logo.RelPermalink }}" type="image/x-icon">
 </head>
 <body>
   <header>
