@@ -47,5 +47,5 @@ All contents and works published on this website are subject to Austrian copyrig
 
 ## Basic orientation of the website
 
-This website presents synapsyx GmbH and its consulting services in the field of artificial intelligence.
+This website presents synapsyx GmbH and its AI solutions and services.
 (No periodic editorial content is published; §§ 24-25 MedienG therefore do not apply.)

@@ -1,7 +1,7 @@
 ---
-title: "AI Strategy & Implementation"
+title: "AI Enablement & Training"
 image: "images/services/digitization.png"
-alt: "AI Strategy & Implementation"
+alt: "AI Enablement & Training"
 weight: 5
 features:
   - "AI readiness assessment"
