@@ -1,13 +1,13 @@
 ---
-title: "AI Software Applications"
+title: "AI-Powered Platforms & Tools"
 image: "images/services/ai-software.png"
-alt: "AI Software Applications"
+alt: "AI-Powered Platforms & Tools"
 weight: 2
 features:
-  - "AI-powered business applications"
-  - "Predictive analytics platforms"
-  - "Recommendation systems"
-  - "Compliance by design"
+  - "Custom AI-powered platforms"
+  - "LMS & LTI integrations"
+  - "Intelligent automation pipelines"
+  - "End-to-end solution deployment"
 ---
 
-We transform AI concepts into practical, scalable software solutions tailored to your specific business needs. Our development team creates intelligent applications that automate processes, analyze data, and provide actionable insights, helping your organization operate more efficiently.
+We build and deploy AI-powered tools and platforms tailored to specific domains — from intelligent education tools with LMS integration to automated workflow pipelines that handle complex, multi-step processes. We take solutions from concept to production and into the hands of real users.

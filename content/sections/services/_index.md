@@ -1,4 +1,4 @@
 ---
-title: "Our services"
+title: "What we build"
 ---
-We combine cutting-edge AI research, practical application development, and hands-on consulting to help organizations unlock real business value from artificial intelligence.
+We design, build, and deploy AI-powered solutions — from intelligent platforms and automation pipelines to custom tools that help organizations unlock real value from artificial intelligence.
