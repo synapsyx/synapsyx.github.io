@@ -6,12 +6,12 @@ draft: false
 
 # GENERAL TERMS & CONDITIONS
 
-of synapsyx GmbH for Consulting, Development and Delivery of AI-Based Software Solutions
+of synapsyx GmbH for Development and Delivery of AI-Based Software Solutions
 (version 1 / in force from 07 July 2025)
 
 ## 1. Scope and hierarchy
 
-1.1 These GTC govern every present and future contract under which synapsyx GmbH (“Provider”) supplies consulting services, software or AI-generated outputs to an entrepreneur within the meaning of § 1 UGB (“Client”). The Provider rejects any conflicting, deviating or supplemental terms of the Client unless the Provider expressly accepts them in writing.
+1.1 These GTC govern every present and future contract under which synapsyx GmbH (“Provider”) supplies services, software or AI-generated outputs to an entrepreneur within the meaning of § 1 UGB (“Client”). The Provider rejects any conflicting, deviating or supplemental terms of the Client unless the Provider expressly accepts them in writing.
 
 1.2  Individual written agreements (including statements of work, SLAs or licence terms) take precedence over these GTC in case of conflict.
 
@@ -19,7 +19,7 @@ of synapsyx GmbH for Consulting, Development and Delivery of AI-Based Software S
 
 2.1  The exact scope, milestones and fees result from the Provider’s offer or the parties’ statement of work (“SOW”).
 
-2.2  The Client shall supply in due time all information, test data, access rights and qualified personnel that are reasonably necessary for the orderly performance of the services. Delays or additional efforts caused by the Client’s failure to cooperate may be invoiced at the Provider’s then-current consulting rates.
+2.2  The Client shall supply in due time all information, test data, access rights and qualified personnel that are reasonably necessary for the orderly performance of the services. Delays or additional efforts caused by the Client’s failure to cooperate may be invoiced at the Provider’s then-current rates.
 
 2.3  Unless otherwise agreed, services are performed remotely during Austrian business hours.
 
