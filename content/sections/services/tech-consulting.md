@@ -1,13 +1,13 @@
 ---
-title: "Strategic Technology Consulting"
+title: "AI Strategy & Implementation"
 image: "images/services/digitization.png"
-alt: "Strategic Technology Consulting"
+alt: "AI Strategy & Implementation"
 weight: 5
 features:
-  - "Creating custom AI strategies"
-  - "Future-proof workflows"
-  - "Process mining & optimisation"
-  - "Big picture AI integrations"
+  - "AI readiness assessment"
+  - "Workflow automation design"
+  - "Tool selection & integration"
+  - "Workshops & training"
 ---
 
-We help our customers bringing their organisations into the age of AI by analysing processes, finding potential and helping to find technology strategies for the whole business instead of just isolated applications.
+We help organisations adopt AI effectively — identifying high-impact opportunities, designing AI-powered workflows, and delivering hands-on workshops and training. We work especially closely with universities and institutions navigating the AI transition.

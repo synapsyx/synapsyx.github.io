@@ -4,10 +4,10 @@ image: "images/services/ai-research.png"
 alt: "AI Research & Development"
 weight: 1
 features:
-  - "Custom AI optimisation"
-  - "Machine learning model fine-tuning"
-  - "Automatisation design"
-  - "Prototype testing and validation"
+  - "Prompt engineering & context design"
+  - "AI pipeline architecture"
+  - "Automation design"
+  - "Prototype to production deployment"
 ---
 
-We're at the forefront of artificial intelligence innovation, creating custom algorithms and models that solve complex problems. Our research team explores emerging AI technologies, including machine learning, neural networks, and natural language processing, to develop solutions that give our clients a competitive edge.
+We explore, test, and systematise what works with AI — building proprietary tooling, reusable templates, and multi-stage pipelines that turn AI capabilities into reliable, production-ready solutions. Our R&D feeds directly into the products we build and deploy.

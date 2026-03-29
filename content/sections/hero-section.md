@@ -1,5 +1,5 @@
 ---
-title: "Driving Innovation through Technology and Digital Excellence"
+title: "Building AI-Powered Tools for Real-World Impact"
 ---
 
-We advance AI research, build custom applications, and provide strategic tech consulting. From early discovery to production deployment, we align models, data, and workflows to deliver measurable business impact.
+We design and deploy AI solutions — from intelligent platforms and automation pipelines to AI-powered tools for education and institutional workflows. From prototype to production, we turn AI capabilities into measurable outcomes.
