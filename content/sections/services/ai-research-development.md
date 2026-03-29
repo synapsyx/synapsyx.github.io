@@ -6,8 +6,8 @@ weight: 1
 features:
   - "Prompt engineering & context design"
   - "AI pipeline architecture"
-  - "Automation design"
-  - "Prototype to production deployment"
+  - "Proprietary template & tooling library"
+  - "Continuous evaluation of new AI capabilities"
 ---
 
-We explore, test, and systematise what works with AI — building proprietary tooling, reusable templates, and multi-stage pipelines that turn AI capabilities into reliable, production-ready solutions. Our R&D feeds directly into the products we build and deploy.
+Our R&D is the engine behind everything we ship. We build and maintain a growing library of proprietary tooling — reusable templates, multi-stage pipelines, and systematic approaches to prompt engineering — that accelerates all of our downstream products and deployments.

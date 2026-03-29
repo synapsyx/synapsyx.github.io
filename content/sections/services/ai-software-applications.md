@@ -1,13 +1,13 @@
 ---
-title: "AI-Powered Platforms & Tools"
+title: "AI-Powered Products"
 image: "images/services/ai-software.png"
-alt: "AI-Powered Platforms & Tools"
+alt: "AI-Powered Products"
 weight: 2
 features:
-  - "Custom AI-powered platforms"
-  - "Third-party system integrations"
   - "Intelligent automation pipelines"
-  - "End-to-end solution deployment"
+  - "AI-powered platforms & applications"
+  - "Third-party system integrations"
+  - "From prototype to production"
 ---
 
-We build and deploy AI-powered tools and platforms tailored to specific domains — integrating seamlessly into existing systems and automating complex, multi-step processes. We take solutions from concept to production and into the hands of real users.
+We turn our R&D into real products — AI-powered platforms and automation pipelines that are deployed, integrated into existing systems, and used by real people. Our products solve specific, high-impact problems in domains like education, institutional workflows, and beyond.
