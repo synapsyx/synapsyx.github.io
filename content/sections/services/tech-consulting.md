@@ -1,13 +1,13 @@
 ---
-title: "AI Enablement & Training"
+title: "Domain Expertise"
 image: "images/services/digitization.png"
-alt: "AI Enablement & Training"
+alt: "Domain Expertise"
 weight: 5
 features:
-  - "AI readiness assessment"
-  - "Workflow automation design"
-  - "Tool selection & integration"
-  - "Custom AI tooling"
+  - "Education & institutional intelligence"
+  - "Automated proposal & document workflows"
+  - "International project development"
+  - "AI-powered process design"
 ---
 
-We design and build AI-powered workflows and internal tools that help organisations work faster and smarter — from automating repetitive processes to integrating AI into existing systems. We work with companies, universities, and public institutions alike.
+We apply our technology where we know the domain deeply. Our current focus areas include education, international project development, and complex document workflows — sectors where AI can create outsized impact and where we have real deployment experience.
