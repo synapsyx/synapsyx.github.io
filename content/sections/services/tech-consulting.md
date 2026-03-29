@@ -10,4 +10,4 @@ features:
   - "Workshops & training"
 ---
 
-We help organisations adopt AI effectively — identifying high-impact opportunities, designing AI-powered workflows, and delivering hands-on workshops and training. We work with companies, universities, and public institutions alike.
+We build AI-powered workflows and tools for organisations ready to adopt AI — and run hands-on workshops and training to make sure teams can use them effectively. We work with companies, universities, and public institutions alike.
