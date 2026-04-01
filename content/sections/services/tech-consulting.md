@@ -1,13 +1,13 @@
 ---
-title: "G/S-Flow — AI Proposal Automation Pipeline"
+title: "AI-Powered Project Development Pipeline"
 image: "images/services/digitization.png"
-alt: "G/S-Flow — AI Proposal Automation Pipeline"
+alt: "AI-Powered Project Development Pipeline"
 weight: 2
 features:
-  - "Multi-stage AI pipeline for drafting, analyzing, and refining grant & subsidy proposals"
-  - "Proprietary reference library with past proposals and official evaluations"
-  - "Successfully used for multiple Erasmus+ CBHE proposals across Africa & Southeast Asia"
-  - "Dramatically accelerates proposal writing while maintaining high quality"
+  - "Multi-stage AI pipeline: situation analysis, research, project development, and proposal drafting"
+  - "Semi-automated with human-in-the-loop at all critical decision points"
+  - "Used for international project development across EU programmes"
+  - "Achieves both quality and speed through structured AI-assisted workflows"
 ---
 
-**G/S-Flow** is our proprietary AI-powered automation pipeline for grant and subsidy proposal writing. It combines multi-stage prompt pipelines with a curated reference library of past proposals and their official evaluations to produce high-quality drafts at speed. G/S-Flow has already been used to complete multiple proposals for EU Erasmus+ programmes — with consistently positive feedback from consortium partners across several countries.
+Our project development pipeline is a semi-automated, multi-stage AI system that guides projects from initial analysis through research, development, and proposal drafting. Human experts stay in the loop at every critical point — ensuring quality while dramatically accelerating the process. The pipeline is actively used for international project development, particularly across EU-funded programmes in collaboration with partners in multiple countries.
