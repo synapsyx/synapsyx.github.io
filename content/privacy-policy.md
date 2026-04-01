@@ -20,7 +20,7 @@ E-mail: **contact@synapsyx.com**
 | Data category | Source | Purpose & legal basis | Retention |
 |--------------|--------|-----------------------|-----------|
 | **Server log data** (IP address, date/time, requested file, referrer, user-agent) | Automatically recorded by our hosting provider **GitHub Inc./B.V.** | • Deliver the pages<br>• Ensure security<br>**Legal basis:** legitimate interest (Art. 6 (1)(f) GDPR) | Deleted or anonymised after ≈ 30 days (GitHub standard) |
-| **Essential cookies** set by GitHub and its CDN (**Fastly**) – e.g. `_gh_sess`, `_octo`, `color_mode` | Browser | Technical operation, load balancing, rate-limiting<br>**Legal basis:** legitimate interest (Art. 6 (1)(f) GDPR) | Session-only or as stated in the cookie’s expiration attribute |
+| **Essential cookies** set by GitHub and its CDN (**Fastly**) – e.g. `_gh_sess`, `_octo`, `color_mode` | Browser | Technical operation, load balancing, rate-limiting<br>**Legal basis:** legitimate interest (Art. 6 (1)(f) GDPR) | Session-only or as stated in the cookie's expiration attribute |
 
 > We **do not** place any analytics, tracking or marketing cookies, and the site offers **no forms, log-in, newsletter or user-upload** features.
 
@@ -28,7 +28,7 @@ E-mail: **contact@synapsyx.com**
 
 ## 3  Recipients and international transfers  
 The site is hosted on **GitHub Pages**, which uses **Fastly** as a global content-delivery network.  
-GitHub stores and processes data in the EU and the United States. Transfers to the US are protected by GitHub’s certification under the **EU–US Data Privacy Framework (DPF)** and the **Standard Contractual Clauses** contained in GitHub’s Data-Processing Agreement.
+GitHub stores and processes data in the EU and the United States. Transfers to the US are protected by GitHub's certification under the **EU–US Data Privacy Framework (DPF)** and the **Standard Contractual Clauses** contained in GitHub's Data-Processing Agreement.
 
 No other third parties receive your data from this website.
 
@@ -42,7 +42,7 @@ If you believe your data are processed unlawfully, you can lodge a complaint wit
 ---
 
 ## 5  Security  
-The site is delivered exclusively over HTTPS (TLS 1.3). Administrative access is protected by strong authentication, and the underlying infrastructure is maintained by GitHub’s security team, including regular patching, fire-walling and redundancy.
+The site is delivered exclusively over HTTPS (TLS 1.3). Administrative access is protected by strong authentication, and the underlying infrastructure is maintained by GitHub's security team, including regular patching, fire-walling and redundancy.
 
 ---
 
@@ -52,4 +52,4 @@ We do not use your data for profiling or automated decisions that produce legal 
 ---
 
 ## 7  Updates to this notice  
-We may revise this notice if the site’s functionality changes (e.g. if we add analytics or a contact form). The current version is always available at this URL.
+We may revise this notice if the site's functionality changes (e.g. if we add analytics or a contact form). The current version is always available at this URL.
