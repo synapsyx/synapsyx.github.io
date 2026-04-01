@@ -10,4 +10,4 @@ features:
   - "Continuous evaluation and integration of new AI capabilities"
 ---
 
-Our internal R&D platform is the engine behind ePATH, G/S-Flow, and everything else we ship. We maintain a growing library of over 100 proprietary templates, reusable pipelines, and systematic approaches to prompt engineering — infrastructure that compounds over time and allows us to build and deploy new AI products faster than traditional development approaches.
+Our internal R&D platform is the engine behind ePATH, our project development pipeline, and everything else we ship. We maintain a growing library of over 100 proprietary templates, reusable pipelines, and systematic approaches to prompt engineering — infrastructure that compounds over time and allows us to build and deploy new AI products faster than traditional development approaches.
