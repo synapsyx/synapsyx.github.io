@@ -1,13 +1,13 @@
 ---
-title: "AI Research & Development"
+title: "AI Consulting & Custom Development"
 image: "images/services/ai-research.png"
-alt: "AI Research & Development"
-weight: 1
+alt: "AI Consulting & Custom Development"
+weight: 3
 features:
-  - "Prompt engineering & context design"
-  - "AI pipeline architecture"
-  - "Proprietary template & tooling library"
-  - "Continuous evaluation of new AI capabilities"
+  - "Custom AI solution development for organizations & institutions"
+  - "AI strategy consulting & workflow optimization"
+  - "Workshops & lectures on AI literacy, prompt engineering, and AI in project management"
+  - "Proprietary tooling library with 100+ reusable templates and pipelines"
 ---
 
-Our R&D is the engine behind everything we ship. We build and maintain a growing library of proprietary tooling — reusable templates, multi-stage pipelines, and systematic approaches to prompt engineering — that accelerates all of our downstream products and deployments.
+Beyond our own products, we help organizations leverage AI effectively. We offer custom AI solution development, strategy consulting, and hands-on workshops — particularly for universities and institutions. Our proprietary R&D library of 100+ templates and multi-stage pipelines powers everything we build and allows us to deliver solutions faster than traditional development approaches.

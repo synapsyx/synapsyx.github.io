@@ -16,8 +16,8 @@ theme = 'synapsyx'
 
 [menu]
   [[menu.main]]
-    name = "Services"
-    url = "#services" 
+    name = "Products"
+    url = "#services"
     weight = 20
   [[menu.main]]
     name = "Team"

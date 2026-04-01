@@ -1,5 +1,5 @@
 ---
-title: "Driving Innovation through Technology and Digital Excellence"
+title: "AI Solutions — From Concept to Production"
 ---
 
-We design and deploy AI solutions — from intelligent platforms and automation pipelines to custom tools that solve complex, domain-specific problems. From prototype to production, we turn AI capabilities into measurable outcomes.
+We build and deploy AI-powered products for education, institutional workflows, and complex document automation. Our platforms are live, our pipelines are proven, and our tools are used by real people across multiple countries.
