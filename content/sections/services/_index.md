@@ -1,4 +1,4 @@
 ---
-title: "What we build"
+title: "Our Products"
 ---
-We build AI-powered products and proprietary tooling. Everything we develop — from internal R&D infrastructure to deployed platforms — is designed to compound: each tool we build makes the next one faster and better.
+We build AI-powered products that solve real problems in education, institutional workflows, and complex document automation. Our products are deployed, integrated into existing systems, and used by real people across multiple countries.

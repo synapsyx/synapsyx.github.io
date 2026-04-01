@@ -1,11 +1,11 @@
 ---
-title: "About us"
-id: "about-us"
-subtitle: "Pioneering AI Solutions from the Heart of Vienna"
+title: “About us”
+id: “about-us”
+subtitle: “AI-First Startup from Vienna, Austria”
 ---
 
-synapsy<span class=”brand-highlight”>x</span> is an AI-first startup headquartered in Vienna, Austria. We build intelligent tools and platforms that solve real problems — from AI-powered applications deployed internationally to proprietary automation pipelines that streamline complex, multi-step workflows.
+**synapsy<span class=”brand-highlight”>x</span> GmbH** is an AI-first startup founded in **February 2025** and headquartered in **Vienna, Austria**. We build AI-powered products and automation pipelines that are deployed internationally — from career guidance platforms integrated into university learning management systems to AI-driven proposal writing pipelines used across multi-country consortia.
 
-Our perspective is inherently international. With a strong base in the DACH region and collaborations spanning multiple continents, we bring global context to every solution we build. Our team has spent years working intensively with AI, developing deep expertise in effective AI deployment, prompt engineering, and building proprietary tooling.
+Our products are developed and deployed in collaboration with partners in the European education space, including <a href=”https://prime-academy.eu” target=”_blank”>priME Academy</a> (Germany) and <a href=”https://sumo-technologies.com” target=”_blank”>SUMO Technologies</a> (Austria), within EU-funded projects such as the Erasmus+ <a href=”https://greeneduseeds.com” target=”_blank”>Green Edu Seeds</a> initiative — reaching institutions across Vietnam, Thailand, Ghana, Cambodia, and beyond.
 
-We find the “wildcard” solutions others overlook. We believe in shipping working products, learning fast, and staying at the frontier of what AI can do.
+Our team combines backgrounds in computer science, engineering, economics, and law — with over two years of intensive, hands-on AI expertise in prompt engineering, pipeline architecture, and deploying AI products to production. We ship working products, learn fast, and stay at the frontier of what AI can do.

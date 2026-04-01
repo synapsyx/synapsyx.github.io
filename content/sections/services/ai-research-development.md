@@ -1,13 +1,13 @@
 ---
-title: "AI Research & Development"
+title: "Proprietary AI Tooling & R&D Platform"
 image: "images/services/ai-research.png"
-alt: "AI Research & Development"
-weight: 1
+alt: "Proprietary AI Tooling & R&D Platform"
+weight: 3
 features:
-  - "Prompt engineering & context design"
-  - "AI pipeline architecture"
-  - "Proprietary template & tooling library"
-  - "Continuous evaluation of new AI capabilities"
+  - "100+ proprietary prompt templates and multi-stage AI pipelines"
+  - "Systematic prompt engineering and context design framework"
+  - "Compounding infrastructure — each tool we build accelerates the next"
+  - "Continuous evaluation and integration of new AI capabilities"
 ---
 
-Our R&D is the engine behind everything we ship. We build and maintain a growing library of proprietary tooling — reusable templates, multi-stage pipelines, and systematic approaches to prompt engineering — that accelerates all of our downstream products and deployments.
+Our internal R&D platform is the engine behind ePATH, G/S-Flow, and everything else we ship. We maintain a growing library of over 100 proprietary templates, reusable pipelines, and systematic approaches to prompt engineering — infrastructure that compounds over time and allows us to build and deploy new AI products faster than traditional development approaches.
