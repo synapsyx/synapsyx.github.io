@@ -1,13 +1,13 @@
 ---
-title: "AI Consulting & Custom Development"
+title: "Proprietary AI Tooling & R&D Platform"
 image: "images/services/ai-research.png"
-alt: "AI Consulting & Custom Development"
+alt: "Proprietary AI Tooling & R&D Platform"
 weight: 3
 features:
-  - "Custom AI solution development for organizations & institutions"
-  - "AI strategy consulting & workflow optimization"
-  - "Workshops & lectures on AI literacy, prompt engineering, and AI in project management"
-  - "Proprietary tooling library with 100+ reusable templates and pipelines"
+  - "100+ proprietary prompt templates and multi-stage AI pipelines"
+  - "Systematic prompt engineering and context design framework"
+  - "Compounding infrastructure — each tool we build accelerates the next"
+  - "Continuous evaluation and integration of new AI capabilities"
 ---
 
-Beyond our own products, we help organizations leverage AI effectively. We offer custom AI solution development, strategy consulting, and hands-on workshops — particularly for universities and institutions. Our proprietary R&D library of 100+ templates and multi-stage pipelines powers everything we build and allows us to deliver solutions faster than traditional development approaches.
+Our internal R&D platform is the engine behind ePATH, G/S-Flow, and everything else we ship. We maintain a growing library of over 100 proprietary templates, reusable pipelines, and systematic approaches to prompt engineering — infrastructure that compounds over time and allows us to build and deploy new AI products faster than traditional development approaches.
