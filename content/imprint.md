@@ -29,7 +29,7 @@ Email: contact@synapsyx.com
 
 ## Legal Information
 
-Member of the Austrian Federal Economic Chamber (Wirtschaftskammer Österreich, WKO), Division “Unternehmensberatung, Buchhaltung & Informationstechnologie”
+Member of the Austrian Federal Economic Chamber (Wirtschaftskammer Österreich, WKO), Division "Unternehmensberatung, Buchhaltung & Informationstechnologie"
 
 Austrian Trade Regulation Act 1994 (GewO) – consolidated text available at the Federal Legal Information System (RIS): https://www.ris.bka.gv.at
 
