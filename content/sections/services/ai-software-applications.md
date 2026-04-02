@@ -1,7 +1,7 @@
 ---
 title: "ePATH — AI Career Guidance Platform"
-image: "images/services/ePATH_counsellor.png"
-alt: "ePATH AI counselor interface"
+image: "images/services/ai-software.png"
+alt: "ePATH — AI Career Guidance Platform"
 weight: 1
 features:
   - "AI-powered career counselor with personalized entrepreneurship potential scoring"
