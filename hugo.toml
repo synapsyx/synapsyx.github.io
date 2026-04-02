@@ -16,6 +16,14 @@ theme = 'synapsyx'
 
 [menu]
   [[menu.main]]
+    name = "About us"
+    url = "#about-us"
+    weight = 10
+  [[menu.main]]
+    name = "ePATH"
+    url = "#epath"
+    weight = 15
+  [[menu.main]]
     name = "Products"
     url = "#services"
     weight = 20
@@ -23,7 +31,3 @@ theme = 'synapsyx'
     name = "Team"
     url = "#team"
     weight = 30
-  [[menu.main]]
-    name = "About us"
-    url = "#about-us"
-    weight = 10
