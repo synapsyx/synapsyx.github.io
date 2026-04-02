@@ -138,7 +138,8 @@
                           {{ range .Site.Data.partners }}
                           <div class="partner-item">
                             <div class="partner-logo">
-                              <img src="{{ .logo | relURL }}" alt="{{ .name }}">
+                              {{ $logo := resources.Get .logo | fingerprint }}
+                              <img src="{{ $logo.RelPermalink }}" alt="{{ .name }}">
                             </div>
                             <div class="partner-overlay">
                               <p class="partner-description">{{ .description }}</p>
