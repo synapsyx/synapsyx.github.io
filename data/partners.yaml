@@ -1,0 +1,11 @@
+- name: "priME Academy"
+  logo: "images/partners/prime-academy.png"
+  description: "EU-funded education projects and AI platform development"
+
+- name: "SUMO Technologies"
+  logo: "images/partners/sumo-technologies.png"
+  description: "International project coordination and consortium management"
+
+- name: "Green Edu Seeds"
+  logo: "images/partners/green-edu-seeds.png"
+  description: "Erasmus+ CBHE project for sustainable education in Southeast Asia"

@@ -1,5 +1,5 @@
 ---
-title: "AI Solutions — From Concept to Production"
+title: "AI Products for Education & Institutional Workflows"
 ---
 
-We build and deploy AI-powered products for education, institutional workflows, and complex document automation — from intelligent platforms to semi-automated pipelines, across multiple countries.
+We build ePATH, an AI-powered career guidance platform integrated into university systems across Southeast Asia, and proprietary AI pipelines for international project development. Our products are built on a growing library of 100+ prompt templates and multi-stage AI pipelines.
