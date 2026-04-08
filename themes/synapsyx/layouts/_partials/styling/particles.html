@@ -28,7 +28,7 @@
   <div class="gradient-background"></div>
 </div>
 
-{{ $tsparticles := resources.Get "js/tsparticles.bundle.min.js" | minify | fingerprint  }}
+{{ $tsparticles := resources.Get "js/tsparticles.bundle.min.js" | fingerprint }}
 <script src="{{ $tsparticles.RelPermalink }}"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
