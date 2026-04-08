@@ -1,5 +1,8 @@
 ---
 title: "AI Products for Education & Institutional Workflows"
+description: "synapsyx builds ePATH and G/S-Flow — proprietary AI products for universities, education consortia, and institutional project teams."
+cta_text: "See the products"
+cta_url: "#services"
 ---
 
-We build ePATH, an AI-powered career guidance platform integrated into university systems across Southeast Asia, and proprietary AI pipelines for international project development. Our products are built on a growing library of 100+ prompt templates and multi-stage AI pipelines.
+synapsyx builds proprietary AI products for universities, education consortia, and institutional project teams. Our two products — **ePATH**, an AI career guidance platform, and **G/S-Flow**, an AI project development platform — are deployed and in active use.

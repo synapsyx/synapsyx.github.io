@@ -1,13 +1,15 @@
 ---
-title: "AI-Powered Project Development Pipeline"
+title: "G/S-Flow — AI Project Development Platform"
 image: "images/services/digitization.png"
-alt: "AI-Powered Project Development Pipeline"
+alt: "G/S-Flow — AI Project Development Platform"
 weight: 2
 features:
-  - "Multi-stage AI pipeline: situation analysis, research, project development, and proposal drafting"
-  - "Semi-automated with human-in-the-loop at all critical decision points"
-  - "Used for international project development across EU programmes"
-  - "Trained on proprietary datasets including confidential expert evaluation reports"
+  - "Structured multi-stage workflows"
+  - "Curated internal reference library"
+  - "Human review at critical checkpoints"
+  - "Refined through live cross-border proposal work"
 ---
 
-Our project development pipeline is a semi-automated, multi-stage AI system that guides projects from initial analysis through research, development, and proposal drafting. Human experts stay in the loop at every critical point — ensuring quality while dramatically accelerating the process. A key differentiator is our access to confidential Expert Score Reports (ESRs) — official evaluator feedback on past EU proposals that are extremely difficult to obtain — which the pipeline uses to align outputs with what reviewers actually look for. The pipeline is used across multiple EU programme proposals in collaboration with partners in several countries.
+**Stage: In live use**
+
+G/S-Flow is for institutional project teams working on cross-border proposals and project development. It is a proprietary AI platform that supports project development and proposal drafting through structured multi-stage workflows, a curated internal reference library, and human review at critical checkpoints. It is used internally in ongoing cross-border proposal work.

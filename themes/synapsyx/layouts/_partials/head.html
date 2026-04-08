@@ -1,6 +1,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>{{ .Site.Title }}</title>
+<title>{{ with .Params.title }}{{ . }} | {{ end }}{{ .Site.Title }}</title>
+<meta name="description" content="{{ .Params.description | default .Site.Params.description }}">
 {{ partialCached "head/css.html" . }}
 {{ partialCached "head/js.html" . }}

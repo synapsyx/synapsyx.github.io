@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Imprint"
 date: 2025-07-04
 draft: false
 ---
@@ -47,5 +47,5 @@ All contents and works published on this website are subject to Austrian copyrig
 
 ## Basic orientation of the website
 
-This website presents synapsyx GmbH and its AI solutions and services.
+This website presents synapsyx GmbH and its AI products, platforms, and technology offerings.
 (No periodic editorial content is published; §§ 24-25 MedienG therefore do not apply.)

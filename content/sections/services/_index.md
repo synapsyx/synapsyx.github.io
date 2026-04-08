@@ -1,4 +1,4 @@
 ---
 title: "Our Products"
 ---
-We build AI-powered products that solve real problems in education, institutional workflows, and complex document automation. Our products are deployed, integrated into existing systems, and used across multiple countries.
+synapsyx builds proprietary AI products that are deployed and used in live workflows. Each product addresses a specific problem for a defined audience — from career guidance for university students to structured project development for institutional teams.

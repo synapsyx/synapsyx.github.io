@@ -1,12 +1,13 @@
+baseURL = 'https://www.synapsyx.com/'
 languageCode = 'en-us'
 title = 'synapsyx'
 theme = 'synapsyx'
 [params]
-  baseURL = 'https://synapsyx.github.io/'
   logo = 'assets/logo/logo_light.png'
   favicon = 'favicon.ico'
   brandword = "synapsyx"
   brandhtml = "synapsy<span class=\"brand-highlight\">x</span>"
+  description = "synapsyx builds proprietary AI products for education and institutional workflows — including ePATH and G/S-Flow."
   canonifyURLs = true
   [params.contact]
     email = "contact@synapsyx.com"

@@ -14,6 +14,9 @@
         <p class="fs-5">
             {{ .Content | safeHTML }}
         </p>
+        {{ with .Params.cta_text }}
+        <a href="{{ $.Params.cta_url }}" class="hero-cta">{{ . }}</a>
+        {{ end }}
         </div>
     </div>      
     {{ partial "elements/scroll_down.html" . }}

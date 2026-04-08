@@ -1,11 +1,11 @@
 - name: "priME Academy"
   logo: "images/services/prime_logo.png"
-  description: "EU-funded education projects and AI platform development"
+  description: "ePATH co-development and deployment in EU-funded education programmes"
 
 - name: "SUMO Technologies"
   logo: "images/services/sumo_technologies_logo.png"
-  description: "International project coordination and consortium management"
+  description: "Cross-border project coordination where G/S-Flow is applied"
 
 - name: "Green Edu Seeds"
   logo: "images/services/GESeeds_logo.webp"
-  description: "Erasmus+ CBHE project for sustainable education in Southeast Asia"
+  description: "Erasmus+ CBHE project — ePATH deployment in Vietnam and Thailand"
