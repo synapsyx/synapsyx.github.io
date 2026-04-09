@@ -319,14 +319,20 @@ section {
     position: relative;
   }
 
-  .service-image-container img {
+  .service-image-container img,
+  .service-image-container video {
     max-width: 75%;
     display: block;
     margin: 0 auto;
     transition: transform 0.5s ease;
   }
 
-  .service-image-container:hover img {
+.service-image-container video {
+  max-width: 100%;
+}
+
+  .service-image-container:hover img,
+  .service-image-container:hover video {
     transform: scale(1.05);
   }
 
@@ -359,6 +365,27 @@ section {
     color: #555;
     line-height: 1.7;
     flex-grow: 1;
+  }
+
+  .service-content-card .badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background: rgba(var(--synapsyx-theme-color-values), 0.1);
+    color: var(--synapsyx-theme-color);
+    vertical-align: middle;
+    margin-left: 8px;
+    white-space: nowrap;
+  }
+
+  .service-content-card .card-audience {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-top: 4px;
+    margin-bottom: 10px;
   }
 
   .service-features {
