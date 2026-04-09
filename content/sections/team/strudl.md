@@ -2,6 +2,6 @@
 name: "Michael Strobl, BSc."
 image: "/images/team/michael_nobg.png"
 position: "Managing Director"
-bioSummary: "Michael drives digital-transformation and AI projects. Drawing on a degree in Economics and Big 4 forensic-tech experience, Michael combines analytical rigour with hands-on product development."
+bioSummary: "Michael drives digital-transformation and AI projects. Drawing on a degree in Economics and Big 4 forensic-tech as well as international startup experience, Michael combines analytical rigour with hands-on product development."
 linkedin: "https://www.linkedin.com/in/michael-strobl-429a57211"
 ---

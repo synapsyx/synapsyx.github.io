@@ -2,7 +2,7 @@
 name: "Mathias Baumgartinger, BSc."
 image: "/images/team/mathias_nobg_new.png"
 position: "Lead Developer"
-bioSummary: "As a creative mind passionate about the craftsmanship of software and other digital creations, he brings both precision and imagination to his work. Mathias translates abstract ideas into robust, scalable systems. His work ensures provided solutions are not only technically sound but also thoughtfully designed."
+bioSummary: "Computer scientist with 6+ years in software development, geospatial analytics, and machine learning. MSc candidate in Computer Science at University of Vienna. Previously Research Associate and Software Developer at BOKU University (2021–2025), where he built deep learning pipelines for geospatial data (contributor to TorchGeo) and large-scale visualization systems in the Godot Engine (LandscapeLab)."
 linkedin: "https://www.linkedin.com/in/mathias-baumgartinger-0b2902196/"
 github: "https://github.com/MathiasBaumgartinger/"
 bluesky: "https://bsky.app/profile/mathiasbaum.bsky.social"

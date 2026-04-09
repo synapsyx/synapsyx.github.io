@@ -37,13 +37,13 @@ Share capital € 10,000; of which € 5,000 paid in (gründungsprivilegiert)
 
 ## Liability notice
 
-Despite careful content control we assume no liability for the accuracy, completeness or timeliness of the information provided. As a service provider we are responsible for our own content on these pages under general law (§ 7 ECG). We are, however, not obliged to monitor transmitted or stored third-party information or to investigate circumstances indicating unlawful activity (§§ 8-10 ECG).
+Despite careful content control we assume no liability for the accuracy, completeness, or timeliness of the information provided. As a service provider we are responsible for our own content on these pages under general law (§ 7 ECG). We are, however, not obliged to monitor transmitted or stored third-party information or to investigate circumstances indicating unlawful activity (§§ 8-10 ECG).
 
 Our pages contain links to external websites of third parties over whose content we have no influence. Therefore we cannot accept any liability for these external contents. The respective provider or operator of the linked pages is always responsible for their content.
 
 ## Copyright
 
-All contents and works published on this website are subject to Austrian copyright law. Duplication, processing, distribution or any form of commercial exploitation outside the limits of copyright require the prior written consent of the respective author or creator.
+All contents and works published on this website are subject to Austrian copyright law. Duplication, processing, distribution, or any form of commercial exploitation outside the limits of copyright require the prior written consent of the respective author or creator.
 
 ## Basic orientation of the website
 

@@ -11,15 +11,15 @@ of synapsyx GmbH for Development and Delivery of AI-Based Software Solutions
 
 ## 1. Scope and hierarchy
 
-1.1 These GTC govern every present and future contract under which synapsyx GmbH ("Provider") supplies services, software or AI-generated outputs to an entrepreneur within the meaning of § 1 UGB ("Client"). The Provider rejects any conflicting, deviating or supplemental terms of the Client unless the Provider expressly accepts them in writing.
+1.1 These GTC govern every present and future contract under which synapsyx GmbH ("Provider") supplies services, software or AI-generated outputs to an entrepreneur within the meaning of § 1 UGB ("Client"). The Provider rejects any conflicting, deviating, or supplemental terms of the Client unless the Provider expressly accepts them in writing.
 
-1.2  Individual written agreements (including statements of work, SLAs or licence terms) take precedence over these GTC in case of conflict.
+1.2  Individual written agreements (including statements of work, SLAs, or licence terms) take precedence over these GTC in case of conflict.
 
 ## 2. Services, deliverables, cooperation duties
 
-2.1  The exact scope, milestones and fees result from the Provider's offer or the parties' statement of work ("SOW").
+2.1  The exact scope, milestones, and fees result from the Provider's offer or the parties' statement of work ("SOW").
 
-2.2  The Client shall supply in due time all information, test data, access rights and qualified personnel that are reasonably necessary for the orderly performance of the services. Delays or additional efforts caused by the Client's failure to cooperate may be invoiced at the Provider's then-current rates.
+2.2  The Client shall supply in due time all information, test data, access rights, and qualified personnel that are reasonably necessary for the orderly performance of the services. Delays or additional efforts caused by the Client's failure to cooperate may be invoiced at the Provider's then-current rates.
 
 2.3  Unless otherwise agreed, services are performed remotely during Austrian business hours.
 
@@ -27,7 +27,7 @@ of synapsyx GmbH for Development and Delivery of AI-Based Software Solutions
 
 3.1  All prices are net of VAT and payable within 14 days of invoice.
 
-3.2  Travel costs, accommodation and daily allowances are reimbursed against receipts in accordance with the Austrian Income Tax Act's tax-free limits.
+3.2  Travel costs, accommodation, and daily allowances are reimbursed against receipts in accordance with the Austrian Income Tax Act's tax-free limits.
 
 3.3  In case of late payment the Provider may charge default interest of 9.2 percentage points above the ECB base rate (§ 456 UGB) and suspend services until full payment.
 
@@ -35,15 +35,15 @@ of synapsyx GmbH for Development and Delivery of AI-Based Software Solutions
 
 4.1  Unless the SOW grants broader rights, the Client receives a non-exclusive, non-transferable, perpetual licence to use project deliverables solely for its own internal business purposes.
 
-4.2  Any source code, pretrained models, frameworks or generic know-how developed or owned by the Provider before or independently of the project ("Background IP") remain the Provider's property. The Client obtains no rights to Background IP other than those necessary to use the project deliverables.
+4.2  Any source code, pretrained models, frameworks, or generic know-how developed or owned by the Provider before or independently of the project ("Background IP") remain the Provider's property. The Client obtains no rights to Background IP other than those necessary to use the project deliverables.
 
 4.3  The Client shall not de-compile, reverse engineer or otherwise attempt to derive the source of any source code or AI models unless this is indispensable under § 40e UrhG and the Provider has been asked first. 
 
 ## 5. AI-specific responsibilities and disclaimers
 
-5.1  AI outputs are probabilistic and may contain errors, biases or third-party content. The Client is responsible for professionally reviewing every AI suggestion before relying on it.
+5.1  AI outputs are probabilistic and may contain errors, biases, or third-party content. The Client is responsible for professionally reviewing every AI suggestion before relying on it.
 
-5.2  The Provider does not warrant that AI outputs are legally compliant, free of discriminatory content or suitable for any specific purpose.
+5.2  The Provider does not warrant that AI outputs are legally compliant, free of discriminatory content, or suitable for any specific purpose.
 
 5.3  Where personal data are processed, the parties will conclude a data-processing agreement pursuant to Art. 28 GDPR.
 
@@ -59,7 +59,7 @@ of synapsyx GmbH for Development and Delivery of AI-Based Software Solutions
 
 7.1  The Provider is liable without limitation for damages caused intentionally or by gross negligence, for personal injury, and under the Product Liability Act.
 
-7.2  In all other cases the Provider's aggregate liability per contract is limited to 100 % of the fees paid under that contract; liability for lost profit, lost data, indirect or consequential damages is excluded to the extent permitted by law.  ￼
+7.2  In all other cases the Provider's aggregate liability per contract is limited to 100 % of the fees paid under that contract; liability for lost profit, lost data, indirect, or consequential damages is excluded to the extent permitted by law.  ￼
 
 ## 8. Confidentiality
 
@@ -71,7 +71,7 @@ The Provider processes personal data as described in its Privacy Notice (availab
 
 ## 10. Export control / sanctions
 
-The Client warrants that it will not use the deliverables in violation of Austrian, EU or U.S. export-control regulations or provide them to persons on sanctions lists.
+The Client warrants that it will not use the deliverables in violation of Austrian, EU, or U.S. export-control regulations or provide them to persons on sanctions lists.
 
 ## 11. Term, termination
 
