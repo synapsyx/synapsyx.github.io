@@ -9,7 +9,7 @@
             {{ $mp4 := resources.Get .Params.video.mp4 }}
             <video class="img-fluid" autoplay muted loop playsinline preload="metadata"
                 poster="{{ $poster.RelPermalink }}"
-                aria-label="Demo of ePATH in use — AI career guidance embedded in a university learning environment">
+                aria-label="Demo of ePATH in use: AI career guidance embedded in a university learning environment">
                 <source src="{{ $webm.RelPermalink }}" type="video/webm">
                 <source src="{{ $mp4.RelPermalink }}" type="video/mp4">
                 <p>Your browser does not support HTML5 video. <a href="{{ $mp4.RelPermalink }}">Download the MP4 demo</a>.</p>
@@ -22,9 +22,12 @@
     </div>
     <div class="col-md-6">
         <div class="blur-box service-content-card">
-            <h3>{{ .Params.title }}{{ with .Params.badge }} <span class="badge">{{ . }}</span>{{ end }}</h3>
+            <div class="service-card-header">
+                <h3>{{ .Params.title }}</h3>
+                {{ with .Params.badge }}<span class="badge">{{ . }}</span>{{ end }}
+            </div>
+            {{ with .Params.subtitle }}<p class="product-subtitle">{{ . }}</p>{{ end }}
             {{ with .Params.audience }}<p class="card-audience">{{ . }}</p>{{ end }}
-            <div class="service-divider"></div>
             <p> {{ .Content }} </p>
             <ul class="service-features">
                 {{ range .Params.features }}
@@ -44,7 +47,7 @@
             {{ $mp4 := resources.Get .Params.video.mp4 }}
             <video class="img-fluid" autoplay muted loop playsinline preload="metadata"
                 poster="{{ $poster.RelPermalink }}"
-                aria-label="Demo of ePATH in use — AI career guidance embedded in a university learning environment">
+                aria-label="Demo of ePATH in use: AI career guidance embedded in a university learning environment">
                 <source src="{{ $webm.RelPermalink }}" type="video/webm">
                 <source src="{{ $mp4.RelPermalink }}" type="video/mp4">
                 <p>Your browser does not support HTML5 video. <a href="{{ $mp4.RelPermalink }}">Download the MP4 demo</a>.</p>
@@ -57,9 +60,12 @@
     </div>
     <div class="col-md-6 order-md-1">
         <div class="blur-box service-content-card">
-            <h3>{{ .Params.title }}{{ with .Params.badge }} <span class="badge">{{ . }}</span>{{ end }}</h3>
+            <div class="service-card-header">
+                <h3>{{ .Params.title }}</h3>
+                {{ with .Params.badge }}<span class="badge">{{ . }}</span>{{ end }}
+            </div>
+            {{ with .Params.subtitle }}<p class="product-subtitle">{{ . }}</p>{{ end }}
             {{ with .Params.audience }}<p class="card-audience">{{ . }}</p>{{ end }}
-            <div class="service-divider"></div>
             <p> {{ .Content }} </p>
             <ul class="service-features">
                 {{ range .Params.features }}

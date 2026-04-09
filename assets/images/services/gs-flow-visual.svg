@@ -1,0 +1,297 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1020 820" role="img" aria-labelledby="gsflow-title gsflow-desc">
+  <title id="gsflow-title">G/S-Flow platform architecture diagram</title>
+  <desc id="gsflow-desc">Multi-stage processing pipeline with parallel tracks, reference library, validation layer, and human review checkpoints.</desc>
+
+  <defs>
+    <!-- Modern card fills with frosted glass effect -->
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f8f9fb"/>
+    </linearGradient>
+    <linearGradient id="accentCardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff0f5"/>
+      <stop offset="100%" stop-color="#fce4ef"/>
+    </linearGradient>
+    <linearGradient id="compGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5f0ff"/>
+      <stop offset="100%" stop-color="#ece4f8"/>
+    </linearGradient>
+    <linearGradient id="outputCardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0f9f0"/>
+      <stop offset="100%" stop-color="#e4f2e4"/>
+    </linearGradient>
+
+    <!-- Stage pill fills -->
+    <linearGradient id="pillA" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#eef0f4"/>
+      <stop offset="100%" stop-color="#e4e7ed"/>
+    </linearGradient>
+    <linearGradient id="pillAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fde8f0"/>
+      <stop offset="100%" stop-color="#f9d0e0"/>
+    </linearGradient>
+    <linearGradient id="pillOutput" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e8f5e9"/>
+      <stop offset="100%" stop-color="#c8e6c9"/>
+    </linearGradient>
+
+    <!-- Accent bar gradient -->
+    <linearGradient id="accentBar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E61264"/>
+      <stop offset="100%" stop-color="#c2185b"/>
+    </linearGradient>
+    <linearGradient id="accentBar65" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E61264" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#c2185b" stop-opacity="0.5"/>
+    </linearGradient>
+    <linearGradient id="accentBar35" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E61264" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#c2185b" stop-opacity="0.25"/>
+    </linearGradient>
+
+    <!-- Reference library gradient -->
+    <linearGradient id="libGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0f1f4"/>
+      <stop offset="100%" stop-color="#e6e8ed"/>
+    </linearGradient>
+
+    <!-- Shadows — refined -->
+    <filter id="cardShadow" x="-12%" y="-12%" width="130%" height="150%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+      <feOffset dx="0" dy="3" result="offsetblur"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.06"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="cardShadowLg" x="-12%" y="-12%" width="130%" height="150%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="8"/>
+      <feOffset dx="0" dy="5" result="offsetblur"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.09"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="accentGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="12" result="blur"/>
+      <feFlood flood-color="#E61264" flood-opacity="0.10"/>
+      <feComposite in2="blur" operator="in"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="pillShadow" x="-15%" y="-30%" width="130%" height="180%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2" result="offsetblur"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.05"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Arrow markers — filled triangles -->
+    <marker id="arrowPrimary" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="10" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0.5 L 9 4 L 0 7.5 Z" fill="#4a5568"/>
+    </marker>
+    <marker id="arrowSecondary" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0.5 L 9 4 L 0 7.5 Z" fill="#b0b8c4"/>
+    </marker>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+      .stage-num  { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 12px; font-weight: 700; fill: #b0b6be; letter-spacing: 2px; }
+      .label      { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 21px; font-weight: 600; fill: #1a1d21; letter-spacing: -0.3px; }
+      .label-lg   { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 23px; font-weight: 600; fill: #1e2330; letter-spacing: -0.2px; }
+      .label-sm   { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 21px; font-weight: 600; fill: #1e2330; letter-spacing: -0.15px; }
+      .sublabel-lg { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 16px; font-weight: 400; fill: #6b7585; letter-spacing: 0.15px; }
+      .sublabel   { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 15px; font-weight: 400; fill: #6b7585; letter-spacing: 0.15px; }
+      .section    { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2.2px; text-transform: uppercase; }
+      .section-default { fill: #5a6370; }
+      .section-accent  { fill: #E61264; }
+      .section-output  { fill: #2e7d32; }
+      .connector        { stroke: #4a5568; stroke-width: 1.8; fill: none; }
+      .connector-secondary { stroke: #b0b8c4; stroke-width: 1.2; fill: none; }
+      .icon { fill: none; stroke: #8e97a5; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  </defs>
+
+  <!-- ============================================================ -->
+  <!--  BACKGROUND (transparent)                                      -->
+  <!-- ============================================================ -->
+
+  <!-- ============================================================ -->
+  <!--  ROW 1 — INTAKE                                               -->
+  <!-- ============================================================ -->
+  <g filter="url(#pillShadow)">
+    <rect x="25" y="26" width="115" height="32" rx="16" fill="#e8f0fa" stroke="#c0d4ea" stroke-width="0.8"/>
+    <text class="section" x="82.5" y="47" text-anchor="middle" fill="#3a6b9f">Intake</text>
+  </g>
+
+  <!-- Card 1: Requirements -->
+  <g filter="url(#cardShadow)">
+    <rect x="60" y="74" width="260" height="96" rx="10" fill="url(#cardGrad)" stroke="#e0e4ea" stroke-width="0.8"/>
+  </g>
+  <rect x="60" y="74" width="260" height="4" rx="2" fill="#3a6b9f"/>
+  <text class="label-lg"  x="190" y="118" text-anchor="middle">Requirements</text>
+  <text class="sublabel-lg"  x="190" y="138" text-anchor="middle">call specifications</text>
+
+  <!-- Card 2: Reference material -->
+  <g filter="url(#cardShadow)">
+    <rect x="380" y="74" width="260" height="96" rx="10" fill="url(#cardGrad)" stroke="#e0e4ea" stroke-width="0.8"/>
+  </g>
+  <rect x="380" y="74" width="260" height="4" rx="2" fill="#3a6b9f"/>
+  <text class="label-lg"  x="510" y="118" text-anchor="middle">Reference material</text>
+  <text class="sublabel-lg"  x="510" y="138" text-anchor="middle">prior work &amp; precedent</text>
+
+  <!-- Card 3: Context sources -->
+  <g filter="url(#cardShadow)">
+    <rect x="700" y="74" width="260" height="96" rx="10" fill="url(#cardGrad)" stroke="#e0e4ea" stroke-width="0.8"/>
+  </g>
+  <rect x="700" y="74" width="260" height="4" rx="2" fill="#3a6b9f"/>
+  <text class="label-lg"  x="830" y="118" text-anchor="middle">Context sources</text>
+  <text class="sublabel-lg"  x="830" y="138" text-anchor="middle">domain &amp; partner data</text>
+
+  <!-- Intake → Processing arrows -->
+  <line class="connector" x1="190" y1="170" x2="190" y2="248" marker-end="url(#arrowPrimary)"/>
+  <line class="connector" x1="510" y1="170" x2="510" y2="248" marker-end="url(#arrowPrimary)"/>
+  <line class="connector" x1="830" y1="170" x2="830" y2="248" marker-end="url(#arrowPrimary)"/>
+
+  <!-- ============================================================ -->
+  <!--  ROW 2 — PROCESSING                                          -->
+  <!-- ============================================================ -->
+  <g filter="url(#pillShadow)">
+    <rect x="25" y="208" width="138" height="32" rx="16" fill="#f0e8f4" stroke="#d4c0e0" stroke-width="0.8"/>
+    <text class="section" x="94" y="229" text-anchor="middle" fill="#6b4a8a">Processing</text>
+  </g>
+
+  <!-- Card: Requirements analysis -->
+  <g filter="url(#cardShadow)">
+    <rect x="60" y="254" width="260" height="96" rx="10" fill="url(#cardGrad)" stroke="#e0e4ea" stroke-width="0.8"/>
+  </g>
+  <rect x="60" y="254" width="260" height="4" rx="2" fill="#6b4a8a"/>
+  <text class="label-lg" x="190" y="298" text-anchor="middle">Requirements analysis</text>
+  <text class="sublabel-lg" x="190" y="318" text-anchor="middle">structuring &amp; alignment</text>
+
+  <!-- Card: Evidence synthesis -->
+  <g filter="url(#cardShadow)">
+    <rect x="380" y="254" width="260" height="96" rx="10" fill="url(#cardGrad)" stroke="#e0e4ea" stroke-width="0.8"/>
+  </g>
+  <rect x="380" y="254" width="260" height="4" rx="2" fill="#6b4a8a"/>
+  <text class="label-lg" x="510" y="298" text-anchor="middle">Evidence synthesis</text>
+  <text class="sublabel-lg" x="510" y="318" text-anchor="middle">retrieval &amp; curation</text>
+
+  <!-- Card: Context alignment -->
+  <g filter="url(#cardShadow)">
+    <rect x="700" y="254" width="260" height="96" rx="10" fill="url(#cardGrad)" stroke="#e0e4ea" stroke-width="0.8"/>
+  </g>
+  <rect x="700" y="254" width="260" height="4" rx="2" fill="#6b4a8a"/>
+  <text class="label-lg" x="830" y="298" text-anchor="middle">Context alignment</text>
+  <text class="sublabel-lg" x="830" y="318" text-anchor="middle">partner &amp; domain profiling</text>
+
+  <!-- Processing → Composition arrows (converging) -->
+  <path class="connector" d="M 190 350 L 190 410 Q 190 430, 210 440 L 298 470" marker-end="url(#arrowPrimary)"/>
+  <path class="connector" d="M 510 350 L 510 410 Q 510 430, 490 440 L 438 465" marker-end="url(#arrowPrimary)"/>
+  <path class="connector" d="M 830 350 L 830 410 Q 830 430, 800 445 L 558 470" marker-end="url(#arrowPrimary)"/>
+
+  <!-- ============================================================ -->
+  <!--  ROW 3 — COMPOSITION → VALIDATION → REVIEW → OUTPUT          -->
+  <!-- ============================================================ -->
+
+  <!-- Composition pill -->
+  <g filter="url(#pillShadow)">
+    <rect x="60" y="428" width="160" height="32" rx="16" fill="#ece4f8" stroke="#d4c8e8" stroke-width="0.8"/>
+    <text class="section" x="140" y="449" text-anchor="middle" fill="#6b4c9a">Composition</text>
+  </g>
+
+  <!-- Composition card -->
+  <g filter="url(#cardShadowLg)">
+    <rect x="25" y="472" width="230" height="120" rx="10" fill="url(#compGrad)" stroke="#6b4c9a" stroke-width="1.2"/>
+  </g>
+  <text class="label" x="140" y="518" text-anchor="middle" fill="#6b4c9a">Draft composition</text>
+  <text class="sublabel" x="140" y="544" text-anchor="middle" fill="#8b6aaf">staged synthesis of</text>
+  <text class="sublabel" x="140" y="564" text-anchor="middle" fill="#8b6aaf">processed inputs</text>
+
+  <!-- Composition → Validation -->
+  <line class="connector" x1="255" y1="532" x2="308" y2="532" marker-end="url(#arrowPrimary)"/>
+
+  <!-- Review pill -->
+  <g filter="url(#pillShadow)">
+    <rect x="373" y="428" width="110" height="32" rx="16" fill="url(#pillAccent)" stroke="#f0b8ce" stroke-width="0.8"/>
+    <text class="section section-accent" x="428" y="449" text-anchor="middle">Review</text>
+  </g>
+
+  <!-- Validation card: Compliance -->
+  <g filter="url(#cardShadow)">
+    <rect x="308" y="472" width="240" height="72" rx="10" fill="url(#cardGrad)" stroke="#e0e4ea" stroke-width="0.8"/>
+  </g>
+  <rect x="308" y="472" width="240" height="4" rx="2" fill="url(#accentBar)"/>
+  <text class="label-sm" x="428" y="503" text-anchor="middle">Compliance checks</text>
+  <text class="sublabel" x="428" y="522" text-anchor="middle">format &amp; rules</text>
+
+  <!-- Validation card: Consistency -->
+  <g filter="url(#cardShadow)">
+    <rect x="308" y="552" width="240" height="72" rx="10" fill="url(#cardGrad)" stroke="#e0e4ea" stroke-width="0.8"/>
+  </g>
+  <rect x="308" y="552" width="240" height="4" rx="2" fill="url(#accentBar)"/>
+  <text class="label-sm" x="428" y="583" text-anchor="middle">Consistency checks</text>
+  <text class="sublabel" x="428" y="602" text-anchor="middle">cross-section coherence</text>
+
+  <!-- Validation → Human Review -->
+  <path class="connector" d="M 548 508 L 568 508 Q 585 508, 590 520 L 601 532" marker-end="url(#arrowPrimary)"/>
+  <path class="connector" d="M 548 588 L 568 588 Q 585 588, 590 576 L 601 548" marker-end="url(#arrowPrimary)"/>
+
+  <!-- Human Review gate -->
+  <g filter="url(#accentGlow)">
+    <rect x="601" y="487" width="165" height="122" rx="10" fill="url(#accentCardGrad)" stroke="#E61264" stroke-width="1.2" opacity="0.94"/>
+  </g>
+  <!-- Person icon (refined) -->
+  <g transform="translate(683,510)">
+    <circle cx="0" cy="0" r="12" fill="none" stroke="#E61264" stroke-width="1.2" opacity="0.12"/>
+    <circle cx="0" cy="-3" r="4.5" fill="none" stroke="#E61264" stroke-width="1.5" opacity="0.8"/>
+    <path d="M -8 8 C -8 3 -4.5 0 0 0 C 4.5 0 8 3 8 8" fill="none" stroke="#E61264" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+  <text class="label-lg" x="683" y="551" text-anchor="middle" fill="#E61264">Human review</text>
+  <text class="sublabel-lg" x="683" y="572" text-anchor="middle" fill="#c2185b">expert sign-off</text>
+
+  <!-- Review → Output -->
+  <line class="connector" x1="766" y1="548" x2="820" y2="548" marker-end="url(#arrowPrimary)"/>
+
+  <!-- Output pill -->
+  <g filter="url(#pillShadow)">
+    <rect x="855" y="428" width="106" height="32" rx="16" fill="url(#pillOutput)" stroke="#a5d6a7" stroke-width="0.8"/>
+    <text class="section section-output" x="908" y="449" text-anchor="middle">Output</text>
+  </g>
+
+  <!-- Output card -->
+  <g filter="url(#cardShadow)">
+    <rect x="820" y="493" width="175" height="110" rx="10" fill="url(#outputCardGrad)" stroke="#2e7d32" stroke-width="1.2"/>
+  </g>
+  <text class="label-sm" x="908" y="541" text-anchor="middle" fill="#2e7d32">Review-ready</text>
+  <text class="label-sm" x="908" y="563" text-anchor="middle" fill="#2e7d32">drafts</text>
+
+  <!-- ============================================================ -->
+  <!--  REFERENCE LIBRARY                                            -->
+  <!-- ============================================================ -->
+  <g filter="url(#cardShadowLg)">
+    <rect x="212" y="682" width="595" height="105" rx="12" fill="url(#libGrad)" stroke="#cdd2da" stroke-width="0.9"/>
+  </g>
+  <!-- Subtle inner border highlight -->
+  <rect x="213" y="683" width="593" height="103" rx="11" fill="none" stroke="#ffffff" stroke-width="0.6" opacity="0.6"/>
+  <!-- Icon: database -->
+  <g transform="translate(232,708) scale(1.15)">
+    <ellipse class="icon" cx="10" cy="4" rx="9" ry="3.5" stroke="#6b7585"/>
+    <path class="icon" d="M 1 4 L 1 16 C 1 19.5 19 19.5 19 16 L 19 4" stroke="#6b7585"/>
+    <ellipse class="icon" cx="10" cy="10" rx="9" ry="3.5" stroke="#6b7585" opacity="0.35"/>
+    <ellipse class="icon" cx="10" cy="16" rx="9" ry="3.5" stroke="#6b7585" opacity="0.2"/>
+  </g>
+  <text class="label-sm" x="510" y="720" text-anchor="middle">Reference library</text>
+  <text class="sublabel" x="510" y="745" text-anchor="middle">accumulated precedent  ·  evaluation patterns  ·  reusable components</text>
+  <text class="sublabel" x="510" y="770" text-anchor="middle" fill="#a8aeb8" font-style="italic" font-size="13">informs multiple pipeline stages</text>
+
+  <!-- Library feeds stages (dashed upward) -->
+  <path class="connector-secondary" stroke-dasharray="5 5" d="M 300 682 C 290 595, 195 475, 190 352" marker-end="url(#arrowSecondary)"/>
+  <path class="connector-secondary" stroke-dasharray="5 5" d="M 428 682 C 428 625, 426 610, 426 605" marker-end="url(#arrowSecondary)"/>
+  <path class="connector-secondary" stroke-dasharray="5 5" d="M 630 682 C 635 630, 680 612, 683 610" marker-end="url(#arrowSecondary)"/>
+
+  <!-- ============================================================ -->
+  <!--  ITERATION FEEDBACK LOOP                                      -->
+  <!-- ============================================================ -->
+  <path class="connector-secondary" stroke-dasharray="6 5" d="M 601 498 C 540 408, 340 365, 255 352" marker-end="url(#arrowSecondary)"/>
+  <g filter="url(#pillShadow)">
+    <rect x="337" y="390" width="182" height="28" rx="14" fill="white" stroke="#d4d8df" stroke-width="0.7"/>
+    <text class="sublabel" x="428" y="409" text-anchor="middle" font-style="italic" fill="#a8aeb8" font-size="12">iteration &amp; refinement</text>
+  </g>
+
+</svg>

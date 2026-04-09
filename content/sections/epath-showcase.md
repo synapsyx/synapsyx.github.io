@@ -1,7 +1,7 @@
 ---
 title: "ePATH"
 id: "epath"
-subtitle: "AI-Powered Career Guidance Platform — Launched"
+subtitle: "AI-Powered Career Guidance Platform · Launched"
 screenshots:
   - image: "images/services/ePATH_ltiiframe.png"
     caption: "ePATH integrated into MoodleCloud via LTI 1.3"
