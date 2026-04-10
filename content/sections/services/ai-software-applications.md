@@ -10,10 +10,10 @@ video:
   poster: "videos/epath-poster.jpg"
 badge: "Launched"
 features:
-  - "AI-powered career counselor with personalized entrepreneurship potential scoring"
-  - "Integrated into MoodleCloud via LTI 1.3"
-  - "Built on O*NET occupational datasets and domain-specific AI models"
-  - "Developed for the EU-funded Green Edu Seeds project (Erasmus+ CBHE)"
+  - "Hybrid design combining skippable modular questionnaires with open-ended AI counselor dialogue"
+  - "Questionnaire and AI recommendations benchmarked against O*NET occupational data during development"
+  - "Embedded directly into university LMS environments via LTI 1.3"
+  - "Built under Erasmus+ CBHE as part of the EU-funded Green Edu Seeds project"
 ---
 
-ePATH (entrepreneurship PATHWAY) helps university students discover their career potential through a structured questionnaire and personalized AI counselor conversations. Built for the [Green Edu Seeds](https://green-edu-seeds.com) project in collaboration with [priME Academy](https://www.primeacademy.eu), it is embedded via LTI 1.3 into MoodleCloud and currently used by students at partner universities in Vietnam and Thailand.
+ePATH helps university students find a direction without forcing them through rigid questionnaires or leaving them to a generic chatbot. Modular, skippable questions gather the basics; a specialized AI counselor then lets students elaborate in their own words, explore career paths, and surface where their entrepreneurial strengths lie. Built with [priME Academy](https://www.primeacademy.eu) for the [Green Edu Seeds](https://green-edu-seeds.com) project, ePATH is embedded into MoodleCloud via LTI 1.3 and used by students at partner universities across Southeast Asia.

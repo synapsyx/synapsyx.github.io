@@ -28,7 +28,7 @@
             </div>
             {{ with .Params.subtitle }}<p class="product-subtitle">{{ . }}</p>{{ end }}
             {{ with .Params.audience }}<p class="card-audience">{{ . }}</p>{{ end }}
-            <p> {{ .Content }} </p>
+            {{ .Content }}
             <ul class="service-features">
                 {{ range .Params.features }}
                 <li>{{ . }}</li>
@@ -66,7 +66,7 @@
             </div>
             {{ with .Params.subtitle }}<p class="product-subtitle">{{ . }}</p>{{ end }}
             {{ with .Params.audience }}<p class="card-audience">{{ . }}</p>{{ end }}
-            <p> {{ .Content }} </p>
+            {{ .Content }}
             <ul class="service-features">
                 {{ range .Params.features }}
                 <li>{{ . }}</li>

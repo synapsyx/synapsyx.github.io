@@ -1,4 +1,4 @@
 ---
 title: "Our Products"
 ---
-synapsyx builds proprietary AI products that are deployed and used in live workflows. Each product addresses a specific problem for a defined audience: from career guidance for university students to structured project development for institutional teams.
+Our products are in the hands of real users. ePATH is used by students at partner universities across Southeast Asia, and G/S-Flow powers automated project development and proposal work inside ongoing cross-border initiatives. Each one targets a specific problem for a specific audience.
