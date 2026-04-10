@@ -1,5 +1,5 @@
 ---
-title: "AI Products for<br class='d-none d-md-inline'> Institutional Workflows & Education"
+title: "AI Products for <br class='d-none d-md-inline'>Institutional Workflows & Education"
 description: "synapsyx builds ePATH and G/S-Flow: proprietary AI products for universities, education consortia, and institutional project teams."
 cta_text: "Explore our products →"
 cta_url: "#services"
