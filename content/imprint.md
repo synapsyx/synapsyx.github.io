@@ -31,7 +31,9 @@ Email: contact@synapsyx.com
 
 Member of the Austrian Federal Economic Chamber (Wirtschaftskammer Österreich, WKO), Division "Unternehmensberatung, Buchhaltung & Informationstechnologie"
 
-Austrian Trade Regulation Act 1994 (GewO) – consolidated text available at the Federal Legal Information System (RIS): https://www.ris.bka.gv.at
+Applicable trade and professional rules: Austrian Trade Regulation Act 1994 (GewO), available via the Federal Legal Information System (RIS): https://www.ris.bka.gv.at
+
+Supervisory authority (Aufsichtsbehörde/Gewerbebehörde): Magistratisches Bezirksamt für den 22. Bezirk, Dr.-Adolf-Schärf-Platz 8, 1220 Vienna, Austria
 
 Share capital € 10,000; of which € 5,000 paid in (gründungsprivilegiert)
 
@@ -45,7 +47,12 @@ Our pages contain links to external websites of third parties over whose content
 
 All contents and works published on this website are subject to Austrian copyright law. Duplication, processing, distribution, or any form of commercial exploitation outside the limits of copyright require the prior written consent of the respective author or creator.
 
-## Basic orientation of the website
+## Media disclosure (Offenlegung gemäß § 25 MedienG)
 
-This website presents synapsyx GmbH and its AI products, platforms, and technology offerings.
-(No periodic editorial content is published; §§ 24-25 MedienG therefore do not apply.)
+Media owner (Medieninhaber): synapsyx GmbH
+
+Registered office (Sitz): Vienna
+
+Company object (Unternehmensgegenstand): Research, development, and distribution of software with a focus on Artificial Intelligence (AI), as well as digital consulting and training services.
+
+Basic direction of the website: Information about synapsyx GmbH and its AI products, platforms, services, and activities.
