@@ -50,9 +50,12 @@
     <link rel="stylesheet" href="{{ $css.RelPermalink }}">
   {{ end }}
 
+  {{ $orgID := "https://www.synapsyx.com/#organization" }}
+  {{ $webID := "https://www.synapsyx.com/#website" }}
+  {{ $pageID := printf "%s#webpage" $url }}
   {{ $org := dict
-    "@context" "https://schema.org"
     "@type" "Organization"
+    "@id" $orgID
     "name" "synapsyx"
     "legalName" "synapsyx GmbH"
     "url" "https://www.synapsyx.com/"
@@ -74,7 +77,78 @@
       "https://github.com/synapsyx"
     )
   }}
-  <script type="application/ld+json">{{ $org | jsonify | safeJS }}</script>
+  {{ $website := dict
+    "@type" "WebSite"
+    "@id" $webID
+    "url" "https://www.synapsyx.com/"
+    "name" "synapsyx"
+    "publisher" (dict "@id" $orgID)
+    "inLanguage" "en"
+  }}
+  {{ $webpage := dict
+    "@type" "WebPage"
+    "@id" $pageID
+    "url" $url
+    "name" $title
+    "description" $desc
+    "isPartOf" (dict "@id" $webID)
+    "about" (dict "@id" $orgID)
+    "inLanguage" "en"
+  }}
+  {{ $gsflow := dict
+    "@type" "SoftwareApplication"
+    "@id" (printf "%s#gsflow" $url)
+    "name" "G/S-Flow"
+    "alternateName" "G/S-Flow AI Project Development Platform"
+    "description" "AI Project Development Platform — structured multi-stage workflows, curated internal reference library, and human review at critical checkpoints. Used internally for live cross-border proposal work."
+    "applicationCategory" "BusinessApplication"
+    "operatingSystem" "Web"
+    "creator" (dict "@id" $orgID)
+    "publisher" (dict "@id" $orgID)
+    "url" (printf "%s#gsflow" $url)
+  }}
+  {{ $epath := dict
+    "@type" "SoftwareApplication"
+    "@id" (printf "%s#epath" $url)
+    "name" "ePATH"
+    "alternateName" "ePATH AI Career Guidance Platform"
+    "description" "AI Career Guidance Platform — hybrid skippable questionnaires plus open-ended AI counselor dialogue, embedded into university LMS environments via LTI 1.3. Live at partner universities in Vietnam and Thailand."
+    "applicationCategory" "EducationalApplication"
+    "operatingSystem" "Web"
+    "creator" (dict "@id" $orgID)
+    "publisher" (dict "@id" $orgID)
+    "url" (printf "%s#epath" $url)
+  }}
+  {{ $entities := slice $org $website $webpage $gsflow $epath }}
+  {{ $teamSlugs := slice "mathias" "george" "strudl" "petar" }}
+  {{ range $teamSlugs }}
+    {{ $slug := . }}
+    {{ $m := $.Site.GetPage (printf "/sections/team/%s" $slug) }}
+    {{ if $m }}
+      {{ $sameAs := slice }}
+      {{ with $m.Params.linkedin }}{{ $sameAs = $sameAs | append . }}{{ end }}
+      {{ with $m.Params.github }}{{ $sameAs = $sameAs | append . }}{{ end }}
+      {{ with $m.Params.bluesky }}{{ $sameAs = $sameAs | append . }}{{ end }}
+      {{ $imageURL := "" }}
+      {{ with $m.Params.image }}{{ with resources.Get . }}{{ $imageURL = .Permalink }}{{ end }}{{ end }}
+      {{ $person := dict
+        "@type" "Person"
+        "@id" (printf "%s#person-%s" $url $slug)
+        "name" $m.Params.name
+        "jobTitle" $m.Params.position
+        "description" ($m.Params.bioShort | default $m.Params.bioSummary)
+        "worksFor" (dict "@id" $orgID)
+      }}
+      {{ if gt (len $sameAs) 0 }}{{ $person = merge $person (dict "sameAs" $sameAs) }}{{ end }}
+      {{ if $imageURL }}{{ $person = merge $person (dict "image" $imageURL) }}{{ end }}
+      {{ $entities = $entities | append $person }}
+    {{ end }}
+  {{ end }}
+  {{ $graph := dict
+    "@context" "https://schema.org"
+    "@graph" $entities
+  }}
+  <script type="application/ld+json">{{ $graph | jsonify | safeJS }}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
