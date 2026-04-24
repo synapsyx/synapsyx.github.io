@@ -501,3 +501,47 @@ html[data-theme="light"] .footer{
   .nav .links a[data-target="partners"]{display:none;}
   .nav .cta{display:none;}
 }
+
+/* ===================================================
+   PRINT — paper-friendly fallback. Drops chrome, decorative
+   media, and theme tokens; prints body copy in black on
+   white regardless of the active screen theme.
+=================================================== */
+@media print{
+  :root, html[data-theme="light"]{
+    --bg:#fff; --bg-2:#fff; --panel:#fff; --panel-2:#fff;
+    --body-bg:#fff; --footer-bg:#fff; --hover-bg:#fff;
+    --fg:#000; --fg-2:#222; --fg-3:#444; --fg-4:#666;
+    --line:rgba(0,0,0,0.18); --line-strong:rgba(0,0,0,0.32);
+    --magenta:#000; --magenta-rgb:0,0,0;
+    --primary-shadow:none; --product-hover-shadow:none;
+    --page-shadow:none; --nav-shadow-scrolled:none;
+    --accent-glow:none; --panel-gradient:none; --portrait-gradient:none;
+  }
+  html,body,.page,.footer{background:#fff !important;color:#000 !important;box-shadow:none !important;}
+  .page{width:auto !important;max-width:100% !important;margin:0 !important;}
+  .page::before,.team::before,.hero::after,.hero .grid-bg,.hero h1 .accent::before{display:none !important;}
+  .page-header,.skip-link,.nav,.theme-toggle,.corner,.hero .ctas,.product .actions,.footer-bottom .socials{display:none !important;}
+  .product-visual,.epath-video,.gsflow-canvas,.member .portrait,.partner .plogo .glyph{display:none !important;}
+  .hero{height:auto !important;padding:0 0 18pt !important;border:none !important;}
+  .hero-inner{position:static !important;padding:0 !important;max-width:100% !important;}
+  .about,.products,.team,.partners{padding:18pt 0 !important;border:none !important;}
+  .product{margin-bottom:18pt !important;}
+  .wrap,.footer-inner{padding:0 !important;max-width:100% !important;}
+  .about-grid,.product-grid,.product.reverse .product-grid{display:block !important;}
+  .about-pillars,.about-stats,.team-grid,.partners-row,.footer-grid{display:block !important;background:none !important;border:none !important;}
+  .stat,.pillar,.member,.partner{padding:8pt 0 !important;border:none !important;border-bottom:1px solid var(--line) !important;min-height:0 !important;}
+  .hero h1,.section-head h2,.product h3,.member h3,.partner .plogo .wordmark{color:#000 !important;page-break-after:avoid;}
+  .hero h1{font-size:22pt !important;line-height:1.15 !important;}
+  .section-head h2{font-size:16pt !important;}
+  .product h3{font-size:14pt !important;}
+  main a[href^="http"]:not(.icn)::after,
+  main a[href^="mailto:"]:not(.icn)::after,
+  .footer-brand a[href^="http"]::after,
+  .footer-brand a[href^="mailto:"]::after{content:" (" attr(href) ")";font-size:0.85em;color:#555;word-break:break-all;}
+  .reveal{opacity:1 !important;transform:none !important;}
+  .product,.pillar,.stat,.member,.partner{page-break-inside:avoid;}
+  h1,h2,h3{page-break-after:avoid;}
+  *,*::before,*::after{transition:none !important;animation:none !important;}
+  @page{margin:18mm;}
+}
