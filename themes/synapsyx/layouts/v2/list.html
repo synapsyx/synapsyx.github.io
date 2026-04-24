@@ -427,8 +427,12 @@
               <span class="pidx">{{ $idx }}</span>
               <div class="portrait">
                 {{ if $photo }}
-                  {{ $cropped := $photo.Fill "168x168" }}
-                  <img src="{{ $cropped.RelPermalink }}" width="{{ $cropped.Width }}" height="{{ $cropped.Height }}" alt="Portrait of {{ $m.Params.name }}" loading="lazy" decoding="async">
+                  {{/* Portrait renders in an 84×84 circle. Serve 1x at native
+                       and 2x for retina via srcset so non-retina viewers don't
+                       download a 168×168 sized for high-DPR displays. */}}
+                  {{ $cropped1x := $photo.Fill "84x84" }}
+                  {{ $cropped2x := $photo.Fill "168x168" }}
+                  <img src="{{ $cropped1x.RelPermalink }}" srcset="{{ $cropped1x.RelPermalink }} 1x, {{ $cropped2x.RelPermalink }} 2x" width="{{ $cropped1x.Width }}" height="{{ $cropped1x.Height }}" alt="Portrait of {{ $m.Params.name }}" loading="lazy" decoding="async">
                 {{ else }}
                   {{ $initials }}
                 {{ end }}
