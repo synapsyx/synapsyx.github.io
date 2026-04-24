@@ -340,7 +340,7 @@
                 {{ end }}
               {{ end }}
               {{ if and $epathWebm $epathMp4 }}
-              <video autoplay muted loop playsinline preload="metadata"
+              <video autoplay muted loop playsinline preload="metadata" width="1600" height="1268"
                 {{ with $epathPoster }}poster="{{ .RelPermalink }}"{{ end }}
                 aria-label="Demo of ePATH in use: AI career guidance embedded in a university learning environment">
                 <source src="{{ $epathWebm.RelPermalink }}" type="video/webm">
@@ -412,7 +412,7 @@
               <div class="portrait">
                 {{ if $photo }}
                   {{ $cropped := $photo.Fill "168x168" }}
-                  <img src="{{ $cropped.RelPermalink }}" alt="Portrait of {{ $m.Params.name }}" loading="lazy" decoding="async">
+                  <img src="{{ $cropped.RelPermalink }}" width="{{ $cropped.Width }}" height="{{ $cropped.Height }}" alt="Portrait of {{ $m.Params.name }}" loading="lazy" decoding="async">
                 {{ else }}
                   {{ $initials }}
                 {{ end }}
@@ -470,7 +470,7 @@
           <div class="partner">
             <div class="plogo">
               <span class="glyph">
-                {{ if $logo }}<img src="{{ $logo.RelPermalink }}" alt="" loading="lazy" decoding="async">
+                {{ if $logo }}<img src="{{ $logo.RelPermalink }}" width="{{ $logo.Width }}" height="{{ $logo.Height }}" alt="" loading="lazy" decoding="async">
                 {{ else }}<span class="init" aria-hidden="true">{{ $initials }}</span>{{ end }}
               </span>
               <span class="wordmark">{{ $pname }}</span>
