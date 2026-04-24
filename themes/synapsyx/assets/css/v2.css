@@ -290,8 +290,7 @@ a:focus:not(:focus-visible){outline:none;}
 .stat .corner-mark::after{top:0;right:0;width:1px;height:8px;}
 
 .about-pillars{margin-top:72px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
-.pillar{background:var(--pillar-bg);padding:32px 32px 32px 0;transition:background .25s ease;cursor:default;}
-.pillar:not(:first-child){padding-left:32px;}
+.pillar{background:var(--pillar-bg);padding:32px;transition:background .25s ease;cursor:default;}
 .pillar:hover{background:var(--pillar-hover-bg);}
 .pillar:hover h3{color:var(--fg);}
 .pillar h3{transition:color .25s ease;}
@@ -472,7 +471,6 @@ html[data-theme="light"] .footer{
   .about-stats,.team-grid,.partners-row,.footer-grid{grid-template-columns:1fr 1fr;}
   .about-pillars{grid-template-columns:1fr;}
   .pillar{padding:24px 0;}
-  .pillar:not(:first-child){padding-left:0;}
   .section-head{flex-direction:column;align-items:flex-start;gap:24px;padding-bottom:32px;margin-bottom:40px;}
   .section-head .right{order:-1;text-align:left;padding-bottom:0;}
   .hero h1{font-size:54px;}
