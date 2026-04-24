@@ -44,6 +44,32 @@
   {{ else }}
     <link rel="stylesheet" href="{{ $css.RelPermalink }}">
   {{ end }}
+
+  {{ $org := dict
+    "@context" "https://schema.org"
+    "@type" "Organization"
+    "name" "synapsyx"
+    "legalName" "synapsyx GmbH"
+    "url" "https://www.synapsyx.com/"
+    "logo" "https://www.synapsyx.com/logo/logo_light.png"
+    "description" (.Site.Params.description | default "synapsyx builds proprietary AI products for education and institutional workflows — including ePATH and G/S-Flow.")
+    "foundingDate" "2024"
+    "email" (.Site.Params.contact.email | default "contact@synapsyx.com")
+    "telephone" "+4369919217912"
+    "vatID" "ATU82230578"
+    "address" (dict
+      "@type" "PostalAddress"
+      "streetAddress" "Steigenteschgasse 13/3/53"
+      "postalCode" "1220"
+      "addressLocality" "Vienna"
+      "addressCountry" "AT"
+    )
+    "sameAs" (slice
+      "https://www.linkedin.com/company/synapsyx/"
+      "https://github.com/synapsyx"
+    )
+  }}
+  <script type="application/ld+json">{{ $org | jsonify | safeJS }}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
