@@ -1,7 +1,18 @@
 {{ define "main" }}
 {{ $logoSVG := resources.Get "logo/logo_wordmark.svg" }}
-{{ $logoMarkup := "" }}
-{{ with $logoSVG }}{{ $logoMarkup = .Content }}{{ end }}
+{{ $logoSprite := "" }}
+{{ $logoUse := `<svg viewBox="0 0 106.95116 40.999893" aria-hidden="true" focusable="false"><use href="#brand-logo"/></svg>` }}
+{{ with $logoSVG }}
+  {{/* Convert the wordmark <svg> to a <symbol id="brand-logo"> so we can render
+       once at the top of <body> and reference it from both the nav and footer
+       via <use>. Inlining the full SVG twice produced 111 duplicate element
+       IDs (invalid HTML) and ~14.5KB of redundant markup. */}}
+  {{ $logoSprite = .Content
+    | replaceRE `(?i)\sid="svg1"` ""
+    | replaceRE `(?is)<svg(\s[^>]*)>` `<symbol id="brand-logo"$1>`
+    | replaceRE `(?i)</svg>` `</symbol>`
+  }}
+{{ end }}
 {{ $gsflow := .Site.GetPage "/sections/services/tech-consulting" }}
 {{ $epath := .Site.GetPage "/sections/services/ai-software-applications" }}
 {{ $teamMathias := .Site.GetPage "/sections/team/mathias" }}
@@ -14,10 +25,13 @@
 
 <div class="page" id="top" data-screen-label="synapsyx.com v2">
 
+  <!-- Logo sprite — referenced via <use> from the nav and footer logos. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">{{ $logoSprite | safeHTML }}</svg>
+
   <!-- Navbar -->
   <header class="page-header">
   <nav class="nav" id="nav" aria-label="Primary">
-    <a class="logo" href="#top" aria-label="synapsyx home"><span aria-hidden="true">{{ $logoMarkup | safeHTML }}</span></a>
+    <a class="logo" href="#top" aria-label="synapsyx home"><span aria-hidden="true">{{ $logoUse | safeHTML }}</span></a>
     <div class="links">
       <a href="#products" data-target="products">Products</a>
       <a href="#about" data-target="about">About</a>
@@ -491,7 +505,7 @@
     <div class="footer-inner">
       <div class="footer-grid reveal">
         <div class="footer-brand">
-          <a href="#top" class="logo" aria-label="synapsyx home"><span aria-hidden="true">{{ $logoMarkup | safeHTML }}</span></a>
+          <a href="#top" class="logo" aria-label="synapsyx home"><span aria-hidden="true">{{ $logoUse | safeHTML }}</span></a>
           <p>Proprietary AI products and platforms for education and institutional workflows. Vienna-based, shipping into EU and international programmes.</p>
           <div class="addr">
             {{ range (split $contactAddress ", ") }}<span>{{ . }}</span>{{ end }}
