@@ -474,7 +474,15 @@
           {{ $pname := .name }}
           {{ $pdesc := .description }}
           {{ $logo := resources.Get .logo }}
-          {{ with $logo }}{{ $logo = . | fingerprint }}{{ end }}
+          {{ with $logo }}
+            {{/* Partner logos render in a 60×60 glyph; ship a fitted raster
+                 (max 120px for retina) so a 1120×947 source doesn't send
+                 ~320KB to a 60-pixel slot. SVGs pass through unmodified. */}}
+            {{ if ne .MediaType.SubType "svg+xml" }}
+              {{ $logo = .Fit "120x120" }}
+            {{ end }}
+            {{ $logo = $logo | fingerprint }}
+          {{ end }}
           {{ $initials := "" }}
           {{ with $pname }}
             {{ $parts := split . " " }}
