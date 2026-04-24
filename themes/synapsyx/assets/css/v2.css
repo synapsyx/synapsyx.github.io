@@ -343,8 +343,14 @@ a:focus:not(:focus-visible){outline:none;}
 .gsflow-canvas{position:relative;padding:36px 36px 24px;height:465px;}
 .gsflow-canvas svg{width:100%;height:100%;}
 @media (max-width:680px){
-  .gsflow-canvas{overflow-x:auto;overflow-y:hidden;padding:24px 20px 16px;height:360px;}
+  .gsflow-canvas{overflow-x:auto;overflow-y:hidden;padding:24px 20px 16px;height:360px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;}
   .gsflow-canvas svg{min-width:600px;}
+}
+@media (max-width:420px){
+  .gsflow-canvas{height:320px;padding:18px 14px 10px;}
+  .gsflow-canvas svg{min-width:500px;}
+  .idx-tl{top:12px;left:14px;}
+  .idx-br{bottom:10px;right:14px;}
 }
 
 .epath-video{position:relative;padding:0;background:#000;display:flex;align-items:stretch;justify-content:center;}
