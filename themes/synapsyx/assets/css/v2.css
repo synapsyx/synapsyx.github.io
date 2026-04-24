@@ -141,6 +141,14 @@ html[data-theme="light"] ::selection{background:rgba(var(--magenta-rgb),0.28);co
 html[data-theme="light"] .page::before{opacity:.18;mix-blend-mode:multiply;}
 html[data-theme="light"] [stroke="#EDEDEE"]{stroke:var(--fg);}
 html[data-theme="light"] [fill="#EDEDEE"]{fill:var(--fg);}
+/* CSS properties hardcoded to rgba(237,237,238,…) below don't pick up the
+   token swap above (they're literal colors, not tokens, and aren't SVG
+   stroke/fill attributes). Mirror them to the light --fg counterpart so
+   the hero meta text, eyebrow dot, and active nav underline remain visible
+   on warm paper. */
+html[data-theme="light"] .nav .links a.active::after{background:rgba(15,15,16,0.6);}
+html[data-theme="light"] .hero .eyebrow .dot-sep{background:rgba(15,15,16,0.3);}
+html[data-theme="light"] .hero .meta .v{color:rgba(15,15,16,0.92);}
 
 .theme-toggle{width:34px;height:34px;margin-left:auto;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:7px;background:var(--ghost-bg);color:var(--fg-2);cursor:pointer;transition:all .2s;padding:0;}
 .theme-toggle:hover{color:var(--fg);border-color:var(--line-strong);background:var(--ghost-bg-hover);}
