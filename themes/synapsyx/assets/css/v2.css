@@ -497,13 +497,18 @@ html[data-theme="light"] .footer{
   .hero .meta{flex-direction:column;gap:12px;}
   .section-head h2{font-size:32px;}
 }
+@media (max-width:480px){
+  /* iPhone Pro Max is 430px — covered here so the Contact CTA doesn't get
+     clipped to "Cont..." next to the theme toggle. Footer and hero CTAs
+     still expose the mailto contact path. */
+  .nav .cta{display:none;}
+}
 @media (max-width:420px){
   .nav{gap:14px;padding:0 12px;}
   .nav .links{gap:12px;margin-left:10px;}
   .nav .links a{font-size:12.5px;}
   .nav .links a[data-target="about"],
   .nav .links a[data-target="partners"]{display:none;}
-  .nav .cta{display:none;}
 }
 
 /* ===================================================
