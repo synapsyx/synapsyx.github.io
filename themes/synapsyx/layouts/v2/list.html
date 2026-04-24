@@ -448,13 +448,13 @@
           <p class="lede">Our work is embedded in funded consortia and institutional collaborations across Europe and Southeast Asia.</p>
         </div>
         <div class="right">
-          <span class="count">{{ printf "%02d" (len hugo.Data.partners) }}</span>
+          <span class="count">{{ printf "%02d" (len .Site.Data.partners) }}</span>
           Active collaborations
         </div>
       </div>
 
       <div class="partners-row reveal reveal-delay-1">
-        {{ range hugo.Data.partners }}
+        {{ range .Site.Data.partners }}
           {{ $pname := .name }}
           {{ $pdesc := .description }}
           {{ $logo := resources.Get .logo }}
