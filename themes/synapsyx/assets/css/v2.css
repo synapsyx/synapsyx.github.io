@@ -41,13 +41,10 @@
 }
 
 :root{
-  --ink:#0F0F0F; --muted:#87878B;
   --magenta:#E61264; --magenta-hover:#C40F55;
   --magenta-rgb:230,18,100;
   --bg:#0A0A0B;
   --bg-2:#0C0C0E;
-  --panel:#121214;
-  --panel-2:#161618;
   --line:rgba(255,255,255,0.08);
   --line-strong:rgba(255,255,255,0.14);
   --fg:#EDEDEE;
@@ -103,8 +100,6 @@ a{text-decoration:none;color:inherit;}
 html[data-theme="light"]{
   --bg:#F7F5F1;
   --bg-2:#FBF9F5;
-  --panel:#FFFFFF;
-  --panel-2:#F2EFE9;
   --line:rgba(15,15,15,0.09);
   --line-strong:rgba(15,15,15,0.16);
   --fg:#0F0F10;
@@ -538,7 +533,7 @@ html[data-theme="light"] .footer{
 =================================================== */
 @media print{
   :root, html[data-theme="light"]{
-    --bg:#fff; --bg-2:#fff; --panel:#fff; --panel-2:#fff;
+    --bg:#fff; --bg-2:#fff;
     --body-bg:#fff; --footer-bg:#fff; --hover-bg:#fff;
     --fg:#000; --fg-2:#222; --fg-3:#444; --fg-4:#666;
     --line:rgba(0,0,0,0.18); --line-strong:rgba(0,0,0,0.32);
