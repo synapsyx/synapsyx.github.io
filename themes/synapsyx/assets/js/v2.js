@@ -100,6 +100,16 @@
       e.preventDefault();
       var y = h === '#top' ? 0 : (target.getBoundingClientRect().top + window.scrollY - NAV_OFFSET_PX);
       window.scrollTo({top:y, behavior:'smooth'});
+      // Update the URL so deep-links are shareable, and move keyboard focus
+      // to the target so tabbing continues from the new location. For #top,
+      // strip the hash entirely for a clean URL.
+      if (history.replaceState) {
+        history.replaceState(null, '', h === '#top' ? (location.pathname + location.search) : h);
+      }
+      if (h !== '#top' && typeof target.focus === 'function') {
+        if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+        target.focus({preventScroll: true});
+      }
     });
   });
 })();
