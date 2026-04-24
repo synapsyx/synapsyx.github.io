@@ -457,7 +457,11 @@ html[data-theme="light"] .footer{
   .hero .corner{right:56px;}
 }
 @media (max-width:900px){
-  .hero-inner{padding:100px 32px;}
+  /* Detach the hero inner panel from absolute positioning so its content
+     contributes to the hero's own height instead of spilling into the about
+     section. The desktop rule pins inset:0 inside a fixed 820px hero; at this
+     breakpoint the hero is height:auto and needs natural flow. */
+  .hero-inner{position:static;padding:96px 32px 56px;}
   .wrap{padding:0 32px;}
   .footer-inner{padding:0 32px;}
   .about-grid,.product-grid,.product.reverse .product-grid{grid-template-columns:1fr;gap:40px;}
@@ -469,8 +473,8 @@ html[data-theme="light"] .footer{
   .section-head{flex-direction:column;align-items:flex-start;gap:24px;padding-bottom:32px;margin-bottom:40px;}
   .section-head .right{order:-1;text-align:left;padding-bottom:0;}
   .hero h1{font-size:54px;}
-  .hero{height:auto;padding-bottom:80px;}
-  .hero .corner{right:32px;bottom:32px;}
+  .hero{height:auto;padding-bottom:64px;overflow:hidden;}
+  .hero .corner{right:32px;bottom:20px;}
   .nav .links{gap:20px;margin-left:8px;}
   .footer-bottom{flex-direction:column;gap:14px;align-items:flex-start;}
 }
