@@ -87,18 +87,40 @@
   window.addEventListener('scroll', onScrollThrottled, {passive:true});
   onScroll();
 
-  // Theme toggle — persists to localStorage
+  // Theme toggle — persists to localStorage; falls back to OS preference
+  // when no explicit choice has been made (matches the inline anti-flash
+  // script in baseof.html so first-paint and JS state agree).
   var themeBtn = document.getElementById('themeToggle');
-  var stored = null;
-  try { stored = localStorage.getItem('synx_v2_theme'); } catch(e){ console.warn('v2: theme read failed', e); }
-  if (stored === 'light') document.documentElement.setAttribute('data-theme','light');
+  var prefersLightMQ = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)');
+  function readStoredTheme(){
+    try { return localStorage.getItem('synx_v2_theme'); } catch(e){ return null; }
+  }
+  function applyTheme(theme){
+    if (theme === 'light') document.documentElement.setAttribute('data-theme','light');
+    else document.documentElement.removeAttribute('data-theme');
+    syncThemeButton();
+  }
+  function syncThemeButton(){
+    if (!themeBtn) return;
+    var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    themeBtn.setAttribute('aria-pressed', isLight ? 'true' : 'false');
+    themeBtn.setAttribute('aria-label', isLight ? 'Switch to dark theme' : 'Switch to light theme');
+  }
+  syncThemeButton();
   if (themeBtn) {
     themeBtn.addEventListener('click', function(){
       var cur = document.documentElement.getAttribute('data-theme');
       var next = cur === 'light' ? 'dark' : 'light';
-      if (next === 'dark') document.documentElement.removeAttribute('data-theme');
-      else document.documentElement.setAttribute('data-theme','light');
+      applyTheme(next);
       try { localStorage.setItem('synx_v2_theme', next); } catch(e){ console.warn('v2: theme persist failed', e); }
+    });
+  }
+  // Follow OS theme changes only when the user hasn't made an explicit choice.
+  if (prefersLightMQ && prefersLightMQ.addEventListener) {
+    prefersLightMQ.addEventListener('change', function(e){
+      var s = readStoredTheme();
+      if (s === 'light' || s === 'dark') return;
+      applyTheme(e.matches ? 'light' : 'dark');
     });
   }
 
