@@ -11,6 +11,10 @@
   {{ $ogImage := resources.Get "v2/og-preview.png" | fingerprint }}
   <title>{{ $title }}</title>
   <meta name="description" content="{{ $desc }}">
+  <link rel="canonical" href="{{ $url }}">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0A0A0B" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F7F5F1" media="(prefers-color-scheme: light)">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="synapsyx">
