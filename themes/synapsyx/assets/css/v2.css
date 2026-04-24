@@ -53,7 +53,7 @@
   --fg:#EDEDEE;
   --fg-2:rgba(237,237,238,0.72);
   --fg-3:rgba(237,237,238,0.5);
-  --fg-4:rgba(237,237,238,0.35);
+  --fg-4:rgba(237,237,238,0.42);
 
   /* Component tokens (inverted in light theme below) */
   --body-bg:#08080A;
@@ -110,7 +110,7 @@ html[data-theme="light"]{
   --fg:#0F0F10;
   --fg-2:rgba(15,15,16,0.72);
   --fg-3:rgba(15,15,16,0.55);
-  --fg-4:rgba(15,15,16,0.38);
+  --fg-4:rgba(15,15,16,0.48);
 
   --body-bg:#EFECE5;
   --hover-bg:#F7F4EE;
@@ -410,7 +410,7 @@ a:focus:not(:focus-visible){outline:none;}
   --fg:#EDEDEE;
   --fg-2:rgba(237,237,238,0.72);
   --fg-3:rgba(237,237,238,0.5);
-  --fg-4:rgba(237,237,238,0.35);
+  --fg-4:rgba(237,237,238,0.42);
   --line:rgba(255,255,255,0.08);
   --line-strong:rgba(255,255,255,0.2);
   background:var(--footer-bg);border-top:1px solid var(--line);padding:72px 0 0;position:relative;
