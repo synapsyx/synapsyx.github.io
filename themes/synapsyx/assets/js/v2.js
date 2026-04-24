@@ -72,7 +72,19 @@
       else a.removeAttribute('aria-current');
     });
   }
-  window.addEventListener('scroll', onScroll, {passive:true});
+  // Coalesce scroll-driven DOM writes to one per frame — the raw scroll
+  // event fires dozens of times/sec and onScroll does classList toggles,
+  // style writes, and getBoundingClientRect reads.
+  var scrollRafPending = false;
+  function onScrollThrottled(){
+    if (scrollRafPending) return;
+    scrollRafPending = true;
+    requestAnimationFrame(function(){
+      scrollRafPending = false;
+      onScroll();
+    });
+  }
+  window.addEventListener('scroll', onScrollThrottled, {passive:true});
   onScroll();
 
   // Theme toggle — persists to localStorage
