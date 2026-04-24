@@ -498,5 +498,10 @@ html[data-theme="light"] .footer{
   .section-head h2{font-size:32px;}
 }
 @media (max-width:420px){
+  .nav{gap:14px;padding:0 12px;}
+  .nav .links{gap:12px;margin-left:10px;}
+  .nav .links a{font-size:12.5px;}
+  .nav .links a[data-target="about"],
+  .nav .links a[data-target="partners"]{display:none;}
   .nav .cta{display:none;}
 }
