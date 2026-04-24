@@ -64,10 +64,12 @@
         </div>
       </div>
     </div>
+    {{ if .Params.preview }}
     <div class="corner">
       <span class="pill">synapsyx.com/v2</span>
       <span class="live">Preview</span>
     </div>
+    {{ end }}
   </section>
 
   <!-- ABOUT -->
@@ -510,7 +512,7 @@
           <ul>
             <li><a href="#gsflow">G/S-Flow <span class="badge-live mg">Deployed</span></a></li>
             <li><a href="#epath">ePATH <span class="badge-live">Launched</span></a></li>
-            <li><a href="/">Current site <span class="ext">↗</span></a></li>
+            {{ if .Params.preview }}<li><a href="/">Current site <span class="ext">↗</span></a></li>{{ end }}
           </ul>
         </div>
 
