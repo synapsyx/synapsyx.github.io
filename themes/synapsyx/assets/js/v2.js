@@ -8,15 +8,24 @@
   var NAV_OFFSET_PX = 80;
   var REVEAL_ROOT_MARGIN_BOTTOM = 60;
 
-  var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reducedMotionMQ = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+  var autoplayVideos = document.querySelectorAll('video[autoplay]');
 
-  // Respect reduced-motion: stop autoplay on demo videos, keep poster visible.
-  if (reducedMotion) {
-    document.querySelectorAll('video[autoplay]').forEach(function(v){
+  function stopAutoplay(){
+    autoplayVideos.forEach(function(v){
       v.removeAttribute('autoplay');
       v.pause();
       v.setAttribute('controls','');
     });
+  }
+
+  if (reducedMotionMQ) {
+    if (reducedMotionMQ.matches) stopAutoplay();
+    // Honor mid-session preference changes (once reduced, stays reduced —
+    // restoring autoplay after load is unreliable cross-browser).
+    if (reducedMotionMQ.addEventListener) {
+      reducedMotionMQ.addEventListener('change', function(e){ if (e.matches) stopAutoplay(); });
+    }
   }
 
   // Scroll reveal via IntersectionObserver
