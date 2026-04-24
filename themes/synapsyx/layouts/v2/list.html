@@ -455,11 +455,21 @@
         {{ range .Site.Data.partners }}
           {{ $pname := .name }}
           {{ $pdesc := .description }}
-          {{ $logo := resources.Get .logo | fingerprint }}
+          {{ $logo := resources.Get .logo }}
+          {{ with $logo }}{{ $logo = . | fingerprint }}{{ end }}
+          {{ $initials := "" }}
+          {{ with $pname }}
+            {{ $parts := split . " " }}
+            {{ $a := substr (index $parts 0) 0 1 }}
+            {{ $b := "" }}
+            {{ if gt (len $parts) 1 }}{{ $b = substr (index $parts 1) 0 1 }}{{ end }}
+            {{ $initials = upper (printf "%s%s" $a $b) }}
+          {{ end }}
           <div class="partner">
             <div class="plogo">
               <span class="glyph">
-                {{ with $logo }}<img src="{{ .RelPermalink }}" alt="" loading="lazy" decoding="async">{{ end }}
+                {{ if $logo }}<img src="{{ $logo.RelPermalink }}" alt="" loading="lazy" decoding="async">
+                {{ else }}<span class="init" aria-hidden="true">{{ $initials }}</span>{{ end }}
               </span>
               <span class="wordmark">{{ $pname }}</span>
             </div>
