@@ -160,7 +160,7 @@ html[data-theme="light"] .theme-toggle .moon{display:none;}
 .theme-toggle:hover svg{transform:rotate(18deg);}
 
 .page{width:1440px;max-width:100%;margin:0 auto;background:var(--bg);position:relative;overflow:visible;border-radius:0;box-shadow:var(--page-shadow);transition:background .4s ease;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth;scroll-padding-top:80px;}
 body, .page, .nav, .stat, .member, .partner, .pillar, .product-visual, .btn, .footer, .hero h1, .section-head h2{transition-property:background, background-color, color, border-color, box-shadow; transition-duration:.35s; transition-timing-function:ease;}
 
 /* ===== Interaction primitives ===== */
