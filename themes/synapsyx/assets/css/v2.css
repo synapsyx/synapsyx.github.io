@@ -498,6 +498,8 @@ html[data-theme="light"] .footer{
 }
 @media (max-width:560px){
   .team-grid,.partners-row,.footer-grid,.about-stats{grid-template-columns:1fr;}
+  .wrap{padding:0 24px;}
+  .footer-inner{padding:0 24px;}
   .hero-inner{padding:96px 24px 48px;}
   .hero h1{font-size:40px;}
   .hero .eyebrow{margin-bottom:24px;}
