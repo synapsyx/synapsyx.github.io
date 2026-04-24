@@ -133,7 +133,8 @@
       if (!target) return;
       e.preventDefault();
       var y = h === '#top' ? 0 : (target.getBoundingClientRect().top + window.scrollY - NAV_OFFSET_PX);
-      window.scrollTo({top:y, behavior:'smooth'});
+      var prefersReduced = reducedMotionMQ && reducedMotionMQ.matches;
+      window.scrollTo({top:y, behavior: prefersReduced ? 'auto' : 'smooth'});
       // Update the URL so deep-links are shareable, and move keyboard focus
       // to the target so tabbing continues from the new location. For #top,
       // strip the hash entirely for a clean URL.
