@@ -477,7 +477,18 @@ html[data-theme="light"] .footer{
   .hero .corner{right:32px;bottom:20px;}
   .nav .links{gap:20px;margin-left:8px;}
   .footer-bottom{flex-direction:column;gap:14px;align-items:flex-start;}
-}
+  /* Mobile density: desktop 120px rhythms leave too much empty scroll on a
+     single-column stack. Tighten vertical spacing, reduce the oversized
+     product heading, and drop the product-visual min-height so the collapsed
+     layout doesn't leave a 520px empty box below each product. */
+  .about{padding:88px 0;}
+  .products{padding:88px 0 96px;}
+  .team{padding:88px 0;}
+  .partners{padding:80px 0 88px;}
+  .about-pillars{margin-top:48px;}
+  .product{margin-bottom:72px;}
+  .product h3{font-size:36px;}
+  .product-visual{min-height:0;}
 @media (max-width:720px){
   .nav{gap:20px;padding:0 14px;}
   .nav .links{gap:16px;}
@@ -487,7 +498,7 @@ html[data-theme="light"] .footer{
 }
 @media (max-width:560px){
   .team-grid,.partners-row,.footer-grid,.about-stats{grid-template-columns:1fr;}
-  .hero-inner{padding:96px 24px;}
+  .hero-inner{padding:96px 24px 48px;}
   .hero h1{font-size:40px;}
   .hero .eyebrow{margin-bottom:24px;}
   .hero h1{margin-bottom:20px;}
@@ -496,6 +507,12 @@ html[data-theme="light"] .footer{
   .hero .ctas .btn{justify-content:center;}
   .hero .meta{flex-direction:column;gap:12px;}
   .section-head h2{font-size:32px;}
+  .about{padding:72px 0;}
+  .products{padding:72px 0 80px;}
+  .team{padding:72px 0;}
+  .partners{padding:64px 0 72px;}
+  .product{margin-bottom:56px;}
+  .product h3{font-size:30px;}
 }
 @media (max-width:480px){
   /* iPhone Pro Max is 430px — covered here so the Contact CTA doesn't get
