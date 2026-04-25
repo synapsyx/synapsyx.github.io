@@ -24,9 +24,9 @@ window.synxHeroFlow = function(canvas){
   // Listened on .hero — canvas is pointer-events:none so the text above
   // stays clickable.
   var MOUSE_RADIUS = 230;
-  var MOUSE_FORCE = 3.6;
-  var VORTEX_FORCE = 2.8;
-  var CLICK_BOOST = 4.0;
+  var MOUSE_FORCE = 2.8;
+  var VORTEX_FORCE = 2.2;
+  var CLICK_BOOST = 3.2;
   var mouseX = -9999, mouseY = -9999;
   var mouseInfluence = 0;
   var mouseTarget = 0;
@@ -106,7 +106,7 @@ window.synxHeroFlow = function(canvas){
         life: Math.random() * 200, maxLife: 180 + Math.random()*120,
         // Per-particle line width — adds visible weight variation so
         // some trails read as bold ribbons and others as fine threads.
-        w: 0.5 + Math.random() * Math.random() * 2.4
+        w: 0.8 + Math.random() * Math.random() * 3.0
       });
     }
   }
@@ -146,8 +146,8 @@ window.synxHeroFlow = function(canvas){
     for (var i=0; i<particles.length; i++){
       var p = particles[i];
       var ang = flowAngle(p.x, p.y, time*0.04);
-      var dx = Math.cos(ang) * 0.7;
-      var dy = Math.sin(ang) * 0.7;
+      var dx = Math.cos(ang) * 0.5;
+      var dy = Math.sin(ang) * 0.5;
 
       if (hasMouse) {
         var ex = p.x - mouseX, ey = p.y - mouseY;
