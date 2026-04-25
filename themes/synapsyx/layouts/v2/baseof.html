@@ -209,8 +209,9 @@
   {{ $heroMesh := resources.Get "js/hero-mesh.js" }}
   {{ $heroNetwork := resources.Get "js/hero-network.js" }}
   {{ $heroFlow := resources.Get "js/hero-flow.js" }}
+  {{ $globe := resources.Get "js/globe.js" }}
   {{ $core := resources.Get "js/v2.js" }}
-  {{ $js := slice $heroMesh $heroNetwork $heroFlow $core | resources.Concat "js/v2-bundle.js" }}
+  {{ $js := slice $heroMesh $heroNetwork $heroFlow $globe $core | resources.Concat "js/v2-bundle.js" }}
   {{ if hugo.IsProduction }}
     {{ $js = $js | resources.Minify | resources.Fingerprint }}
     <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>

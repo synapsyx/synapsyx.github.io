@@ -64,6 +64,30 @@
     }
   }
 
+  // Footprint globe — deferred init via IntersectionObserver so the canvas
+  // doesn't allocate or compute anything until the section is near-viewport.
+  // Data is embedded as a <script type="application/json"> block alongside
+  // the canvas container; globe.js (window.synxGlobe) reads it.
+  var globeContainer = document.querySelector('.footprint-canvas[data-globe]');
+  if (globeContainer && typeof window.synxGlobe === 'function' && 'IntersectionObserver' in window) {
+    var globeMounted = false;
+    var globeObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!globeMounted && e.isIntersecting) {
+          var dataEl = globeContainer.querySelector('#footprint-data');
+          if (!dataEl) return;
+          var data = null;
+          try { data = JSON.parse(dataEl.textContent); } catch(err){ console.warn('globe: data parse failed', err); return; }
+          if (window.synxGlobe(globeContainer, data) !== false) {
+            globeMounted = true;
+            globeObs.disconnect();
+          }
+        }
+      });
+    }, {rootMargin:'200px 0px'});
+    globeObs.observe(globeContainer);
+  }
+
   // Loading splash dismissal. The inline anti-flash script in baseof.html sets
   // html[data-loaded] before paint when sessionStorage says we've shown it
   // already this tab; CSS hides the overlay in that case, and we just clear

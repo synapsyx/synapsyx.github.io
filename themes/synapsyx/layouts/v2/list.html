@@ -533,9 +533,10 @@
              screen readers, and in print. */}}
         <div class="footprint-canvas" data-globe aria-hidden="true">
           <div class="footprint-canvas-fallback">
-            <span class="dot mg"></span>
             <span class="orb"></span>
+            <span class="dot"></span>
           </div>
+          <script type="application/json" id="footprint-data">{{ .Site.Data.deployments | jsonify | safeJS }}</script>
         </div>
 
         <ul class="footprint-list">
