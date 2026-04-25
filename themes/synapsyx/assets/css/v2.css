@@ -210,7 +210,7 @@ html[data-loaded] .v2-loading{display:none;}
 /* Mark: outer frame fades in, inner spirals draw + fill with magenta gradient,
    one-time bloom replaces the previous infinite pulse. */
 .v2-loading-mark-wrap{position:relative;display:inline-flex;}
-.v2-loading-logo{width:96px;height:auto;opacity:0;animation:v2-mark-in .35s cubic-bezier(.16,1,.3,1) 80ms forwards;}
+.v2-loading-logo{width:128px;height:auto;opacity:0;animation:v2-mark-in .35s cubic-bezier(.16,1,.3,1) 80ms forwards;}
 .v2-grad-stop-a{stop-color:var(--magenta);}
 .v2-grad-stop-b{stop-color:var(--magenta-hover);}
 .v2-loading-logo .v2-spiral{stroke:currentColor;stroke-width:.25;stroke-dasharray:180;stroke-dashoffset:180;fill:url(#v2-spiral-grad);fill-opacity:0;animation:v2-spiral-draw .4s cubic-bezier(.16,1,.3,1) 100ms forwards,v2-spiral-fill .35s cubic-bezier(.16,1,.3,1) 380ms forwards,v2-spiral-bloom .7s ease-out 380ms forwards;}
