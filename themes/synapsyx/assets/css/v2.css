@@ -182,18 +182,83 @@ body, .page, .nav, .stat, .member, .partner, .pillar, .product-visual, .btn, .fo
 }
 
 /* ===== Loading splash =====
-   First-paint overlay; suppressed on subsequent loads in the same tab via
-   sessionStorage (the inline anti-flash script in baseof.html sets
-   html[data-loaded] before paint, and the rule below hides the overlay). */
-.v2-loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--fg);z-index:9999;opacity:1;transition:opacity .5s ease-in-out;}
-.v2-loading.is-out{opacity:0;pointer-events:none;}
-.v2-loading-logo{width:128px;height:auto;}
-.v2-loading-logo .v2-spiral{stroke:currentColor;stroke-width:.25;stroke-dasharray:180;stroke-dashoffset:180;fill:transparent;animation:v2-spiral-fill .5s ease-in .5s forwards,v2-spiral-draw .5s ease-out forwards,v2-spiral-pulse 3s ease-in-out 1.5s infinite;}
-@keyframes v2-spiral-draw{to{stroke-dashoffset:0;}}
-@keyframes v2-spiral-fill{to{fill:var(--magenta);}}
-@keyframes v2-spiral-pulse{0%,100%{filter:drop-shadow(0 0 .1px rgba(var(--magenta-rgb),.6));}50%{filter:drop-shadow(0 0 1.5px rgba(var(--magenta-rgb),.85));}}
+   First-paint atmospheric brand moment; suppressed on subsequent loads in the
+   same tab via sessionStorage (the inline anti-flash script in baseof.html
+   sets html[data-loaded] before paint, and the rule below hides the overlay).
+   Total timeline ~1.5s; reduced-motion users skip it. */
+.v2-loading{position:fixed;inset:0;color:var(--fg);z-index:9999;pointer-events:none;overflow:hidden;}
 html.v2-loading-active{overflow:hidden;}
 html[data-loaded] .v2-loading{display:none;}
+
+/* Two curtain panels each render half the viewport; each panel layers
+   var(--bg), a subtle radial magenta wash that breathes, and a faint grain.
+   On exit, top slides up and bottom slides down to reveal the page. */
+.v2-loading-curtain{position:absolute;left:0;right:0;height:50vh;background:var(--bg);overflow:hidden;will-change:transform;transition:transform .45s cubic-bezier(.7,0,.2,1);}
+.v2-loading-curtain-top{top:0;}
+.v2-loading-curtain-bottom{bottom:0;}
+.v2-loading-curtain::before{content:"";position:absolute;left:0;width:100%;height:100vh;background:radial-gradient(ellipse 65% 55% at 50% 50%, rgba(var(--magenta-rgb),.18) 0%, rgba(var(--magenta-rgb),.06) 35%, transparent 70%);opacity:0;animation:v2-loading-breathe 1.5s ease-out 100ms forwards;}
+.v2-loading-curtain-top::before{top:0;}
+.v2-loading-curtain-bottom::before{bottom:0;}
+.v2-loading-curtain::after{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");background-size:160px 160px;opacity:.05;mix-blend-mode:overlay;pointer-events:none;}
+.v2-loading.is-out .v2-loading-curtain-top{transform:translateY(-100%);}
+.v2-loading.is-out .v2-loading-curtain-bottom{transform:translateY(100%);}
+
+/* Stage holds the centered mark + wordmark; sits above the curtains. */
+.v2-loading-stage{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;opacity:1;transition:opacity .35s ease-out;}
+.v2-loading.is-out .v2-loading-stage{opacity:0;}
+
+/* Mark: outer frame fades in, inner spirals draw + fill with magenta gradient,
+   one-time bloom replaces the previous infinite pulse. */
+.v2-loading-mark-wrap{position:relative;display:inline-flex;}
+.v2-loading-logo{width:96px;height:auto;opacity:0;animation:v2-mark-in .35s cubic-bezier(.16,1,.3,1) 80ms forwards;}
+.v2-grad-stop-a{stop-color:var(--magenta);}
+.v2-grad-stop-b{stop-color:var(--magenta-hover);}
+.v2-loading-logo .v2-spiral{stroke:currentColor;stroke-width:.25;stroke-dasharray:180;stroke-dashoffset:180;fill:url(#v2-spiral-grad);fill-opacity:0;animation:v2-spiral-draw .4s cubic-bezier(.16,1,.3,1) 100ms forwards,v2-spiral-fill .35s cubic-bezier(.16,1,.3,1) 380ms forwards,v2-spiral-bloom .7s ease-out 380ms forwards;}
+@keyframes v2-mark-in{to{opacity:1;}}
+@keyframes v2-spiral-draw{to{stroke-dashoffset:0;}}
+@keyframes v2-spiral-fill{to{fill-opacity:1;}}
+@keyframes v2-spiral-bloom{0%{filter:drop-shadow(0 0 0 rgba(var(--magenta-rgb),0));}45%{filter:drop-shadow(0 0 4px rgba(var(--magenta-rgb),.7));}100%{filter:drop-shadow(0 0 1.4px rgba(var(--magenta-rgb),.4));}}
+
+/* Lens flare: single sweep across the mark area, additive on dark and
+   subtractive-feel on light via overlay blend. */
+.v2-loading-flare{position:absolute;inset:-30%;pointer-events:none;background:linear-gradient(115deg, transparent 38%, rgba(255,255,255,.55) 50%, transparent 62%);transform:translateX(-110%);mix-blend-mode:overlay;opacity:0;animation:v2-flare-sweep .75s cubic-bezier(.4,0,.2,1) 220ms forwards;}
+@keyframes v2-flare-sweep{0%{transform:translateX(-110%);opacity:0;}25%{opacity:1;}80%{opacity:1;}100%{transform:translateX(110%);opacity:0;}}
+
+/* Wordmark types in below the mark; caret blinks while typing then exits with
+   the curtain. JetBrains Mono is already loaded; uppercase tracking gives it
+   weight without competing with the hero typography. */
+.v2-loading-wordmark{font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-2);line-height:1;display:inline-flex;align-items:baseline;}
+.v2-loading-wordmark > span:not(.v2-loading-caret){display:inline-block;opacity:0;transform:translateY(3px);animation:v2-char-in .25s cubic-bezier(.16,1,.3,1) forwards;}
+.v2-loading-wordmark > span:nth-child(1){animation-delay:520ms;}
+.v2-loading-wordmark > span:nth-child(2){animation-delay:570ms;}
+.v2-loading-wordmark > span:nth-child(3){animation-delay:620ms;}
+.v2-loading-wordmark > span:nth-child(4){animation-delay:670ms;}
+.v2-loading-wordmark > span:nth-child(5){animation-delay:720ms;}
+.v2-loading-wordmark > span:nth-child(6){animation-delay:770ms;}
+.v2-loading-wordmark > span:nth-child(7){animation-delay:820ms;}
+.v2-loading-wordmark > span:nth-child(8){animation-delay:870ms;}
+@keyframes v2-char-in{to{opacity:1;transform:translateY(0);}}
+
+.v2-loading-caret{display:inline-block;width:.45em;height:1em;background:var(--magenta);margin-left:3px;transform:translateY(.08em);opacity:0;animation:v2-caret-blink 560ms step-end 480ms infinite;}
+@keyframes v2-caret-blink{0%{opacity:1;}50%{opacity:0;}}
+
+@keyframes v2-loading-breathe{0%{opacity:0;transform:scale(.92);}55%{opacity:1;transform:scale(1.02);}100%{opacity:.85;transform:scale(1);}}
+
+/* Light theme: the white-streak flare reads weakly on a light bg; nudge it
+   darker via a tinted streak so the mark still gets a visible glance. */
+html[data-theme="light"] .v2-loading-flare{background:linear-gradient(115deg, transparent 38%, rgba(15,15,16,.22) 50%, transparent 62%);mix-blend-mode:multiply;}
+html[data-theme="light"] .v2-loading-curtain::after{mix-blend-mode:multiply;opacity:.04;}
+
+/* Reduced motion: skip every animation, hide the splash immediately. JS sets
+   loadingHoldMs=0 and loadingFadeMs=0 so the dismissal flow still runs. */
+@media (prefers-reduced-motion: reduce){
+  .v2-loading,.v2-loading *,.v2-loading *::before,.v2-loading *::after{animation:none !important;transition:none !important;}
+  .v2-loading-logo{opacity:1;}
+  .v2-loading-logo .v2-spiral{stroke-dashoffset:0;fill-opacity:1;}
+  .v2-loading-wordmark > span{opacity:1;transform:none;}
+  .v2-loading-caret{opacity:0;}
+  .v2-loading-flare{display:none;}
+}
 
 /* ===== Focus indicators (keyboard-only) ===== */
 :focus-visible{outline:2px solid var(--magenta);outline-offset:2px;border-radius:inherit;}
