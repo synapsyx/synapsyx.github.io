@@ -283,7 +283,7 @@ a:focus:not(:focus-visible){outline:none;}
 .nav .progress{position:absolute;left:16px;right:16px;bottom:-1px;height:1px;background:var(--progress-track);border-radius:1px;overflow:hidden;}
 .nav .progress .bar-fill{height:100%;width:0%;background:linear-gradient(to right, rgba(var(--magenta-rgb),0) 0%, rgba(var(--magenta-rgb),0.9) 50%, rgba(var(--magenta-rgb),0) 100%);transition:width .1s linear;}
 .nav .logo{display:inline-flex;align-items:center;color:var(--fg);line-height:0;}
-.nav .logo svg{height:34px;width:auto;display:block;}
+.nav .logo svg{height:36px;width:auto;display:block;}
 .nav .logo:hover{opacity:0.85;}
 .nav .links{display:flex;gap:32px;margin-left:28px;}
 .nav .links a{font-size:13.5px;font-weight:500;color:var(--fg-2);letter-spacing:-0.005em;transition:color .18s;position:relative;padding:4px 0;cursor:pointer;}
