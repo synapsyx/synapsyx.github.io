@@ -203,15 +203,13 @@
   <a class="skip-link" href="#main">Skip to main content</a>
   {{ partial "v2/loading_screen.html" . }}
   {{ block "main" . }}{{ end }}
-  {{/* Hero generative variants are concatenated AHEAD of v2.js so each
-       variant's window.synxHeroX assignment is parsed before the v2.js
-       IIFE runs and the dispatcher reads window.synxHeroX. */}}
-  {{ $heroMesh := resources.Get "js/hero-mesh.js" }}
-  {{ $heroNetwork := resources.Get "js/hero-network.js" }}
+  {{/* Widget files (hero, globe) are concatenated AHEAD of v2.js so their
+       window.synxHero* / window.synxGlobe assignments are parsed before
+       the v2.js IIFE runs and looks them up. */}}
   {{ $heroFlow := resources.Get "js/hero-flow.js" }}
   {{ $globe := resources.Get "js/globe.js" }}
   {{ $core := resources.Get "js/v2.js" }}
-  {{ $js := slice $heroMesh $heroNetwork $heroFlow $globe $core | resources.Concat "js/v2-bundle.js" }}
+  {{ $js := slice $heroFlow $globe $core | resources.Concat "js/v2-bundle.js" }}
   {{ if hugo.IsProduction }}
     {{ $js = $js | resources.Minify | resources.Fingerprint }}
     <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
