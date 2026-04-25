@@ -28,6 +28,42 @@
     }
   }
 
+  // Hero generative background — three drafts, each defined as a global
+  // window.synxHeroX(canvas) earlier in the bundle. Variant chosen by
+  // ?hero=mesh|network|flow (default: mesh). If the chosen one returns
+  // false (e.g. no WebGL for mesh), we fall through to the next available
+  // variant. On success, .hero gets .has-canvas which fades the static
+  // grid fallback. This dispatcher exists for reviewing all three side by
+  // side; collapses to a single chosen variant after selection.
+  function pickHeroVariant(){
+    try {
+      var p = new URLSearchParams(location.search);
+      var v = p.get('hero');
+      if (v === 'mesh' || v === 'network' || v === 'flow') return v;
+    } catch(e){}
+    return 'mesh';
+  }
+  var heroCanvas = document.querySelector('.hero-canvas');
+  if (heroCanvas) {
+    var hero = heroCanvas.closest('.hero');
+    var first = pickHeroVariant();
+    var order = [first];
+    if (first !== 'mesh') order.push('mesh');
+    if (order.indexOf('network') < 0) order.push('network');
+    if (order.indexOf('flow') < 0) order.push('flow');
+    var heroFns = {mesh:window.synxHeroMesh, network:window.synxHeroNetwork, flow:window.synxHeroFlow};
+    for (var hi=0; hi<order.length; hi++){
+      var fn = heroFns[order[hi]];
+      if (typeof fn === 'function' && fn(heroCanvas) !== false) {
+        if (hero) {
+          hero.classList.add('has-canvas');
+          hero.setAttribute('data-hero-variant', order[hi]);
+        }
+        break;
+      }
+    }
+  }
+
   // Loading splash dismissal. The inline anti-flash script in baseof.html sets
   // html[data-loaded] before paint when sessionStorage says we've shown it
   // already this tab; CSS hides the overlay in that case, and we just clear
