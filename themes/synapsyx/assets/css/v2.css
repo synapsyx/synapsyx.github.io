@@ -219,9 +219,9 @@ html[data-loaded] .v2-loading{display:none;}
 @keyframes v2-spiral-fill{to{fill-opacity:1;}}
 @keyframes v2-spiral-bloom{0%{filter:drop-shadow(0 0 0 rgba(var(--magenta-rgb),0));}45%{filter:drop-shadow(0 0 4px rgba(var(--magenta-rgb),.7));}100%{filter:drop-shadow(0 0 1.4px rgba(var(--magenta-rgb),.4));}}
 
-/* Lens flare: single sweep across the mark area, additive on dark and
-   subtractive-feel on light via overlay blend. */
-.v2-loading-flare{position:absolute;inset:-30%;pointer-events:none;background:linear-gradient(115deg, transparent 38%, rgba(255,255,255,.55) 50%, transparent 62%);transform:translateX(-110%);mix-blend-mode:overlay;opacity:0;animation:v2-flare-sweep .85s cubic-bezier(.4,0,.2,1) 800ms forwards;}
+/* Lens flare: a single sun-glance sweep across the full splash. The
+   brightest band of the gradient is timed to cross the mark area. */
+.v2-loading-flare{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;background:linear-gradient(115deg, transparent 38%, rgba(255,255,255,.42) 50%, transparent 62%);transform:translateX(-110%);mix-blend-mode:overlay;opacity:0;animation:v2-flare-sweep .85s cubic-bezier(.4,0,.2,1) 800ms forwards;}
 @keyframes v2-flare-sweep{0%{transform:translateX(-110%);opacity:0;}25%{opacity:1;}80%{opacity:1;}100%{transform:translateX(110%);opacity:0;}}
 
 /* Wordmark types in below the mark; caret blinks while typing then exits with
@@ -246,7 +246,7 @@ html[data-loaded] .v2-loading{display:none;}
 
 /* Light theme: the white-streak flare reads weakly on a light bg; nudge it
    darker via a tinted streak so the mark still gets a visible glance. */
-html[data-theme="light"] .v2-loading-flare{background:linear-gradient(115deg, transparent 38%, rgba(15,15,16,.22) 50%, transparent 62%);mix-blend-mode:multiply;}
+html[data-theme="light"] .v2-loading-flare{background:linear-gradient(115deg, transparent 38%, rgba(15,15,16,.16) 50%, transparent 62%);mix-blend-mode:multiply;}
 html[data-theme="light"] .v2-loading-curtain::after{mix-blend-mode:multiply;opacity:.04;}
 
 /* Reduced motion: skip every animation, hide the splash immediately. JS sets

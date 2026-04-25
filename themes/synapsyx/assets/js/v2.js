@@ -40,7 +40,7 @@
     } else {
       document.documentElement.classList.add('v2-loading-active');
       var reduceLoading = reducedMotionMQ && reducedMotionMQ.matches;
-      var loadingHoldMs = reduceLoading ? 0 : 2200;
+      var loadingHoldMs = reduceLoading ? 0 : 1900;
       var loadingFadeMs = reduceLoading ? 0 : 650;
       var dismissLoading = function(){
         if (v2Loading.parentNode) v2Loading.parentNode.removeChild(v2Loading);
