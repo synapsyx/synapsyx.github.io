@@ -15,6 +15,17 @@ window.synxHeroFlow = function(canvas){
   var time = 0;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Cursor as a soft repulsor in the flow field. mouseInfluence ramps
+  // 0↔1 smoothly per frame so entering/leaving the hero doesn't snap;
+  // particles inside MOUSE_RADIUS get pushed radially away with a cubic
+  // falloff. Listened on .hero, not on the canvas (canvas is
+  // pointer-events:none so the text above stays clickable).
+  var MOUSE_RADIUS = 150;
+  var MOUSE_FORCE = 2.4;
+  var mouseX = -9999, mouseY = -9999;
+  var mouseInfluence = 0;
+  var mouseTarget = 0;
+
   // Tiny 2D value-noise + FBM. ~30 lines, smooth enough for visual flow,
   // far cheaper than a true gradient noise implementation.
   function hash(x, y, seed){
@@ -110,13 +121,33 @@ window.synxHeroFlow = function(canvas){
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, w, h);
 
+    // Smooth-ramp cursor influence so enter/leave doesn't snap.
+    mouseInfluence += (mouseTarget - mouseInfluence) * 0.08;
+    var hasMouse = mouseInfluence > 0.01;
+    var mr2 = MOUSE_RADIUS * MOUSE_RADIUS;
+
     ctx.strokeStyle = 'rgba(' + c.lineRGB + ',' + c.lineA + ')';
     ctx.lineWidth = 0.6;
     for (var i=0; i<particles.length; i++){
       var p = particles[i];
       var ang = flowAngle(p.x, p.y, time*0.04);
-      var nx = p.x + Math.cos(ang) * 0.7;
-      var ny = p.y + Math.sin(ang) * 0.7;
+      var dx = Math.cos(ang) * 0.7;
+      var dy = Math.sin(ang) * 0.7;
+
+      if (hasMouse) {
+        var ex = p.x - mouseX, ey = p.y - mouseY;
+        var d2 = ex*ex + ey*ey;
+        if (d2 < mr2 && d2 > 0.5) {
+          var dist = Math.sqrt(d2);
+          var t = 1 - dist / MOUSE_RADIUS;
+          var infl = t*t * mouseInfluence * MOUSE_FORCE;
+          dx += (ex / dist) * infl;
+          dy += (ey / dist) * infl;
+        }
+      }
+
+      var nx = p.x + dx;
+      var ny = p.y + dy;
       ctx.beginPath();
       ctx.moveTo(p.x, p.y); ctx.lineTo(nx, ny);
       ctx.stroke();
@@ -164,6 +195,27 @@ window.synxHeroFlow = function(canvas){
         if (visible && !raf) raf = requestAnimationFrame(step);
       });
     }, {threshold:0}).observe(canvas);
+  }
+
+  // Cursor / touch events bind on the hero (canvas itself is
+  // pointer-events:none so the text overlay stays clickable).
+  var hero = canvas.closest('.hero') || canvas.parentNode;
+  if (hero && !reduce) {
+    function setPointer(clientX, clientY){
+      var rect = canvas.getBoundingClientRect();
+      mouseX = clientX - rect.left;
+      mouseY = clientY - rect.top;
+      mouseTarget = 1;
+      if (!raf) raf = requestAnimationFrame(step);
+    }
+    function clearPointer(){ mouseTarget = 0; }
+    hero.addEventListener('mousemove', function(e){ setPointer(e.clientX, e.clientY); });
+    hero.addEventListener('mouseenter', function(){ mouseTarget = 1; });
+    hero.addEventListener('mouseleave', clearPointer);
+    hero.addEventListener('touchstart', function(e){ if (e.touches[0]) setPointer(e.touches[0].clientX, e.touches[0].clientY); }, {passive:true});
+    hero.addEventListener('touchmove', function(e){ if (e.touches[0]) setPointer(e.touches[0].clientX, e.touches[0].clientY); }, {passive:true});
+    hero.addEventListener('touchend', clearPointer);
+    hero.addEventListener('touchcancel', clearPointer);
   }
 
   window.addEventListener('resize', function(){ resize(); seed(); if (!raf) raf = requestAnimationFrame(step); }, {passive:true});
