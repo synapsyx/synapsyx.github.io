@@ -28,6 +28,37 @@
     }
   }
 
+  // Loading splash dismissal. The inline anti-flash script in baseof.html sets
+  // html[data-loaded] before paint when sessionStorage says we've shown it
+  // already this tab; CSS hides the overlay in that case, and we just clear
+  // the orphan node here to keep the DOM tidy.
+  var v2Loading = document.getElementById('v2Loading');
+  if (v2Loading) {
+    var alreadyLoaded = document.documentElement.hasAttribute('data-loaded');
+    if (alreadyLoaded) {
+      v2Loading.parentNode.removeChild(v2Loading);
+    } else {
+      document.documentElement.classList.add('v2-loading-active');
+      var reduceLoading = reducedMotionMQ && reducedMotionMQ.matches;
+      var loadingHoldMs = reduceLoading ? 0 : 2000;
+      var loadingFadeMs = reduceLoading ? 0 : 500;
+      var dismissLoading = function(){
+        if (v2Loading.parentNode) v2Loading.parentNode.removeChild(v2Loading);
+        document.documentElement.classList.remove('v2-loading-active');
+        document.documentElement.setAttribute('data-loaded','');
+        try { sessionStorage.setItem('synx_v2_loaded_once','1'); } catch(e){}
+      };
+      var fadeLoading = function(){
+        setTimeout(function(){
+          v2Loading.classList.add('is-out');
+          setTimeout(dismissLoading, loadingFadeMs);
+        }, loadingHoldMs);
+      };
+      if (document.readyState === 'complete') fadeLoading();
+      else window.addEventListener('load', fadeLoading);
+    }
+  }
+
   // Scroll reveal via IntersectionObserver
   var revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {

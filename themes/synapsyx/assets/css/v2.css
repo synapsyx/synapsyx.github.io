@@ -181,6 +181,20 @@ body, .page, .nav, .stat, .member, .partner, .pillar, .product-visual, .btn, .fo
   html{scroll-behavior:auto;}
 }
 
+/* ===== Loading splash =====
+   First-paint overlay; suppressed on subsequent loads in the same tab via
+   sessionStorage (the inline anti-flash script in baseof.html sets
+   html[data-loaded] before paint, and the rule below hides the overlay). */
+.v2-loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--fg);z-index:9999;opacity:1;transition:opacity .5s ease-in-out;}
+.v2-loading.is-out{opacity:0;pointer-events:none;}
+.v2-loading-logo{width:128px;height:auto;}
+.v2-loading-logo .v2-spiral{stroke:currentColor;stroke-width:.25;stroke-dasharray:180;stroke-dashoffset:180;fill:transparent;animation:v2-spiral-fill .5s ease-in .5s forwards,v2-spiral-draw .5s ease-out forwards,v2-spiral-pulse 3s ease-in-out 1.5s infinite;}
+@keyframes v2-spiral-draw{to{stroke-dashoffset:0;}}
+@keyframes v2-spiral-fill{to{fill:var(--magenta);}}
+@keyframes v2-spiral-pulse{0%,100%{filter:drop-shadow(0 0 .1px rgba(var(--magenta-rgb),.6));}50%{filter:drop-shadow(0 0 1.5px rgba(var(--magenta-rgb),.85));}}
+html.v2-loading-active{overflow:hidden;}
+html[data-loaded] .v2-loading{display:none;}
+
 /* ===== Focus indicators (keyboard-only) ===== */
 :focus-visible{outline:2px solid var(--magenta);outline-offset:2px;border-radius:inherit;}
 .nav .cta:focus-visible,

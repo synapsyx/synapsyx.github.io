@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <script>(function(){try{var s=localStorage.getItem('synx_v2_theme');if(s==='light'||s==='dark'){if(s==='light')document.documentElement.setAttribute('data-theme','light');return;}if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)document.documentElement.setAttribute('data-theme','light');}catch(e){}})();</script>
+  <script>(function(){try{var s=localStorage.getItem('synx_v2_theme');if(s==='light'||s==='dark'){if(s==='light')document.documentElement.setAttribute('data-theme','light');}else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches){document.documentElement.setAttribute('data-theme','light');}if(sessionStorage.getItem('synx_v2_loaded_once')==='1')document.documentElement.setAttribute('data-loaded','');}catch(e){}})();</script>
   {{ $title := "synapsyx v2 preview · AI products for institutional workflows" }}
   {{ $desc := "Preview of the upcoming synapsyx.com — proprietary AI products for institutional workflows and education. Vienna." }}
   {{ $url := "https://www.synapsyx.com/v2/" }}
@@ -153,6 +153,7 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
+  {{ partial "v2/loading_screen.html" . }}
   {{ block "main" . }}{{ end }}
   {{ $js := resources.Get "js/v2.js" }}
   {{ if hugo.IsProduction }}
