@@ -526,9 +526,6 @@ html[data-theme="light"] .footer{
 /* ===================================================
    RESPONSIVE — layered breakpoints from 1440 → 360
 =================================================== */
-@media (max-width:1440px){
-  .nav{width:auto;}
-}
 @media (max-width:1200px){
   .wrap{padding:0 56px;}
   .footer-inner{padding:0 56px;}
