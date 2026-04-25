@@ -510,6 +510,61 @@
     </div>
   </section>
 
+  <!-- FOOTPRINT -->
+  <section class="footprint section" id="footprint" aria-labelledby="footprint-heading" data-screen-label="footprint">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="left">
+          <p class="num"><span class="bar"></span> 05 · Footprint</p>
+          <h2 id="footprint-heading">From Vienna, into live institutional workflows worldwide.</h2>
+          <p class="lede">Our products run inside cross-border programmes — built in Vienna, deployed at partner universities across Southeast Asia.</p>
+        </div>
+        <div class="right">
+          <span class="count">{{ printf "%02d" (add 1 (len (index .Site.Data.deployments "deployments"))) }}</span>
+          Locations · 2026
+        </div>
+      </div>
+
+      <div class="footprint-grid reveal reveal-delay-1">
+        {{/* Globe mounts into .footprint-canvas via globe.js once the section
+             enters the viewport. The .footprint-list below carries the same
+             data as text so the section reads correctly without JS, with
+             screen readers, and in print. */}}
+        <div class="footprint-canvas" data-globe aria-hidden="true">
+          <div class="footprint-canvas-fallback">
+            <span class="dot mg"></span>
+            <span class="orb"></span>
+          </div>
+        </div>
+
+        <ul class="footprint-list">
+          {{ with .Site.Data.deployments }}
+            {{ with .hq }}
+            <li class="loc loc-hq">
+              <span class="loc-dot mg" aria-hidden="true"></span>
+              <div>
+                <p class="city">{{ .city }} <span class="reg">· {{ .region }}</span></p>
+                <p class="role">{{ .role }}</p>
+                <p class="desc">{{ .description }}</p>
+              </div>
+            </li>
+            {{ end }}
+            {{ range .deployments }}
+            <li class="loc">
+              <span class="loc-dot" aria-hidden="true"></span>
+              <div>
+                <p class="city">{{ .region }}</p>
+                <p class="role">{{ .role }}</p>
+                <p class="desc">{{ .description }}</p>
+              </div>
+            </li>
+            {{ end }}
+          {{ end }}
+        </ul>
+      </div>
+    </div>
+  </section>
+
   </main>
 
   <!-- FOOTER -->

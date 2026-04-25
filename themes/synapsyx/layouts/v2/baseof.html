@@ -120,7 +120,55 @@
     "publisher" (dict "@id" $orgID)
     "url" (printf "%s#epath" $url)
   }}
+  {{/* Place entities for the Footprint section. Country-level resolution
+       (capital coordinates) until per-institution data is curated.
+       Built first so $org can reference them via areaServed. */}}
+  {{ $places := slice }}
+  {{ $areaServed := slice }}
+  {{ with .Site.Data.deployments }}
+    {{ with .hq }}
+      {{ $pid := printf "%s#place-hq" $url }}
+      {{ $places = $places | append (dict
+        "@type" "Place"
+        "@id" $pid
+        "name" (printf "%s, %s" .city .region)
+        "address" (dict
+          "@type" "PostalAddress"
+          "addressLocality" .city
+          "addressCountry" .country
+        )
+        "geo" (dict
+          "@type" "GeoCoordinates"
+          "latitude" .lat
+          "longitude" .lng
+        )
+      ) }}
+      {{ $areaServed = $areaServed | append (dict "@id" $pid) }}
+    {{ end }}
+    {{ range $i, $d := .deployments }}
+      {{ $pid := printf "%s#place-%s" $url (lower $d.country) }}
+      {{ $places = $places | append (dict
+        "@type" "Place"
+        "@id" $pid
+        "name" $d.region
+        "address" (dict
+          "@type" "PostalAddress"
+          "addressCountry" $d.country
+        )
+        "geo" (dict
+          "@type" "GeoCoordinates"
+          "latitude" $d.lat
+          "longitude" $d.lng
+        )
+      ) }}
+      {{ $areaServed = $areaServed | append (dict "@id" $pid) }}
+    {{ end }}
+  {{ end }}
+  {{ if gt (len $areaServed) 0 }}
+    {{ $org = merge $org (dict "areaServed" $areaServed) }}
+  {{ end }}
   {{ $entities := slice $org $website $webpage $gsflow $epath }}
+  {{ range $places }}{{ $entities = $entities | append . }}{{ end }}
   {{ $teamSlugs := slice "mathias" "george" "strudl" "petar" }}
   {{ range $teamSlugs }}
     {{ $slug := . }}

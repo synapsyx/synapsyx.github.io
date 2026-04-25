@@ -1,0 +1,24 @@
+# Geographic footprint surfaced on /v2/ in the Footprint section + globe widget.
+# Country-level only (capital coordinates) until per-institution data is curated.
+hq:
+  city: Vienna
+  region: Austria
+  country: AT
+  lat: 48.2082
+  lng: 16.3738
+  role: Headquarters
+  description: synapsyx GmbH — product, engineering, deployment.
+
+deployments:
+  - region: Vietnam
+    country: VN
+    lat: 21.0285
+    lng: 105.8542
+    role: ePATH at partner universities
+    description: Career guidance via Green Edu Seeds (Erasmus+ CBHE).
+  - region: Thailand
+    country: TH
+    lat: 13.7563
+    lng: 100.5018
+    role: ePATH at partner universities
+    description: Career guidance via Green Edu Seeds (Erasmus+ CBHE).

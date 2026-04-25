@@ -90,7 +90,7 @@
       progress.style.width = pct + '%';
     }
 
-    var sections = ['about','products','team','partners'];
+    var sections = ['about','products','team','partners','footprint'];
     var current = '';
     for (var i=0;i<sections.length;i++){
       var el = document.getElementById(sections[i]);

@@ -482,6 +482,47 @@ a:focus:not(:focus-visible){outline:none;}
 .partner p{font-size:13.5px;line-height:1.55;color:var(--fg-2);margin:0;}
 
 /* ===================================================
+   FOOTPRINT
+   Two-column section: globe canvas (decorative, populated by globe.js
+   when the section enters the viewport) + a parallel text list of
+   locations (the source of truth — survives no-JS, screen readers,
+   and print). Globe canvas keeps a CSS-only fallback orb visible
+   until JS mounts a real globe inside.
+=================================================== */
+.footprint{padding:100px 0 120px;border-top:1px solid var(--line);}
+.footprint-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:80px;align-items:center;}
+
+.footprint-canvas{position:relative;width:100%;aspect-ratio:1 / 1;max-width:480px;margin:0 auto;}
+.footprint-canvas canvas,.footprint-canvas svg{position:absolute;inset:0;width:100%;height:100%;display:block;}
+.footprint-canvas[data-globe-ready] .footprint-canvas-fallback{display:none;}
+
+/* CSS-only globe sketch shown until globe.js mounts (or if JS is off).
+   Two crossed arc gradients hint at a sphere; magenta dot anchors Vienna. */
+.footprint-canvas-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+.footprint-canvas-fallback .orb{width:88%;height:88%;border-radius:50%;border:1px solid var(--line-strong);background:
+  radial-gradient(circle at 32% 32%, rgba(var(--magenta-rgb),0.10) 0%, transparent 55%),
+  radial-gradient(circle at 70% 75%, rgba(255,255,255,0.04) 0%, transparent 60%),
+  conic-gradient(from 220deg, transparent 0deg, rgba(255,255,255,0.025) 90deg, transparent 180deg, rgba(255,255,255,0.025) 270deg, transparent 360deg);
+  position:relative;overflow:hidden;}
+.footprint-canvas-fallback .orb::before,
+.footprint-canvas-fallback .orb::after{content:"";position:absolute;border:1px solid rgba(255,255,255,0.05);border-radius:50%;}
+.footprint-canvas-fallback .orb::before{inset:14%;border-color:rgba(255,255,255,0.04);}
+.footprint-canvas-fallback .orb::after{inset:30%;border-color:rgba(255,255,255,0.03);}
+.footprint-canvas-fallback .dot{position:absolute;top:36%;left:54%;width:9px;height:9px;border-radius:50%;background:var(--magenta);box-shadow:0 0 14px rgba(var(--magenta-rgb),0.7),0 0 0 5px rgba(var(--magenta-rgb),0.10);z-index:1;}
+
+.footprint-list{list-style:none;margin:0;padding:0;}
+.footprint-list .loc{display:flex;align-items:flex-start;gap:18px;padding:24px 0;border-bottom:1px solid var(--line);}
+.footprint-list .loc:first-child{padding-top:0;}
+.footprint-list .loc:last-child{border-bottom:0;padding-bottom:0;}
+.footprint-list .loc-dot{width:10px;height:10px;border-radius:50%;background:var(--fg-3);flex-shrink:0;margin-top:9px;}
+.footprint-list .loc-dot.mg{background:var(--magenta);box-shadow:0 0 10px rgba(var(--magenta-rgb),0.5),0 0 0 4px rgba(var(--magenta-rgb),0.08);}
+.footprint-list .loc > div{flex:1;}
+.footprint-list .loc .city{font-family:var(--display);font-size:22px;font-weight:500;letter-spacing:-0.01em;color:var(--fg);margin:0 0 6px;line-height:1.2;}
+.footprint-list .loc .city .reg{color:var(--fg-3);font-weight:400;font-size:18px;}
+.footprint-list .loc .role{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--fg-4);margin:0 0 10px;}
+.footprint-list .loc .desc{font-size:14px;line-height:1.55;color:var(--fg-2);margin:0;}
+
+/* ===================================================
    FOOTER
 =================================================== */
 .footer{
@@ -562,6 +603,9 @@ html[data-theme="light"] .footer{
   .products{padding:88px 0 96px;}
   .team{padding:88px 0;}
   .partners{padding:80px 0 88px;}
+  .footprint{padding:80px 0 88px;}
+  .footprint-grid{grid-template-columns:1fr;gap:48px;}
+  .footprint-canvas{max-width:380px;}
   .about-pillars{margin-top:48px;}
   .product{margin-bottom:72px;}
   .product h3{font-size:36px;}
@@ -591,6 +635,10 @@ html[data-theme="light"] .footer{
   .products{padding:72px 0 80px;}
   .team{padding:72px 0;}
   .partners{padding:64px 0 72px;}
+  .footprint{padding:64px 0 72px;}
+  .footprint-canvas{max-width:300px;}
+  .footprint-list .loc .city{font-size:19px;}
+  .footprint-list .loc .city .reg{font-size:16px;}
   .product{margin-bottom:56px;}
   .product h3{font-size:30px;}
 }
@@ -628,15 +676,18 @@ html[data-theme="light"] .footer{
   .page{width:auto !important;max-width:100% !important;margin:0 !important;}
   .page::before,.team::before,.hero::after,.hero .grid-bg,.hero h1 .accent::before{display:none !important;}
   .page-header,.skip-link,.nav,.theme-toggle,.corner,.hero .ctas,.product .actions,.footer-bottom .socials{display:none !important;}
-  .product-visual,.epath-video,.gsflow-canvas,.member .portrait,.partner .plogo .glyph{display:none !important;}
+  .product-visual,.epath-video,.gsflow-canvas,.member .portrait,.partner .plogo .glyph,.footprint-canvas{display:none !important;}
   .hero{height:auto !important;padding:0 0 18pt !important;border:none !important;}
   .hero-inner{position:static !important;padding:0 !important;max-width:100% !important;}
-  .about,.products,.team,.partners{padding:18pt 0 !important;border:none !important;}
+  .about,.products,.team,.partners,.footprint{padding:18pt 0 !important;border:none !important;}
   .product{margin-bottom:18pt !important;}
   .wrap,.footer-inner{padding:0 !important;max-width:100% !important;}
   .about-grid,.product-grid,.product.reverse .product-grid{display:block !important;}
   .about-pillars,.about-stats,.team-grid,.partners-row,.footer-grid{display:block !important;background:none !important;border:none !important;}
   .stat,.pillar,.member,.partner{padding:8pt 0 !important;border:none !important;border-bottom:1px solid var(--line) !important;min-height:0 !important;}
+  .footprint-grid{display:block !important;}
+  .footprint-list .loc{padding:6pt 0 !important;border-bottom:1px solid var(--line) !important;}
+  .footprint-list .loc .city,.footprint-list .loc .desc,.footprint-list .loc .city .reg{color:#000 !important;}
   .hero h1,.section-head h2,.product h3,.member h3,.partner .plogo .wordmark{color:#000 !important;page-break-after:avoid;}
   .hero h1{font-size:22pt !important;line-height:1.15 !important;}
   .section-head h2{font-size:16pt !important;}
