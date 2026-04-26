@@ -28,12 +28,21 @@
     }
   }
 
-  // Hero generative background — interactive Canvas2D Perlin flow field.
-  // Defined as window.synxHeroFlow earlier in the bundle. On success, .hero
-  // gets .has-canvas which fades the static grid no-JS fallback.
+  // Hero generative background — try WebGL Navier-Stokes fluid sim first
+  // (window.synxHeroFluid), fall back to Canvas2D Perlin flow field
+  // (window.synxHeroFlow) on no-WebGL / no-half-float-linear devices.
+  // Both return false on init failure; success adds .has-canvas which
+  // fades the static grid no-JS fallback.
   var heroCanvas = document.querySelector('.hero-canvas');
-  if (heroCanvas && typeof window.synxHeroFlow === 'function') {
-    if (window.synxHeroFlow(heroCanvas) !== false) {
+  if (heroCanvas) {
+    var mounted = false;
+    if (typeof window.synxHeroFluid === 'function') {
+      mounted = window.synxHeroFluid(heroCanvas) !== false;
+    }
+    if (!mounted && typeof window.synxHeroFlow === 'function') {
+      mounted = window.synxHeroFlow(heroCanvas) !== false;
+    }
+    if (mounted) {
       var hero = heroCanvas.closest('.hero');
       if (hero) hero.classList.add('has-canvas');
     }

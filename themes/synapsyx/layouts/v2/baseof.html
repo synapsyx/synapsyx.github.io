@@ -206,10 +206,11 @@
   {{/* Widget files (hero, globe) are concatenated AHEAD of v2.js so their
        window.synxHero* / window.synxGlobe assignments are parsed before
        the v2.js IIFE runs and looks them up. */}}
+  {{ $heroFluid := resources.Get "js/hero-fluid.js" }}
   {{ $heroFlow := resources.Get "js/hero-flow.js" }}
   {{ $globe := resources.Get "js/globe.js" }}
   {{ $core := resources.Get "js/v2.js" }}
-  {{ $js := slice $heroFlow $globe $core | resources.Concat "js/v2-bundle.js" }}
+  {{ $js := slice $heroFluid $heroFlow $globe $core | resources.Concat "js/v2-bundle.js" }}
   {{ if hugo.IsProduction }}
     {{ $js = $js | resources.Minify | resources.Fingerprint }}
     <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
