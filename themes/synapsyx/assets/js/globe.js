@@ -43,6 +43,8 @@ window.synxGlobe = function(container, data){
   var REVEAL_MS = 1200;              // arc draw-in duration
   var REVEAL_STAGGER_MS = 180;
   var PULSE_PERIOD_MS = 2400;
+  var PACKET_PERIOD_MS = 2800;       // arc-traversal time per packet
+  var PACKET_FADE_IN_MS = 400;       // soft fade-in once arc reveal completes
   var HOVER_RADIUS = 22;             // CSS px
 
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -87,16 +89,26 @@ window.synxGlobe = function(container, data){
     };
   }
 
-  // Arcs always run from primary HQ outward.
+  // Arcs always run from primary HQ outward. We precompute the great-circle
+  // basis (v1, v2, omega, sinO) once per arc so per-frame sampling — used by
+  // both the polyline draw and the data-packet animation — is just a couple
+  // of trig ops, not a fresh arccos.
+  function makeArc(lat1, lng1, lat2, lng2){
+    var v1 = latLngToVec(lat1, lng1);
+    var v2 = latLngToVec(lat2, lng2);
+    var dot = Math.max(-1, Math.min(1, v1.x*v2.x + v1.y*v2.y + v1.z*v2.z));
+    var omega = Math.acos(dot);
+    return { v1: v1, v2: v2, omega: omega, sinO: Math.sin(omega) };
+  }
   var arcs = [];
   if (data.hq.satellites) {
     for (var i=0; i<data.hq.satellites.length; i++) {
-      arcs.push({ lat1: data.hq.lat, lng1: data.hq.lng, lat2: data.hq.satellites[i].lat, lng2: data.hq.satellites[i].lng });
+      arcs.push(makeArc(data.hq.lat, data.hq.lng, data.hq.satellites[i].lat, data.hq.satellites[i].lng));
     }
   }
   if (data.deployments) {
     for (var i=0; i<data.deployments.length; i++) {
-      arcs.push({ lat1: data.hq.lat, lng1: data.hq.lng, lat2: data.deployments[i].lat, lng2: data.deployments[i].lng });
+      arcs.push(makeArc(data.hq.lat, data.hq.lng, data.deployments[i].lat, data.deployments[i].lng));
     }
   }
 
@@ -106,6 +118,10 @@ window.synxGlobe = function(container, data){
   var rotX = deg2rad(12);            // gentle initial tilt
   var raf = 0;
   var visible = true;
+  // Float32Array of (x,y,z) unit vectors for each land sample point.
+  // Filled asynchronously by loadLandmask(); null until then so the globe
+  // renders fine if the fetch is slow or fails.
+  var landVecs = null;
   var dragging = false;
   var pointerId = null;
   var dragVX = 0, dragVY = 0;        // velocity (rad / ms)
@@ -164,6 +180,20 @@ window.synxGlobe = function(container, data){
 
     ctx.clearRect(0, 0, W, H);
 
+    // Atmosphere halo — drawn BEFORE the sphere so the inner half of the
+    // gradient is hidden by the disk; only the soft outer bloom shows.
+    // Outer extent r*1.20 keeps the falloff within the canvas (r is 0.42*W).
+    var halo = ctx.createRadialGradient(cx, cy, r*0.50, cx, cy, r*1.20);
+    halo.addColorStop(0, 'rgba(' + colors.mg + ',0)');
+    halo.addColorStop(0.70, 'rgba(' + colors.mg + ',0.04)');
+    halo.addColorStop(0.83, 'rgba(' + colors.mg + ',0.22)');  // peak at the rim
+    halo.addColorStop(0.92, 'rgba(' + colors.mg + ',0.07)');
+    halo.addColorStop(1, 'rgba(' + colors.mg + ',0)');
+    ctx.fillStyle = halo;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r*1.20, 0, TAU);
+    ctx.fill();
+
     // Sphere base (force-dark in both themes).
     var sphereGrad = ctx.createRadialGradient(cx - r*0.3, cy - r*0.35, r*0.05, cx, cy, r);
     sphereGrad.addColorStop(0, 'rgba(28,28,32,1)');
@@ -174,15 +204,20 @@ window.synxGlobe = function(container, data){
     ctx.arc(cx, cy, r, 0, TAU);
     ctx.fill();
 
-    // Magenta rim glow (very subtle).
-    var rim = ctx.createRadialGradient(cx, cy, r*0.92, cx, cy, r*1.16);
-    rim.addColorStop(0, 'rgba(' + colors.mg + ',0)');
-    rim.addColorStop(0.5, 'rgba(' + colors.mg + ',0.06)');
-    rim.addColorStop(1, 'rgba(' + colors.mg + ',0)');
-    ctx.fillStyle = rim;
+    // Inner rim accent on top of the sphere — soft magenta glow at the
+    // disk edge so the planet reads as "lit from behind".
+    var innerRim = ctx.createRadialGradient(cx, cy, r*0.86, cx, cy, r);
+    innerRim.addColorStop(0, 'rgba(' + colors.mg + ',0)');
+    innerRim.addColorStop(0.85, 'rgba(' + colors.mg + ',0.04)');
+    innerRim.addColorStop(1, 'rgba(' + colors.mg + ',0.18)');
+    ctx.fillStyle = innerRim;
     ctx.beginPath();
-    ctx.arc(cx, cy, r*1.16, 0, TAU);
+    ctx.arc(cx, cy, r, 0, TAU);
     ctx.fill();
+
+    // Dot-matrix landmass (Stripe-style). Drawn on top of the sphere fill
+    // but under the lat/lng grid so the grid still reads as overlay.
+    drawLandmass(ctx, cx, cy, r, dpr);
 
     // Outline.
     ctx.strokeStyle = 'rgba(' + colors.grid + ',' + (colors.gridStrongA + 0.04).toFixed(3) + ')';
@@ -212,8 +247,11 @@ window.synxGlobe = function(container, data){
       revealT = Math.max(0, Math.min(1, revealT));
       // Ease-out cubic.
       var eased = 1 - Math.pow(1 - revealT, 3);
-      drawArc(arcs[i].lat1, arcs[i].lng1, arcs[i].lat2, arcs[i].lng2, ctx, cx, cy, r, dpr, eased);
+      drawArc(arcs[i], ctx, cx, cy, r, dpr, eased);
     }
+
+    // Animated data packets travelling HQ→destination along each arc.
+    drawPackets(now, ctx, cx, cy, r, dpr);
 
     // Pins. Compute screen positions in pin objects so hit-testing later
     // can read them without re-projecting.
@@ -259,6 +297,46 @@ window.synxGlobe = function(container, data){
     ctx.stroke();
   }
 
+  // Dot-matrix landmass (Stripe / Linear / Vercel idiom). landVecs is a
+  // Float32Array of (x,y,z) unit vectors sampled at land positions on a
+  // Fibonacci sphere. We bin dots into four depth-alpha buckets so the
+  // ~3K-point loop only touches ctx.fillStyle four times per frame and
+  // batches all rects in each bucket into a single Path2D fill.
+  // Rotation math is inlined to dodge ~3K object allocations / frame.
+  function drawLandmass(ctx, cx, cy, r, dpr){
+    if (!landVecs) return;
+    var dotR = 0.7 * dpr;
+    var size = 2 * dotR;
+    var cyR = Math.cos(rotY), syR = Math.sin(rotY);
+    var cxR = Math.cos(rotX), sxR = Math.sin(rotX);
+    var b0 = [], b1 = [], b2 = [], b3 = [];
+    var n = landVecs.length;
+    for (var i = 0; i < n; i += 3) {
+      var x = landVecs[i], y = landVecs[i+1], z = landVecs[i+2];
+      // rotateY then rotateX, composed inline:
+      var x2 = x*cyR + z*syR;
+      var y2 = y*cxR + x*syR*sxR - z*cyR*sxR;
+      var z2 = y*sxR - x*syR*cxR + z*cyR*cxR;
+      if (z2 < 0.04) continue;  // back-cull + soft horizon margin
+      var sx = cx + x2 * r - dotR;
+      var sy = cy - y2 * r - dotR;
+      var bucket = z2 > 0.7 ? b3 : z2 > 0.45 ? b2 : z2 > 0.20 ? b1 : b0;
+      bucket.push(sx, sy);
+    }
+    var alphas = [0.16, 0.30, 0.48, 0.70];
+    var buckets = [b0, b1, b2, b3];
+    for (var bi = 0; bi < 4; bi++){
+      var pts = buckets[bi];
+      if (pts.length === 0) continue;
+      ctx.fillStyle = 'rgba(' + colors.grid + ',' + alphas[bi] + ')';
+      ctx.beginPath();
+      for (var j = 0; j < pts.length; j += 2){
+        ctx.rect(pts[j], pts[j+1], size, size);
+      }
+      ctx.fill();
+    }
+  }
+
   function drawPin(pin, isHovered, pulse, ctx, dpr){
     var color = pin.isHQ ? colors.mg : colors.pin;
     var depthAlpha = Math.max(0.35, Math.min(1, pin.sz * 0.9 + 0.45));
@@ -297,25 +375,29 @@ window.synxGlobe = function(container, data){
     ctx.fillText(pin.label, pin.sx + ox, pin.sy + oy);
   }
 
-  function drawArc(lat1, lng1, lat2, lng2, ctx, cx, cy, r, dpr, reveal){
+  // Sample a great-circle arc at parameter t∈[0,1] using the precomputed
+  // basis. Used by both arc drawing and packet animation.
+  function arcSample(arc, t){
+    var k1, k2;
+    if (arc.sinO < 1e-6) { k1 = 1-t; k2 = t; }
+    else { k1 = Math.sin((1-t)*arc.omega)/arc.sinO; k2 = Math.sin(t*arc.omega)/arc.sinO; }
+    var lift = 1 + Math.sin(t * Math.PI) * 0.20;
+    return {
+      x: (arc.v1.x*k1 + arc.v2.x*k2) * lift,
+      y: (arc.v1.y*k1 + arc.v2.y*k2) * lift,
+      z: (arc.v1.z*k1 + arc.v2.z*k2) * lift
+    };
+  }
+
+  function drawArc(arc, ctx, cx, cy, r, dpr, reveal){
     if (reveal <= 0) return;
-    var v1 = latLngToVec(lat1, lng1);
-    var v2 = latLngToVec(lat2, lng2);
-    var dot = Math.max(-1, Math.min(1, v1.x*v2.x + v1.y*v2.y + v1.z*v2.z));
-    var omega = Math.acos(dot);
-    var sinO = Math.sin(omega);
     var steps = 56;
     var lastIdx = Math.ceil(reveal * steps);
     var prev = null;
     ctx.lineWidth = 1.1 * dpr;
     for (var s=0; s<=lastIdx; s++){
       var t = s / steps;
-      var k1, k2;
-      if (sinO < 1e-6) { k1 = 1-t; k2 = t; }
-      else { k1 = Math.sin((1-t)*omega)/sinO; k2 = Math.sin(t*omega)/sinO; }
-      var v = { x: v1.x*k1 + v2.x*k2, y: v1.y*k1 + v2.y*k2, z: v1.z*k1 + v2.z*k2 };
-      var lift = 1 + Math.sin(t * Math.PI) * 0.20;
-      v.x *= lift; v.y *= lift; v.z *= lift;
+      var v = arcSample(arc, t);
       var rv = projectVec(v);
       var sx = cx + rv.x * r;
       var sy = cy - rv.y * r;
@@ -329,6 +411,67 @@ window.synxGlobe = function(container, data){
         ctx.stroke();
       }
       prev = pt;
+    }
+  }
+
+  // Travelling-packet animation: per arc, one packet head with a short
+  // fading polyline trail, looping from HQ→destination. Phase is staggered
+  // so launches don't all coincide. Suppressed during the arc reveal and
+  // skipped entirely under prefers-reduced-motion.
+  function drawPackets(now, ctx, cx, cy, r, dpr){
+    if (reduce) return;
+    if (revealStartAt === 0) return;
+    ctx.lineWidth = 1.6 * dpr;
+    ctx.lineCap = 'round';
+    var trailSteps = 8;
+    var trailDt = 0.020;
+    for (var i=0; i<arcs.length; i++){
+      var arc = arcs[i];
+      var sinceArcReady = now - revealStartAt - i * REVEAL_STAGGER_MS - REVEAL_MS;
+      if (sinceArcReady < 0) continue;
+      var fade = Math.min(1, sinceArcReady / PACKET_FADE_IN_MS);
+      var phase = (i * 0.327) % 1;
+      var t = ((now / PACKET_PERIOD_MS) + phase) % 1;
+
+      var prev = null;
+      for (var s=trailSteps; s>=0; s--){
+        var ts = t - s * trailDt;
+        if (ts < 0) { prev = null; continue; }
+        var v = arcSample(arc, ts);
+        var rv = projectVec(v);
+        if (rv.z < -0.05) { prev = null; continue; }
+        var sx = cx + rv.x * r;
+        var sy = cy - rv.y * r;
+        if (prev){
+          var alphaSeg = (1 - s / trailSteps) * 0.65 * fade;
+          ctx.strokeStyle = 'rgba(' + colors.mg + ',' + alphaSeg.toFixed(3) + ')';
+          ctx.beginPath();
+          ctx.moveTo(prev.x, prev.y);
+          ctx.lineTo(sx, sy);
+          ctx.stroke();
+        }
+        prev = { x: sx, y: sy };
+      }
+
+      var head = arcSample(arc, t);
+      var rh = projectVec(head);
+      if (rh.z < -0.05) continue;
+      var hx = cx + rh.x * r;
+      var hy = cy - rh.y * r;
+      var depthA = Math.max(0.5, Math.min(1, rh.z + 0.5)) * fade;
+
+      var glow = ctx.createRadialGradient(hx, hy, 0, hx, hy, 9 * dpr);
+      glow.addColorStop(0, 'rgba(' + colors.mg + ',' + (depthA * 0.7).toFixed(3) + ')');
+      glow.addColorStop(1, 'rgba(' + colors.mg + ',0)');
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(hx, hy, 9 * dpr, 0, TAU);
+      ctx.fill();
+
+      ctx.fillStyle = 'rgba(' + colors.mg + ',' + (depthA * 0.95).toFixed(3) + ')';
+      ctx.beginPath();
+      ctx.arc(hx, hy, 2.0 * dpr, 0, TAU);
+      ctx.fill();
     }
   }
 
@@ -457,6 +600,34 @@ window.synxGlobe = function(container, data){
   // --- Lifecycle -------------------------------------------------------
 
   resize();
+
+  // Lazy-load the precomputed land-mask points. URL is on the container
+  // (set by Hugo template) so we don't hardcode a path. On success, convert
+  // each (lat, lng) pair to a unit vector once and stash in landVecs;
+  // drawLandmass() picks it up automatically the next frame.
+  (function loadLandmask(){
+    var url = container.getAttribute('data-landmask-url');
+    if (!url || typeof fetch !== 'function') return;
+    fetch(url, {credentials:'same-origin'}).then(function(res){
+      if (!res.ok) throw new Error('landmask fetch ' + res.status);
+      return res.json();
+    }).then(function(arr){
+      if (!Array.isArray(arr) || arr.length < 2) return;
+      var n = arr.length / 2;
+      var buf = new Float32Array(n * 3);
+      for (var i = 0; i < n; i++){
+        var v = latLngToVec(arr[i*2], arr[i*2+1]);
+        buf[i*3]   = v.x;
+        buf[i*3+1] = v.y;
+        buf[i*3+2] = v.z;
+      }
+      landVecs = buf;
+      if (!raf) raf = requestAnimationFrame(animate);
+    }).catch(function(err){
+      // Globe still renders without the landmass — log and move on.
+      if (window.console && console.warn) console.warn('globe: landmask load failed', err);
+    });
+  })();
 
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function(entries){
