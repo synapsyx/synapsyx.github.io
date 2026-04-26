@@ -71,24 +71,55 @@ def vec_to_latlng(x, y, z):
     return lat, lng
 
 
+def detect_map_bounds(img):
+    # Wikipedia's NASA Blue Marble JPEG has a ~3px white frame + 1px dark line
+    # around the actual equirectangular map. Sampling those framing pixels makes
+    # the dateline meridian and poles erroneously read as "land", so find the
+    # inner map bounds by scanning from each edge until we hit a non-near-white
+    # non-near-black pixel.
+    w, h = img.size
+    px = img.load()
+
+    # The map is wrapped in a white border + a thin near-black frame line.
+    # Find that dark line scanning inward from each edge; the actual map starts
+    # one pixel beyond it. Sampling at h/2 (left/right) is safe — Antarctica
+    # is white-ish and would defeat any "first non-grayscale pixel" heuristic.
+    def first_dark_line(seq):
+        for i, (r, g, b) in enumerate(seq):
+            if r < 30 and g < 30 and b < 40:
+                return i
+        return 0
+
+    left = first_dark_line(px[x, h // 2] for x in range(min(40, w // 2))) + 1
+    right = w - 1 - first_dark_line(px[w - 1 - x, h // 2] for x in range(min(40, w // 2))) - 1
+    top = first_dark_line(px[w // 2, y] for y in range(min(40, h // 2))) + 1
+    bottom = h - 1 - first_dark_line(px[w // 2, h - 1 - y] for y in range(min(40, h // 2))) - 1
+    return left, top, right + 1, bottom + 1  # right/bottom exclusive
+
+
 def main():
     n = int(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_N
     print(f"Fetching: {SOURCE_URL}", file=sys.stderr)
     img = fetch_image(SOURCE_URL)
-    w, h = img.size
+    w_full, h_full = img.size
+    x0, y0, x1, y1 = detect_map_bounds(img)
+    w, h = x1 - x0, y1 - y0
     pixels = img.load()
-    print(f"Image: {w}x{h}, sampling {n} Fibonacci points", file=sys.stderr)
+    print(
+        f"Image: {w_full}x{h_full}, map bounds ({x0},{y0})..({x1},{y1}) -> {w}x{h}, sampling {n} Fibonacci points",
+        file=sys.stderr,
+    )
 
     flat = []
     land = 0
     for x, y, z in fibonacci_sphere(n):
         lat, lng = vec_to_latlng(x, y, z)
-        ix = int((lng + 180.0) / 360.0 * w) % w
-        iy = int((90.0 - lat) / 180.0 * h)
-        if iy < 0:
-            iy = 0
-        elif iy >= h:
-            iy = h - 1
+        ix = x0 + (int((lng + 180.0) / 360.0 * w) % w)
+        iy = y0 + int((90.0 - lat) / 180.0 * h)
+        if iy < y0:
+            iy = y0
+        elif iy >= y1:
+            iy = y1 - 1
         r, g, b = pixels[ix, iy]
         if is_land(r, g, b):
             flat.append(round(lat, 1))
