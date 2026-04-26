@@ -521,7 +521,10 @@
           <p class="lede">Our products run inside cross-border programmes — built in Vienna, deployed at partner universities across Southeast Asia.</p>
         </div>
         <div class="right">
-          <span class="count">{{ printf "%02d" (add 1 (len (index .Site.Data.deployments "deployments"))) }}</span>
+          {{ $depCount := len (index .Site.Data.deployments "deployments") }}
+          {{ $teamCount := 0 }}
+          {{ with index .Site.Data.deployments "team" }}{{ $teamCount = len . }}{{ end }}
+          <span class="count">{{ printf "%02d" (add (add 1 $depCount) $teamCount) }}</span>
           Locations · 2026
         </div>
       </div>
@@ -554,6 +557,16 @@
             {{ range .deployments }}
             <li class="loc">
               <span class="loc-dot" aria-hidden="true"></span>
+              <div>
+                <p class="city">{{ .region }}</p>
+                <p class="role">{{ .role }}</p>
+                <p class="desc">{{ .description }}</p>
+              </div>
+            </li>
+            {{ end }}
+            {{ range .team }}
+            <li class="loc loc-team">
+              <span class="loc-dot ring" aria-hidden="true"></span>
               <div>
                 <p class="city">{{ .region }}</p>
                 <p class="role">{{ .role }}</p>

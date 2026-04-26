@@ -22,3 +22,14 @@ deployments:
     lng: 100.5018
     role: ePATH at partner universities
     description: Career guidance via Green Edu Seeds (Erasmus+ CBHE).
+
+# Remote team members. Rendered on the globe with a distinct marker (ring,
+# not filled dot) so they read as "team member working remotely" rather
+# than an institutional deployment.
+team:
+  - region: Australia
+    country: AU
+    lat: -33.8688
+    lng: 151.2093
+    role: Operations Lead
+    description: Petar Djordjevic-Ilic — operations and delivery, currently based in Australia.

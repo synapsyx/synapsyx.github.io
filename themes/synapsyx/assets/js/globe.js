@@ -123,11 +123,17 @@ window.synxGlobe = function(container, data){
       drawCircle(lng, false, ctx, cx, cy, r);
     }
 
-    // Arcs HQ → each deployment.
+    // Arcs HQ → each deployment (solid) and HQ → each team member (dashed,
+    // dimmer) so the two categories read as different relationships.
     var hq = data.hq;
     if (data.deployments) {
       for (var i=0; i<data.deployments.length; i++){
-        drawArc(hq.lat, hq.lng, data.deployments[i].lat, data.deployments[i].lng, ctx, cx, cy, r, dpr);
+        drawArc(hq.lat, hq.lng, data.deployments[i].lat, data.deployments[i].lng, ctx, cx, cy, r, dpr, false);
+      }
+    }
+    if (data.team) {
+      for (var i=0; i<data.team.length; i++){
+        drawArc(hq.lat, hq.lng, data.team[i].lat, data.team[i].lng, ctx, cx, cy, r, dpr, true);
       }
     }
 
@@ -137,6 +143,12 @@ window.synxGlobe = function(container, data){
       for (var i=0; i<data.deployments.length; i++){
         var d = data.deployments[i];
         drawPin(d.lat, d.lng, false, ctx, cx, cy, r, dpr);
+      }
+    }
+    if (data.team) {
+      for (var i=0; i<data.team.length; i++){
+        var m = data.team[i];
+        drawTeamPin(m.lat, m.lng, ctx, cx, cy, r, dpr);
       }
     }
 
@@ -183,7 +195,7 @@ window.synxGlobe = function(container, data){
     ctx.fill();
   }
 
-  function drawArc(lat1, lng1, lat2, lng2, ctx, cx, cy, r, dpr){
+  function drawArc(lat1, lng1, lat2, lng2, ctx, cx, cy, r, dpr, isTeam){
     var v1 = latLngToVec(lat1, lng1);
     var v2 = latLngToVec(lat2, lng2);
     var dot = Math.max(-1, Math.min(1, v1.x*v2.x + v1.y*v2.y + v1.z*v2.z));
@@ -191,7 +203,8 @@ window.synxGlobe = function(container, data){
     var sinO = Math.sin(omega);
     var steps = 56;
     var prev = null;
-    ctx.lineWidth = 1.1 * dpr;
+    ctx.lineWidth = (isTeam ? 0.8 : 1.1) * dpr;
+    var alphaCap = isTeam ? 0.30 : 0.55;
     for (var s=0; s<=steps; s++){
       var t = s / steps;
       var k1, k2;
@@ -204,9 +217,12 @@ window.synxGlobe = function(container, data){
       var sx = cx + rv.x * r;
       var sy = cy - rv.y * r;
       var pt = { x: sx, y: sy, z: rv.z };
-      if (prev && prev.z > -0.08 && pt.z > -0.08) {
+      // For team arcs, render as a dashed line (every other segment) so it
+      // visually reads as "remote collaboration" rather than a deployment.
+      var skip = isTeam && (s % 2 === 0);
+      if (!skip && prev && prev.z > -0.08 && pt.z > -0.08) {
         var avgZ = (prev.z + pt.z) / 2;
-        var alpha = Math.max(0.04, Math.min(0.55, (avgZ + 0.08) * 0.7));
+        var alpha = Math.max(0.04, Math.min(alphaCap, (avgZ + 0.08) * 0.7));
         ctx.strokeStyle = 'rgba(' + colors.mg + ',' + alpha.toFixed(3) + ')';
         ctx.beginPath();
         ctx.moveTo(prev.x, prev.y); ctx.lineTo(pt.x, pt.y);
@@ -214,6 +230,33 @@ window.synxGlobe = function(container, data){
       }
       prev = pt;
     }
+  }
+
+  function drawTeamPin(lat, lng, ctx, cx, cy, r, dpr){
+    var p = project(lat, lng);
+    if (p.z < -0.02) return; // back hemisphere
+    var x = cx + p.x * r;
+    var y = cy - p.y * r;
+    var depthAlpha = Math.max(0.35, Math.min(1, p.z * 0.9 + 0.45));
+    var rRing = 4.5 * dpr;
+    var rGlow = 12 * dpr;
+
+    // Soft glow behind the ring so it doesn't disappear against the sphere.
+    var pgrad = ctx.createRadialGradient(x, y, 0, x, y, rGlow);
+    pgrad.addColorStop(0, 'rgba(' + colors.pin + ',' + (depthAlpha * 0.30) + ')');
+    pgrad.addColorStop(1, 'rgba(' + colors.pin + ',0)');
+    ctx.fillStyle = pgrad;
+    ctx.beginPath();
+    ctx.arc(x, y, rGlow, 0, TAU);
+    ctx.fill();
+
+    // Outlined ring (no fill) — the visual cue that distinguishes "team"
+    // from solid deployment dots.
+    ctx.strokeStyle = 'rgba(' + colors.pin + ',' + depthAlpha + ')';
+    ctx.lineWidth = 1.4 * dpr;
+    ctx.beginPath();
+    ctx.arc(x, y, rRing, 0, TAU);
+    ctx.stroke();
   }
 
   function animate(){
