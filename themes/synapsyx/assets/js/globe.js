@@ -136,12 +136,16 @@ window.synxGlobe = function(container, data){
   // --- Geometry --------------------------------------------------------
 
   function latLngToVec(lat, lng){
+    // Place lng=0 on the +Z axis (camera-facing) and lng=+90° on +X (screen
+    // right) so increasing longitude — going East — moves points to the
+    // right on screen, matching the standard map view. Pairs with
+    // rotY = -deg2rad(HQ.lng) below, which then centers HQ at +Z.
     var phi = deg2rad(90 - lat);
     var theta = deg2rad(lng);
     return {
-      x: Math.sin(phi) * Math.cos(theta),
+      x: Math.sin(phi) * Math.sin(theta),
       y: Math.cos(phi),
-      z: Math.sin(phi) * Math.sin(theta)
+      z: Math.sin(phi) * Math.cos(theta)
     };
   }
   function rotateY(v, ang){
