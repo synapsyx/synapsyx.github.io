@@ -520,7 +520,8 @@ a:focus:not(:focus-visible){outline:none;}
 .footprint-list .loc:last-child{border-bottom:0;padding-bottom:0;}
 .footprint-list .loc-dot{width:10px;height:10px;border-radius:50%;background:var(--fg-3);flex-shrink:0;margin-top:9px;}
 .footprint-list .loc-dot.mg{background:var(--magenta);box-shadow:0 0 10px rgba(var(--magenta-rgb),0.5),0 0 0 4px rgba(var(--magenta-rgb),0.08);}
-.footprint-list .loc-dot.ring{background:transparent;border:1.5px solid var(--fg-3);box-sizing:border-box;}
+.footprint-list .loc-hq .city .sep{color:var(--fg-4);margin:0 0.15em;}
+.footprint-list .loc-hq .desc + .desc{margin-top:6px;}
 .footprint-list .loc > div{flex:1;}
 .footprint-list .loc .city{font-family:var(--display);font-size:22px;font-weight:500;letter-spacing:-0.01em;color:var(--fg);margin:0 0 6px;line-height:1.2;}
 .footprint-list .loc .city .reg{color:var(--fg-3);font-weight:400;font-size:18px;}

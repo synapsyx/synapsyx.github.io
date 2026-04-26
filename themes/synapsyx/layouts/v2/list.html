@@ -522,9 +522,9 @@
         </div>
         <div class="right">
           {{ $depCount := len (index .Site.Data.deployments "deployments") }}
-          {{ $teamCount := 0 }}
-          {{ with index .Site.Data.deployments "team" }}{{ $teamCount = len . }}{{ end }}
-          <span class="count">{{ printf "%02d" (add (add 1 $depCount) $teamCount) }}</span>
+          {{ $satCount := 0 }}
+          {{ with index .Site.Data.deployments.hq "satellites" }}{{ $satCount = len . }}{{ end }}
+          <span class="count">{{ printf "%02d" (add (add 1 $depCount) $satCount) }}</span>
           Locations · 2026
         </div>
       </div>
@@ -548,25 +548,26 @@
             <li class="loc loc-hq">
               <span class="loc-dot mg" aria-hidden="true"></span>
               <div>
-                <p class="city">{{ .city }} <span class="reg">· {{ .region }}</span></p>
-                <p class="role">{{ .role }}</p>
+                <p class="city">
+                  {{ .city }} <span class="reg">· {{ .region }}</span>
+                  {{- range .satellites }}
+                  <span class="sep" aria-hidden="true"> · </span>{{ .city }} <span class="reg">· {{ .region }}</span>
+                  {{- end }}
+                </p>
+                <p class="role">
+                  {{ .role }}
+                  {{- range .satellites }} · {{ .role }}{{ end }}
+                </p>
                 <p class="desc">{{ .description }}</p>
+                {{- range .satellites }}
+                <p class="desc">{{ .description }}</p>
+                {{- end }}
               </div>
             </li>
             {{ end }}
             {{ range .deployments }}
             <li class="loc">
               <span class="loc-dot" aria-hidden="true"></span>
-              <div>
-                <p class="city">{{ .region }}</p>
-                <p class="role">{{ .role }}</p>
-                <p class="desc">{{ .description }}</p>
-              </div>
-            </li>
-            {{ end }}
-            {{ range .team }}
-            <li class="loc loc-team">
-              <span class="loc-dot ring" aria-hidden="true"></span>
               <div>
                 <p class="city">{{ .region }}</p>
                 <p class="role">{{ .role }}</p>
