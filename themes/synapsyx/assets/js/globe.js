@@ -1,12 +1,24 @@
-/* synxGlobe — minimal Canvas2D orthographic globe for /v2/'s Footprint
-   section. No external libraries: a wireframe sphere (lat/lng grid) with
-   pin glyphs and great-circle arcs from the HQ to each deployment.
-   Auto-rotates around Y; pauses on hover; pauses RAF when offscreen.
-   Reduced-motion: renders a single static frame at the HQ-centered angle.
+/* synxGlobe — interactive Canvas2D orthographic globe for /v2/'s
+   Footprint section. No external libraries.
+
+   Features:
+   - Wireframe sphere (lat/lng grid) with two-axis rotation.
+   - HQ + satellite pins (magenta), deployment pins (white), great-circle
+     arcs from HQ to every other pin.
+   - Pointer drag to rotate (mouse + touch + pen via Pointer Events).
+     Vertical drag clamps to ~±70°. Inertia decays after release.
+   - Idle auto-rotation resumes ~1.8s after the last interaction.
+   - Always-visible pin labels with depth-fade. Hover/touch highlights
+     the nearest pin and brightens its label + glow.
+   - Animated arc draw-in on first reveal, staggered per arc.
+   - Subtle pulse on HQ pins.
+   - Pauses RAF when offscreen (IntersectionObserver) and re-renders
+     on theme change. Honors prefers-reduced-motion (static frame).
 
    Data shape (from data/deployments.yaml, jsonify'd into a <script
-   type="application/json"> block): {hq:{lat,lng,city,...},
-   deployments:[{lat,lng,region,...}]}.
+   type="application/json"> block):
+     { hq: {lat,lng,city,...,satellites:[{lat,lng,city,...}]},
+       deployments: [{lat,lng,region,...}] }.
 
    Force-dark surface in both site themes — same approach as the existing
    ePATH demo video and the noted G/S-Flow visual fix. */
@@ -14,16 +26,25 @@ window.synxGlobe = function(container, data){
   if (!container || !data || !data.hq) return false;
   var canvas = document.createElement('canvas');
   canvas.setAttribute('aria-hidden', 'true');
+  canvas.style.touchAction = 'none';
+  canvas.style.cursor = 'grab';
   container.appendChild(canvas);
   var ctx = canvas.getContext('2d');
   if (!ctx) return false;
 
   var TAU = Math.PI * 2;
-  var dprCap = 2;
-  var rotY = 0;
-  var raf = 0;
-  var visible = true;
-  var paused = false;
+  var DPR_CAP = 2;
+  var ROT_X_CLAMP = 1.22;            // ~70° tilt limit
+  var DRAG_SENS = 0.0055;
+  var INERTIA_DECAY = 0.93;          // per-frame velocity multiplier
+  var INERTIA_MIN = 0.00006;         // velocity below this stops
+  var IDLE_RESUME_MS = 1800;
+  var AUTO_ROT_SPEED = 0.00022;      // radians per ms
+  var REVEAL_MS = 1200;              // arc draw-in duration
+  var REVEAL_STAGGER_MS = 180;
+  var PULSE_PERIOD_MS = 2400;
+  var HOVER_RADIUS = 22;             // CSS px
+
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function deg2rad(d){ return d * Math.PI / 180; }
@@ -39,19 +60,64 @@ window.synxGlobe = function(container, data){
       gridA: 0.10,
       gridStrongA: 0.18,
       pin: '237,237,238',
+      label: '237,237,238',
       mg: hexToRGB(s.getPropertyValue('--magenta')) || '230,18,100'
     };
   }
   var colors = readColors();
 
-  function resize(){
-    var dpr = Math.min(window.devicePixelRatio || 1, dprCap);
-    var w = container.clientWidth | 0;
-    canvas.width = (w*dpr) | 0;
-    canvas.height = (w*dpr) | 0;
-    canvas.style.width = w + 'px';
-    canvas.style.height = w + 'px';
+  // Flatten data into a single pin/arc list so the render and hit-test
+  // loops don't have to walk the nested structure.
+  var pins = [];
+  pins.push(makePin(data.hq, true));
+  if (data.hq.satellites) {
+    for (var i=0; i<data.hq.satellites.length; i++) pins.push(makePin(data.hq.satellites[i], true));
   }
+  if (data.deployments) {
+    for (var i=0; i<data.deployments.length; i++) pins.push(makePin(data.deployments[i], false));
+  }
+  function makePin(loc, isHQ){
+    return {
+      lat: loc.lat,
+      lng: loc.lng,
+      isHQ: !!isHQ,
+      label: (loc.city || loc.region || '').toUpperCase(),
+      // Filled in each frame:
+      sx: 0, sy: 0, sz: 0, onFront: false
+    };
+  }
+
+  // Arcs always run from primary HQ outward.
+  var arcs = [];
+  if (data.hq.satellites) {
+    for (var i=0; i<data.hq.satellites.length; i++) {
+      arcs.push({ lat1: data.hq.lat, lng1: data.hq.lng, lat2: data.hq.satellites[i].lat, lng2: data.hq.satellites[i].lng });
+    }
+  }
+  if (data.deployments) {
+    for (var i=0; i<data.deployments.length; i++) {
+      arcs.push({ lat1: data.hq.lat, lng1: data.hq.lng, lat2: data.deployments[i].lat, lng2: data.deployments[i].lng });
+    }
+  }
+
+  // --- State -----------------------------------------------------------
+
+  var rotY = -deg2rad(data.hq.lng);
+  var rotX = deg2rad(12);            // gentle initial tilt
+  var raf = 0;
+  var visible = true;
+  var dragging = false;
+  var pointerId = null;
+  var dragVX = 0, dragVY = 0;        // velocity (rad / ms)
+  var lastPX = 0, lastPY = 0;
+  var lastPT = 0;
+  var idleResumeAt = 0;
+  var revealStartAt = 0;             // 0 until first visible
+  var hoveredPin = -1;
+  var hoverPx = -1, hoverPy = -1;
+  var hoverActive = false;
+
+  // --- Geometry --------------------------------------------------------
 
   function latLngToVec(lat, lng){
     var phi = deg2rad(90 - lat);
@@ -66,22 +132,39 @@ window.synxGlobe = function(container, data){
     var c = Math.cos(ang), s = Math.sin(ang);
     return { x: v.x*c + v.z*s, y: v.y, z: -v.x*s + v.z*c };
   }
+  function rotateX(v, ang){
+    var c = Math.cos(ang), s = Math.sin(ang);
+    return { x: v.x, y: v.y*c - v.z*s, z: v.y*s + v.z*c };
+  }
+  function projectVec(v){
+    return rotateX(rotateY(v, rotY), rotX);
+  }
   function project(lat, lng){
-    return rotateY(latLngToVec(lat, lng), rotY);
+    return projectVec(latLngToVec(lat, lng));
   }
 
-  function draw(){
+  // --- Render ----------------------------------------------------------
+
+  function resize(){
+    var dpr = Math.min(window.devicePixelRatio || 1, DPR_CAP);
+    var w = container.clientWidth | 0;
+    canvas.width = (w*dpr) | 0;
+    canvas.height = (w*dpr) | 0;
+    canvas.style.width = w + 'px';
+    canvas.style.height = w + 'px';
+  }
+
+  function draw(now){
     raf = 0;
     if (!visible) return;
-    var dpr = Math.min(window.devicePixelRatio || 1, dprCap);
+    var dpr = Math.min(window.devicePixelRatio || 1, DPR_CAP);
     var W = canvas.width, H = canvas.height;
     var cx = W / 2, cy = H / 2;
     var r = Math.min(W, H) * 0.42;
 
     ctx.clearRect(0, 0, W, H);
 
-    // Sphere base. Force-dark in both themes for visual consistency with
-    // the ePATH demo + the rest of the dark canvas elements.
+    // Sphere base (force-dark in both themes).
     var sphereGrad = ctx.createRadialGradient(cx - r*0.3, cy - r*0.35, r*0.05, cx, cy, r);
     sphereGrad.addColorStop(0, 'rgba(28,28,32,1)');
     sphereGrad.addColorStop(0.55, 'rgba(14,14,18,1)');
@@ -91,14 +174,14 @@ window.synxGlobe = function(container, data){
     ctx.arc(cx, cy, r, 0, TAU);
     ctx.fill();
 
-    // Outer rim glow (subtle, magenta).
-    var rim = ctx.createRadialGradient(cx, cy, r*0.92, cx, cy, r*1.15);
+    // Magenta rim glow (very subtle).
+    var rim = ctx.createRadialGradient(cx, cy, r*0.92, cx, cy, r*1.16);
     rim.addColorStop(0, 'rgba(' + colors.mg + ',0)');
     rim.addColorStop(0.5, 'rgba(' + colors.mg + ',0.06)');
     rim.addColorStop(1, 'rgba(' + colors.mg + ',0)');
     ctx.fillStyle = rim;
     ctx.beginPath();
-    ctx.arc(cx, cy, r*1.15, 0, TAU);
+    ctx.arc(cx, cy, r*1.16, 0, TAU);
     ctx.fill();
 
     // Outline.
@@ -108,54 +191,56 @@ window.synxGlobe = function(container, data){
     ctx.arc(cx, cy, r, 0, TAU);
     ctx.stroke();
 
-    // Lat lines (front hemisphere only).
+    // Lat lines.
     ctx.lineWidth = 0.6 * dpr;
     ctx.strokeStyle = 'rgba(' + colors.grid + ',' + colors.gridA + ')';
-    for (var lat = -60; lat <= 60; lat += 30) {
-      drawCircle(lat, true, ctx, cx, cy, r);
-    }
+    for (var lat = -60; lat <= 60; lat += 30) drawCircle(lat, true, ctx, cx, cy, r);
     // Equator slightly stronger.
     ctx.strokeStyle = 'rgba(' + colors.grid + ',' + colors.gridStrongA + ')';
     drawCircle(0, true, ctx, cx, cy, r);
     // Lng lines.
     ctx.strokeStyle = 'rgba(' + colors.grid + ',' + colors.gridA + ')';
-    for (var lng = -180; lng < 180; lng += 30) {
-      drawCircle(lng, false, ctx, cx, cy, r);
+    for (var lng = -180; lng < 180; lng += 30) drawCircle(lng, false, ctx, cx, cy, r);
+
+    // Arcs with progressive draw-in (staggered).
+    for (var i=0; i<arcs.length; i++){
+      var revealT;
+      if (revealStartAt === 0) revealT = 0;
+      else {
+        revealT = (now - revealStartAt - i * REVEAL_STAGGER_MS) / REVEAL_MS;
+      }
+      revealT = Math.max(0, Math.min(1, revealT));
+      // Ease-out cubic.
+      var eased = 1 - Math.pow(1 - revealT, 3);
+      drawArc(arcs[i].lat1, arcs[i].lng1, arcs[i].lat2, arcs[i].lng2, ctx, cx, cy, r, dpr, eased);
     }
 
-    // Arcs from primary HQ to each satellite (HQ-tier spine) and to each
-    // deployment. All solid magenta — the satellites read as "co-HQ" via
-    // their magenta pins, not via arc treatment.
-    var hq = data.hq;
-    if (hq.satellites) {
-      for (var i=0; i<hq.satellites.length; i++){
-        drawArc(hq.lat, hq.lng, hq.satellites[i].lat, hq.satellites[i].lng, ctx, cx, cy, r, dpr);
-      }
-    }
-    if (data.deployments) {
-      for (var i=0; i<data.deployments.length; i++){
-        drawArc(hq.lat, hq.lng, data.deployments[i].lat, data.deployments[i].lng, ctx, cx, cy, r, dpr);
-      }
-    }
-
-    // Pins. Primary HQ + every satellite render with the same magenta HQ
-    // pin style. Deployment pins draw last so they layer on top if any
-    // arc end-points happen to overlap.
-    drawPin(hq.lat, hq.lng, true, ctx, cx, cy, r, dpr);
-    if (hq.satellites) {
-      for (var i=0; i<hq.satellites.length; i++){
-        var s = hq.satellites[i];
-        drawPin(s.lat, s.lng, true, ctx, cx, cy, r, dpr);
-      }
-    }
-    if (data.deployments) {
-      for (var i=0; i<data.deployments.length; i++){
-        var d = data.deployments[i];
-        drawPin(d.lat, d.lng, false, ctx, cx, cy, r, dpr);
-      }
+    // Pins. Compute screen positions in pin objects so hit-testing later
+    // can read them without re-projecting.
+    var pulseT = (now % PULSE_PERIOD_MS) / PULSE_PERIOD_MS;
+    var pulse = 0.5 + 0.5 * Math.sin(pulseT * TAU);  // 0..1
+    for (var i=0; i<pins.length; i++) {
+      var pin = pins[i];
+      var p = project(pin.lat, pin.lng);
+      pin.sx = cx + p.x * r;
+      pin.sy = cy - p.y * r;
+      pin.sz = p.z;
+      pin.onFront = p.z >= -0.02;
+      if (pin.onFront) drawPin(pin, i === hoveredPin, pulse, ctx, dpr);
     }
 
-    if (!reduce && !paused) raf = requestAnimationFrame(animate);
+    // Labels above pins. Drawn after all pins so they're never overlapped.
+    ctx.font = (10.5 * dpr).toFixed(0) + 'px "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    for (var i=0; i<pins.length; i++) {
+      var pin = pins[i];
+      if (!pin.onFront) continue;
+      drawLabel(pin, i === hoveredPin, ctx, dpr);
+    }
+
+    // Decide whether to keep the RAF loop running.
+    if (shouldKeepAnimating(now)) raf = requestAnimationFrame(animate);
   }
 
   function drawCircle(angle, isLatitude, ctx, cx, cy, r){
@@ -174,40 +259,56 @@ window.synxGlobe = function(container, data){
     ctx.stroke();
   }
 
-  function drawPin(lat, lng, isHQ, ctx, cx, cy, r, dpr){
-    var p = project(lat, lng);
-    if (p.z < -0.02) return; // back hemisphere
-    var x = cx + p.x * r;
-    var y = cy - p.y * r;
-    var color = isHQ ? colors.mg : colors.pin;
-    var depthAlpha = Math.max(0.35, Math.min(1, p.z * 0.9 + 0.45));
-    var rDot = (isHQ ? 5.5 : 3.5) * dpr;
-    var rGlow = (isHQ ? 18 : 11) * dpr;
+  function drawPin(pin, isHovered, pulse, ctx, dpr){
+    var color = pin.isHQ ? colors.mg : colors.pin;
+    var depthAlpha = Math.max(0.35, Math.min(1, pin.sz * 0.9 + 0.45));
+    var hoverBoost = isHovered ? 1.45 : 1.0;
+    var pulseBoost = pin.isHQ && !reduce ? 1 + 0.18 * pulse : 1;
+    var rDot = (pin.isHQ ? 5.6 : 3.6) * dpr * hoverBoost;
+    var rGlow = (pin.isHQ ? 19 : 12) * dpr * hoverBoost * pulseBoost;
 
-    var pgrad = ctx.createRadialGradient(x, y, 0, x, y, rGlow);
-    pgrad.addColorStop(0, 'rgba(' + color + ',' + (depthAlpha * 0.55) + ')');
+    var pgrad = ctx.createRadialGradient(pin.sx, pin.sy, 0, pin.sx, pin.sy, rGlow);
+    pgrad.addColorStop(0, 'rgba(' + color + ',' + (depthAlpha * (isHovered ? 0.7 : 0.55)) + ')');
     pgrad.addColorStop(1, 'rgba(' + color + ',0)');
     ctx.fillStyle = pgrad;
     ctx.beginPath();
-    ctx.arc(x, y, rGlow, 0, TAU);
+    ctx.arc(pin.sx, pin.sy, rGlow, 0, TAU);
     ctx.fill();
 
     ctx.fillStyle = 'rgba(' + color + ',' + depthAlpha + ')';
     ctx.beginPath();
-    ctx.arc(x, y, rDot, 0, TAU);
+    ctx.arc(pin.sx, pin.sy, rDot, 0, TAU);
     ctx.fill();
   }
 
-  function drawArc(lat1, lng1, lat2, lng2, ctx, cx, cy, r, dpr){
+  function drawLabel(pin, isHovered, ctx, dpr){
+    if (!pin.label) return;
+    var depth = Math.max(0.0, Math.min(1, pin.sz * 1.1 + 0.05));
+    var alpha = (isHovered ? 1.0 : 0.55) * (0.4 + 0.6 * depth);
+    if (alpha < 0.05) return;
+    var ox = (pin.isHQ ? 9 : 7) * dpr;
+    var oy = -(pin.isHQ ? 11 : 9) * dpr;
+    var color = isHovered && pin.isHQ ? colors.mg : colors.label;
+    // Slight halo under the text so it stays readable when overlapping
+    // grid lines or another pin's glow.
+    ctx.fillStyle = 'rgba(0,0,0,' + (0.55 * alpha).toFixed(3) + ')';
+    ctx.fillText(pin.label, pin.sx + ox + dpr, pin.sy + oy + dpr);
+    ctx.fillStyle = 'rgba(' + color + ',' + alpha.toFixed(3) + ')';
+    ctx.fillText(pin.label, pin.sx + ox, pin.sy + oy);
+  }
+
+  function drawArc(lat1, lng1, lat2, lng2, ctx, cx, cy, r, dpr, reveal){
+    if (reveal <= 0) return;
     var v1 = latLngToVec(lat1, lng1);
     var v2 = latLngToVec(lat2, lng2);
     var dot = Math.max(-1, Math.min(1, v1.x*v2.x + v1.y*v2.y + v1.z*v2.z));
     var omega = Math.acos(dot);
     var sinO = Math.sin(omega);
     var steps = 56;
+    var lastIdx = Math.ceil(reveal * steps);
     var prev = null;
     ctx.lineWidth = 1.1 * dpr;
-    for (var s=0; s<=steps; s++){
+    for (var s=0; s<=lastIdx; s++){
       var t = s / steps;
       var k1, k2;
       if (sinO < 1e-6) { k1 = 1-t; k2 = t; }
@@ -215,7 +316,7 @@ window.synxGlobe = function(container, data){
       var v = { x: v1.x*k1 + v2.x*k2, y: v1.y*k1 + v2.y*k2, z: v1.z*k1 + v2.z*k2 };
       var lift = 1 + Math.sin(t * Math.PI) * 0.20;
       v.x *= lift; v.y *= lift; v.z *= lift;
-      var rv = rotateY(v, rotY);
+      var rv = projectVec(v);
       var sx = cx + rv.x * r;
       var sy = cy - rv.y * r;
       var pt = { x: sx, y: sy, z: rv.z };
@@ -231,39 +332,166 @@ window.synxGlobe = function(container, data){
     }
   }
 
-  function animate(){
-    if (!reduce && !paused) rotY += 0.0018;
-    draw();
+  // --- Animation loop --------------------------------------------------
+
+  function shouldKeepAnimating(now){
+    if (!visible) return false;
+    if (reduce) {
+      // Reduced-motion: keep the frame static unless we're still in the
+      // initial reveal (which we skip below) or being dragged.
+      if (dragging) return true;
+      return false;
+    }
+    return true;
   }
 
+  function animate(now){
+    var t = now || performance.now();
+    var dt = 16; // approximate; smoothed below
+    if (animate._last) dt = Math.min(64, t - animate._last);
+    animate._last = t;
+
+    if (!dragging) {
+      var hasInertia = Math.abs(dragVX) > INERTIA_MIN || Math.abs(dragVY) > INERTIA_MIN;
+      if (hasInertia) {
+        rotY += dragVX * dt;
+        rotX = Math.max(-ROT_X_CLAMP, Math.min(ROT_X_CLAMP, rotX + dragVY * dt));
+        var decay = Math.pow(INERTIA_DECAY, dt / 16);
+        dragVX *= decay;
+        dragVY *= decay;
+        if (Math.abs(dragVX) < INERTIA_MIN) dragVX = 0;
+        if (Math.abs(dragVY) < INERTIA_MIN) dragVY = 0;
+        if (!dragVX && !dragVY) idleResumeAt = t + IDLE_RESUME_MS;
+      } else if (!reduce && t >= idleResumeAt) {
+        rotY += AUTO_ROT_SPEED * dt;
+      }
+    }
+
+    draw(t);
+  }
+
+  // --- Pointer interaction --------------------------------------------
+
+  function localXY(e){
+    var rect = canvas.getBoundingClientRect();
+    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+  }
+
+  function findHoveredPin(localX, localY){
+    var dpr = Math.min(window.devicePixelRatio || 1, DPR_CAP);
+    var px = localX * dpr;
+    var py = localY * dpr;
+    var thresh = HOVER_RADIUS * dpr;
+    var best = -1;
+    var bestD = thresh * thresh;
+    for (var i=0; i<pins.length; i++) {
+      var pin = pins[i];
+      if (!pin.onFront) continue;
+      var dx = pin.sx - px;
+      var dy = pin.sy - py;
+      var d2 = dx*dx + dy*dy;
+      if (d2 < bestD) { bestD = d2; best = i; }
+    }
+    return best;
+  }
+
+  canvas.addEventListener('pointerdown', function(e){
+    dragging = true;
+    pointerId = e.pointerId;
+    try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
+    canvas.style.cursor = 'grabbing';
+    var lp = localXY(e);
+    lastPX = lp.x; lastPY = lp.y;
+    lastPT = performance.now();
+    dragVX = 0; dragVY = 0;
+    e.preventDefault();
+    if (!raf) raf = requestAnimationFrame(animate);
+  });
+
+  canvas.addEventListener('pointermove', function(e){
+    var lp = localXY(e);
+    if (dragging && e.pointerId === pointerId) {
+      var t = performance.now();
+      var dt = Math.max(1, t - lastPT);
+      var dx = lp.x - lastPX;
+      var dy = lp.y - lastPY;
+      rotY += dx * DRAG_SENS;
+      rotX = Math.max(-ROT_X_CLAMP, Math.min(ROT_X_CLAMP, rotX + dy * DRAG_SENS));
+      // Velocity in rad/ms for inertia.
+      dragVX = (dx * DRAG_SENS) / dt;
+      dragVY = (dy * DRAG_SENS) / dt;
+      lastPX = lp.x; lastPY = lp.y; lastPT = t;
+      idleResumeAt = t + IDLE_RESUME_MS;
+      if (!raf) raf = requestAnimationFrame(animate);
+    } else {
+      hoverPx = lp.x; hoverPy = lp.y;
+      var prev = hoveredPin;
+      hoveredPin = findHoveredPin(lp.x, lp.y);
+      hoverActive = hoveredPin >= 0;
+      canvas.style.cursor = hoverActive ? 'pointer' : 'grab';
+      if (hoveredPin !== prev && !raf) raf = requestAnimationFrame(animate);
+    }
+  });
+
+  function endPointer(e){
+    if (!dragging || e.pointerId !== pointerId) return;
+    dragging = false;
+    pointerId = null;
+    try { canvas.releasePointerCapture(e.pointerId); } catch (_) {}
+    canvas.style.cursor = hoverActive ? 'pointer' : 'grab';
+    idleResumeAt = performance.now() + IDLE_RESUME_MS;
+    if (!raf) raf = requestAnimationFrame(animate);
+  }
+  canvas.addEventListener('pointerup', endPointer);
+  canvas.addEventListener('pointercancel', endPointer);
+
+  canvas.addEventListener('pointerleave', function(){
+    if (hoveredPin !== -1) {
+      hoveredPin = -1;
+      hoverActive = false;
+      if (!raf) raf = requestAnimationFrame(animate);
+    }
+    if (!dragging) canvas.style.cursor = 'grab';
+  });
+
+  // --- Lifecycle -------------------------------------------------------
+
   resize();
-  // Center HQ longitude initially so the user lands on Vienna in view.
-  rotY = -deg2rad(data.hq.lng);
 
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function(entries){
       entries.forEach(function(e){
+        var wasVisible = visible;
         visible = e.isIntersecting;
-        if (visible && !raf) raf = requestAnimationFrame(animate);
+        if (visible) {
+          if (revealStartAt === 0) revealStartAt = performance.now();
+          if (!raf) raf = requestAnimationFrame(animate);
+        }
       });
     }, {threshold:0}).observe(container);
+  } else {
+    revealStartAt = performance.now();
   }
 
-  window.addEventListener('resize', function(){ resize(); if (!raf) raf = requestAnimationFrame(animate); }, {passive:true});
+  window.addEventListener('resize', function(){
+    resize();
+    if (!raf) raf = requestAnimationFrame(animate);
+  }, {passive:true});
 
   new MutationObserver(function(){
     colors = readColors();
     if (!raf) raf = requestAnimationFrame(animate);
   }).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
 
-  // Pause on hover so the user can read pins; resume on leave.
-  container.addEventListener('mouseenter', function(){ paused = true; });
-  container.addEventListener('mouseleave', function(){ paused = false; if (!raf) raf = requestAnimationFrame(animate); });
-
   container.setAttribute('data-globe-ready', '');
 
-  if (reduce) draw();
-  else raf = requestAnimationFrame(animate);
+  // Kick off either the static frame (reduced-motion) or the RAF loop.
+  if (reduce) {
+    revealStartAt = performance.now() - REVEAL_MS - arcs.length * REVEAL_STAGGER_MS;
+    draw(performance.now());
+  } else {
+    raf = requestAnimationFrame(animate);
+  }
 
   return true;
 };
