@@ -132,6 +132,12 @@ window.synxGlobe = function(container, data){
   var hoveredPin = -1;
   var hoverPx = -1, hoverPy = -1;
   var hoverActive = false;
+  // Tap-vs-drag tracking. A pointerup within TAP_MOVE_PX of where the
+  // pointer went down, on the same pin that was hovered at down-time,
+  // dispatches a 'pin-click' CustomEvent on the container. v2.js uses
+  // it to scroll to the matching footprint-list item.
+  var TAP_MOVE_PX = 6;
+  var downPin = -1, downX = 0, downY = 0;
 
   // --- Geometry --------------------------------------------------------
 
@@ -551,6 +557,12 @@ window.synxGlobe = function(container, data){
     lastPX = lp.x; lastPY = lp.y;
     lastPT = performance.now();
     dragVX = 0; dragVY = 0;
+    // Touch devices don't fire pointermove before pointerdown, so the
+    // hovered pin under a finger tap isn't known yet — recompute here so
+    // the tap path can match the down position to a pin.
+    var pin = findHoveredPin(lp.x, lp.y);
+    downPin = pin;
+    downX = lp.x; downY = lp.y;
     e.preventDefault();
     if (!raf) raf = requestAnimationFrame(animate);
   });
@@ -587,6 +599,21 @@ window.synxGlobe = function(container, data){
     try { canvas.releasePointerCapture(e.pointerId); } catch (_) {}
     canvas.style.cursor = hoverActive ? 'pointer' : 'grab';
     idleResumeAt = performance.now() + IDLE_RESUME_MS;
+    // Tap detection: same pin under both down and up, no real drag.
+    // 'pointercancel' (e.type) shouldn't trigger a click — only release.
+    if (e.type === 'pointerup' && downPin >= 0) {
+      var lp = localXY(e);
+      var moved = Math.hypot(lp.x - downX, lp.y - downY);
+      if (moved < TAP_MOVE_PX) {
+        var upPin = findHoveredPin(lp.x, lp.y);
+        if (upPin === downPin) {
+          try {
+            container.dispatchEvent(new CustomEvent('pin-click', {detail:{index: downPin}}));
+          } catch(_) {}
+        }
+      }
+    }
+    downPin = -1;
     if (!raf) raf = requestAnimationFrame(animate);
   }
   canvas.addEventListener('pointerup', endPointer);

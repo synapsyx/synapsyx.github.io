@@ -549,16 +549,22 @@
         </div>
 
         <ul class="footprint-list">
+          {{/* data-globe-pin indices match the order globe.js builds its
+               pins[] array: 0 = HQ, 1..N = satellites, N+1.. = deployments.
+               The globe dispatches a 'pin-click' event with this index so JS
+               can scroll to the matching card. */}}
           {{ with .Site.Data.deployments }}
+            {{ $pinIdx := 0 }}
             {{ with .hq }}
-            <li class="loc loc-hq">
+            <li class="loc loc-hq" data-globe-pin="{{ $pinIdx }}">
               <span class="loc-dot mg" aria-hidden="true"></span>
               <div>
                 <p class="city">{{ .city }} <span class="reg">· {{ .region }}</span></p>
                 <p class="role">{{ .role }}</p>
                 <p class="desc">{{ .description }}</p>
                 {{ range .satellites }}
-                <div class="loc-sat">
+                  {{ $pinIdx = add $pinIdx 1 }}
+                <div class="loc-sat" data-globe-pin="{{ $pinIdx }}">
                   <p class="city">{{ .city }} <span class="reg">· {{ .region }}</span></p>
                   <p class="role">{{ .role }}</p>
                   <p class="desc">{{ .description }}</p>
@@ -568,7 +574,8 @@
             </li>
             {{ end }}
             {{ range .deployments }}
-            <li class="loc">
+              {{ $pinIdx = add $pinIdx 1 }}
+            <li class="loc" data-globe-pin="{{ $pinIdx }}">
               <span class="loc-dot" aria-hidden="true"></span>
               <div>
                 <p class="city">{{ .region }}</p>

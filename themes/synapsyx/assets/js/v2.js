@@ -70,6 +70,31 @@
       });
     }, {rootMargin:'200px 0px'});
     globeObs.observe(globeContainer);
+
+    // Pin-click → scroll to and briefly highlight the matching footprint
+    // list card. Pin indices are emitted in list.html via data-globe-pin.
+    var highlightTimer = 0;
+    globeContainer.addEventListener('pin-click', function(ev){
+      var idx = ev.detail && ev.detail.index;
+      if (typeof idx !== 'number' || idx < 0) return;
+      var target = document.querySelector('[data-globe-pin="' + idx + '"]');
+      if (!target) return;
+      var prefersReduced = reducedMotionMQ && reducedMotionMQ.matches;
+      target.scrollIntoView({behavior: prefersReduced ? 'auto' : 'smooth', block: 'center'});
+      // Brief visual confirmation; re-armable so a second click on the same
+      // pin re-flashes instead of being a no-op.
+      document.querySelectorAll('[data-globe-pin].is-pin-target').forEach(function(el){
+        el.classList.remove('is-pin-target');
+      });
+      if (highlightTimer) { clearTimeout(highlightTimer); highlightTimer = 0; }
+      // Force a reflow before re-adding so the CSS animation actually restarts.
+      void target.offsetWidth;
+      target.classList.add('is-pin-target');
+      highlightTimer = setTimeout(function(){
+        target.classList.remove('is-pin-target');
+        highlightTimer = 0;
+      }, 1800);
+    });
   }
 
   // Loading splash dismissal. The inline anti-flash script in baseof.html sets
