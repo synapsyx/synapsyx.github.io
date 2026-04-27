@@ -360,10 +360,6 @@ a:focus:not(:focus-visible){outline:none;}
 .hero .meta .v{color:rgba(237,237,238,0.92);font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:-0.005em;}
 .hero .meta .v .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#16A34A;margin-right:8px;vertical-align:middle;box-shadow:0 0 6px rgba(22,163,74,0.5);}
 .hero .meta .v .dot.mg{background:var(--magenta);box-shadow:0 0 6px rgba(var(--magenta-rgb),0.55);}
-.hero .corner{position:absolute;bottom:48px;right:88px;display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--fg-4);text-transform:uppercase;z-index:3;}
-.hero .corner .pill{padding:4px 9px;border:1px solid var(--line);border-radius:5px;background:rgba(255,255,255,0.02);}
-.hero .corner .live{color:#16A34A;display:inline-flex;align-items:center;gap:8px;}
-.hero .corner .live::before{content:"";width:6px;height:6px;border-radius:50%;background:#16A34A;box-shadow:0 0 6px #16A34A;}
 
 /* ===================================================
    ABOUT
@@ -757,7 +753,6 @@ html[data-theme="light"] .footer{
   .hero-inner{padding:100px 56px;}
   .hero h1{font-size:64px;}
   .section-head h2{font-size:42px;}
-  .hero .corner{right:56px;}
 }
 @media (max-width:900px){
   /* Detach the hero inner panel from absolute positioning so its content
@@ -781,7 +776,6 @@ html[data-theme="light"] .footer{
   .section-head .right{order:-1;text-align:left;padding-bottom:0;}
   .hero h1{font-size:54px;}
   .hero{height:auto;padding-bottom:64px;overflow:hidden;}
-  .hero .corner{right:32px;bottom:20px;}
   .nav .links{gap:20px;margin-left:8px;}
   .footer-bottom{flex-direction:column;gap:14px;align-items:flex-start;}
   /* Mobile density: desktop 120px rhythms leave too much empty scroll on a
@@ -871,7 +865,7 @@ html[data-theme="light"] .footer{
   html,body,.page,.footer{background:#fff !important;color:#000 !important;box-shadow:none !important;}
   .page{width:auto !important;max-width:100% !important;margin:0 !important;}
   .page::before,.team::before,.hero::after,.hero .grid-bg,.hero h1 .accent::before{display:none !important;}
-  .page-header,.skip-link,.nav,.theme-toggle,.corner,.hero .ctas,.product .actions,.footer-bottom .socials{display:none !important;}
+  .page-header,.skip-link,.nav,.theme-toggle,.hero .ctas,.product .actions,.footer-bottom .socials{display:none !important;}
   .product-visual,.epath-video,.gsflow-canvas,.member .portrait,.partner .plogo .glyph,.footprint-canvas{display:none !important;}
   .hero{height:auto !important;padding:0 0 18pt !important;border:none !important;}
   .hero-inner{position:static !important;padding:0 !important;max-width:100% !important;}
