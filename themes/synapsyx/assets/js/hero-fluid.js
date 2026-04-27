@@ -1,4 +1,4 @@
-/* hero-fluid — WebGL Navier-Stokes fluid sim hero variant for /v2/.
+/* hero-fluid — WebGL Navier-Stokes fluid sim hero variant for the homepage.
    Stable Fluids (Stam '99) on GPU via ping-pong FBOs:
    curl → vorticity confinement → divergence → Jacobi pressure (~20 iter)
    → gradient subtract → semi-Lagrangian advect of velocity + dye.

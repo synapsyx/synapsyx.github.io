@@ -1,6 +1,6 @@
-/* synapsyx.com v2 — Direction B (dark-first, light variant via html[data-theme="light"])
-   Self-contained stylesheet, loaded only on /v2/. Safe to change without affecting
-   the main site, which uses main.css. */
+/* synapsyx.com — Direction B (dark-first, light variant via html[data-theme="light"])
+   Self-contained stylesheet, loaded only on the homepage. Safe to change without
+   affecting the imprint/privacy pages, which still use the legacy main.css. */
 
 /* Self-hosted fonts — replaces Google Fonts <link>. Variable WOFF2, latin + latin-ext subsets. */
 {{ $interLatin := resources.Get "v2/fonts/inter-latin.woff2" | fingerprint }}

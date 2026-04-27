@@ -1,4 +1,4 @@
-/* synxGlobe — interactive Canvas2D orthographic globe for /v2/'s
+/* synxGlobe — interactive Canvas2D orthographic globe for the homepage's
    Footprint section. No external libraries.
 
    Features:

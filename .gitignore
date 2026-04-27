@@ -14,3 +14,7 @@ hugo.linux
 
 # macOS Finder metadata
 .DS_Store
+
+# Agent artifacts
+.agent/
+.playwright-mcp/

@@ -1,4 +1,4 @@
-# Geographic footprint surfaced on /v2/ in the Footprint section + globe widget.
+# Geographic footprint surfaced on the homepage in the Footprint section + globe widget.
 # Country-level only (capital coordinates) until per-institution data is curated.
 hq:
   city: Vienna

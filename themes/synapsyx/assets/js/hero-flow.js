@@ -1,4 +1,4 @@
-/* hero-flow — generative Canvas2D hero variant for /v2/.
+/* hero-flow — generative Canvas2D hero variant for the homepage.
    Particles seeded across the hero, advected through a Perlin-style flow
    field. Each frame, prior pixels are partially erased toward the bg
    color so trails fade. Reads as "wind currents" / generative art.
