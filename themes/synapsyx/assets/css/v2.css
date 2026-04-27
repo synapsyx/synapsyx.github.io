@@ -295,6 +295,22 @@ a:focus:not(:focus-visible){outline:none;}
 .nav .cta{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--cta-fg);padding:8px 15px;border:1px solid var(--cta-border);border-radius:7px;background:var(--cta-bg);transition:all .15s;}
 .nav .cta:hover{background:var(--cta-bg-hover);}
 
+/* Burger + drawer — hidden on desktop, swapped in for inline links at ≤720px.
+   The burger reuses the theme-toggle's square 34px shape so the right cluster
+   stays balanced. The drawer is positioned absolute below the nav and matches
+   the nav's frosted pill so it reads as an extension of the bar. */
+.nav-burger{display:none;width:34px;height:34px;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:7px;background:var(--ghost-bg);color:var(--fg-2);cursor:pointer;padding:0;transition:color .2s, background .2s, border-color .2s;}
+.nav-burger:hover{color:var(--fg);border-color:var(--line-strong);background:var(--ghost-bg-hover);}
+.nav-burger .bars{position:relative;display:inline-block;width:14px;height:10px;}
+.nav-burger .bars span{position:absolute;left:0;right:0;height:1.5px;background:currentColor;border-radius:1px;transition:transform .25s cubic-bezier(0.16,1,0.3,1), opacity .15s ease, top .25s cubic-bezier(0.16,1,0.3,1);}
+.nav-burger .bars span:nth-child(1){top:0;}
+.nav-burger .bars span:nth-child(2){top:4.25px;}
+.nav-burger .bars span:nth-child(3){top:8.5px;}
+.nav.menu-open .nav-burger .bars span:nth-child(1){top:4.25px;transform:rotate(45deg);}
+.nav.menu-open .nav-burger .bars span:nth-child(2){opacity:0;}
+.nav.menu-open .nav-burger .bars span:nth-child(3){top:4.25px;transform:rotate(-45deg);}
+.nav-menu{display:none;}
+
 /* Shared container */
 .wrap{max-width:1240px;margin:0 auto;padding:0 88px;position:relative;z-index:2;}
 
@@ -411,6 +427,7 @@ a:focus:not(:focus-visible){outline:none;}
 
 .features{list-style:none;padding:0;margin:0 0 32px;border-top:1px solid var(--line);}
 .features li{padding:18px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:24px 1fr;gap:14px;align-items:flex-start;}
+.features li:last-child{border-bottom:none;}
 .features li .tick{width:14px;height:14px;border-radius:50%;border:1px solid rgba(var(--magenta-rgb),0.5);display:inline-flex;align-items:center;justify-content:center;margin-top:3px;flex-shrink:0;position:relative;}
 .features li .tick::after{content:"";width:4px;height:4px;background:var(--magenta);border-radius:50%;box-shadow:0 0 6px rgba(var(--magenta-rgb),0.6);}
 .features li .text{font-size:14.5px;line-height:1.55;color:var(--fg-2);letter-spacing:-0.005em;}
@@ -459,7 +476,23 @@ a:focus:not(:focus-visible){outline:none;}
 }
 
 .epath-video{position:relative;padding:0;background:#000;display:flex;align-items:stretch;justify-content:center;}
-.epath-video video{display:block;width:100%;height:auto;max-height:720px;object-fit:cover;background:#0A0A0B;}
+.epath-video video{display:block;width:100%;height:auto;max-height:720px;object-fit:contain;background:#0A0A0B;}
+
+/* Featured ePATH inside .proof: the right-column copy is naturally taller
+   than the demo's ~5:4 aspect. Don't stretch the visual to match — that
+   produced a framed empty area below the video. Wrap the visual + CTA in
+   a .product-left flex column so the "Request the case study" link sits
+   directly below the video instead of trailing under the right-column
+   bullets, which would otherwise leave a big gap below the visual frame. */
+/* Visual is the centerpiece of this card, so the demo gets the wider
+   column (1.25fr) and the copy gets the narrower one (1fr). The default
+   .product-grid had it the other way around, which made the right-side
+   copy column wider than the video and produced an awkward asymmetry. */
+.proof .product-grid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:start;}
+.proof .product-left{display:flex;flex-direction:column;gap:20px;align-self:start;}
+.proof .product-visual{min-height:0;align-self:auto;}
+.proof .product-left .actions{margin:0;justify-content:center;}
+.proof .epath-video video{height:auto;width:100%;max-height:none;object-fit:contain;}
 
 .idx-mark{position:absolute;font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-4);}
 .idx-tl{top:18px;left:18px;}
@@ -643,7 +676,7 @@ html[data-theme="light"] .credibility .sep{background:rgba(15,15,16,0.22);}
 .cta-band h2{font-family:var(--display);font-weight:500;font-size:46px;line-height:1.08;letter-spacing:-0.025em;color:var(--fg);margin:0 auto 22px;text-wrap:balance;max-width:820px;}
 .cta-band p{font-size:16.5px;line-height:1.6;color:var(--fg-2);margin:0 auto 32px;max-width:580px;text-wrap:pretty;}
 .cta-band .ctas{display:flex;justify-content:center;align-items:center;gap:14px;margin-bottom:20px;}
-.cta-band .secondary-line{font-family:var(--mono);font-size:12px;letter-spacing:0.12em;color:var(--fg-4);margin:0;text-transform:uppercase;}
+.cta-band .secondary-line{font-family:var(--mono);font-size:12px;letter-spacing:0.12em;color:var(--fg-4);margin:0 auto;text-transform:uppercase;}
 .cta-band .secondary-line a{color:var(--fg-3);transition:color .18s;}
 .cta-band .secondary-line a:hover{color:var(--fg);}
 
@@ -769,20 +802,27 @@ html[data-theme="light"] .footer{
   .product-visual{min-height:0;}
   .capability-card,.proof-card{min-height:0;}
 }
-@media (max-width:720px){
+@media (max-width:760px){
+  /* Inline nav links + CTA can't fit a phone width without the Discuss
+     CTA wrapping or pushing the theme toggle out of the pill. Collapse
+     the links and the CTA into a slide-down drawer triggered by the
+     burger button. Cutoff at 760 (rather than 720) so the wrap zone at
+     721–759 collapses into the burger too. iPad portrait (≥768) keeps
+     the inline nav. Drawer styling matches the nav's frosted pill so it
+     reads as a single unit hanging below the bar. */
   .nav{gap:16px;padding:0 12px;}
-  .nav .links{gap:14px;margin-left:6px;}
-  .nav .cta{padding:7px 10px;font-size:12.5px;}
+  .nav .links{display:none;}
+  .nav > .cta{display:none;}
+  .nav-burger{display:inline-flex;}
+  .nav-menu{display:flex;flex-direction:column;gap:2px;position:absolute;top:calc(100% + 8px);left:0;right:0;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--nav-bg-scrolled);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:var(--nav-shadow-scrolled);transform:translateY(-8px);opacity:0;pointer-events:none;transition:transform .25s cubic-bezier(0.16,1,0.3,1), opacity .2s ease;z-index:1;}
+  .nav.menu-open .nav-menu{transform:translateY(0);opacity:1;pointer-events:auto;}
+  .nav-menu a{display:flex;align-items:center;padding:12px 14px;font-size:15px;font-weight:500;color:var(--fg-2);letter-spacing:-0.005em;border-radius:8px;transition:color .15s, background .15s;}
+  .nav-menu a:hover{color:var(--fg);background:var(--ghost-bg);}
+  .nav-menu a.active{color:var(--fg);}
+  .nav-menu a.cta{justify-content:center;margin-top:6px;padding:11px 14px;font-size:14.5px;color:var(--cta-fg);background:var(--cta-bg);border:1px solid var(--cta-border);}
+  .nav-menu a.cta:hover{background:var(--cta-bg-hover);}
   .team-grid{grid-template-columns:1fr 1fr;}
   .partners-row{grid-template-columns:1fr 1fr;}
-}
-@media (max-width:600px){
-  /* Drop the deeper-page links so the bar fits a phone width without the
-     theme toggle popping outside the rounded container. Capabilities + Proof
-     stay visible because they're the primary calls; the rest are reachable
-     via in-page scroll or footer. */
-  .nav .links a[data-target="team"],
-  .nav .links a[data-target="partners"]{display:none;}
 }
 @media (max-width:560px){
   .team-grid,.partners-row,.footer-grid,.about-stats,.capability-grid,.proof-grid{grid-template-columns:1fr;}
@@ -808,17 +848,8 @@ html[data-theme="light"] .footer{
   .product{margin-bottom:56px;}
   .product h3{font-size:30px;}
 }
-@media (max-width:480px){
-  /* iPhone Pro Max is 430px — covered here so the Contact CTA doesn't get
-     clipped to "Cont..." next to the theme toggle. Footer and hero CTAs
-     still expose the mailto contact path. */
-  .nav .cta{display:none;}
-}
 @media (max-width:420px){
   .nav{gap:12px;padding:0 10px;}
-  .nav .links{gap:10px;margin-left:6px;}
-  .nav .links a{font-size:12.5px;}
-  .nav .links a[data-target="proof"]{display:none;}
 }
 
 /* ===================================================

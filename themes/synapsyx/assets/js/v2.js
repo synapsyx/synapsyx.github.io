@@ -149,7 +149,10 @@
     if (!nav) return;
     var y = window.scrollY || window.pageYOffset;
     if (y > SCROLL_SHRINK_PX) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
-    if (y > SCROLL_HIDE_PX && y > lastY + SCROLL_HIDE_VELOCITY) nav.classList.add('hidden');
+    if (y > SCROLL_HIDE_PX && y > lastY + SCROLL_HIDE_VELOCITY) {
+      nav.classList.add('hidden');
+      if (nav.classList.contains('menu-open')) setMenuOpen(false);
+    }
     else if (y < lastY - SCROLL_SHOW_VELOCITY || y < SCROLL_SHOW_PX) nav.classList.remove('hidden');
     lastY = y;
 
@@ -165,7 +168,7 @@
       var el = document.getElementById(sections[i]);
       if (el && el.getBoundingClientRect().top < SECTION_ACTIVE_OFFSET) current = sections[i];
     }
-    document.querySelectorAll('.nav .links a').forEach(function(a){
+    document.querySelectorAll('#nav [data-target]').forEach(function(a){
       var isActive = a.getAttribute('data-target') === current;
       a.classList.toggle('active', isActive);
       if (isActive) a.setAttribute('aria-current', 'location');
@@ -186,6 +189,45 @@
   }
   window.addEventListener('scroll', onScrollThrottled, {passive:true});
   onScroll();
+
+  // Mobile burger menu — toggles the drawer that holds nav links + the
+  // Discuss CTA at ≤720px. Closes on link tap, Escape, click outside the
+  // nav, and when scroll-hide pulls the nav off-screen.
+  var burgerBtn = document.getElementById('navBurger');
+  var navMenu = document.getElementById('navMenu');
+  function setMenuOpen(open){
+    if (!nav || !burgerBtn) return;
+    nav.classList.toggle('menu-open', open);
+    burgerBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burgerBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    if (navMenu) navMenu.setAttribute('aria-hidden', open ? 'false' : 'true');
+  }
+  if (burgerBtn) {
+    burgerBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      setMenuOpen(!nav.classList.contains('menu-open'));
+    });
+  }
+  if (navMenu) {
+    navMenu.addEventListener('click', function(e){
+      var t = e.target;
+      while (t && t !== navMenu){
+        if (t.tagName === 'A'){ setMenuOpen(false); return; }
+        t = t.parentNode;
+      }
+    });
+  }
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && nav && nav.classList.contains('menu-open')){
+      setMenuOpen(false);
+      if (burgerBtn) burgerBtn.focus();
+    }
+  });
+  document.addEventListener('click', function(e){
+    if (!nav || !nav.classList.contains('menu-open')) return;
+    if (nav.contains(e.target)) return;
+    setMenuOpen(false);
+  });
 
   // Theme toggle — persists to localStorage; falls back to OS preference
   // when no explicit choice has been made (matches the inline anti-flash
