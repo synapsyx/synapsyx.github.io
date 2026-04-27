@@ -200,7 +200,10 @@
     nav.classList.toggle('menu-open', open);
     burgerBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
     burgerBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    if (navMenu) navMenu.setAttribute('aria-hidden', open ? 'false' : 'true');
+    if (navMenu) {
+      navMenu.setAttribute('aria-hidden', open ? 'false' : 'true');
+      navMenu.toggleAttribute('inert', !open);
+    }
   }
   if (burgerBtn) {
     burgerBtn.addEventListener('click', function(e){
