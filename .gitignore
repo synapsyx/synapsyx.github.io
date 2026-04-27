@@ -18,3 +18,8 @@ hugo.linux
 # Agent artifacts
 .agent/
 .playwright-mcp/
+
+# Visual debug screenshots at repo root
+/about-*.png
+/final-*.png
+/theme-marker-*.png
