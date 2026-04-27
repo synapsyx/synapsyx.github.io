@@ -458,19 +458,6 @@ a:focus:not(:focus-visible){outline:none;}
 .product-visual .toolbar .path b{color:var(--fg);font-weight:500;}
 .product-visual .toolbar .meta{margin-left:auto;color:var(--fg-4);text-transform:uppercase;letter-spacing:0.14em;font-size:10px;}
 
-.gsflow-canvas{position:relative;padding:36px 36px 24px;height:465px;}
-.gsflow-canvas svg{width:100%;height:100%;}
-@media (max-width:680px){
-  .gsflow-canvas{overflow-x:auto;overflow-y:hidden;padding:24px 20px 16px;height:360px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;}
-  .gsflow-canvas svg{min-width:600px;}
-}
-@media (max-width:420px){
-  .gsflow-canvas{height:320px;padding:18px 14px 10px;}
-  .gsflow-canvas svg{min-width:500px;}
-  .idx-tl{top:12px;left:14px;}
-  .idx-br{bottom:10px;right:14px;}
-}
-
 .epath-video{position:relative;padding:0;background:#000;display:flex;align-items:stretch;justify-content:center;}
 .epath-video video{display:block;width:100%;height:auto;max-height:720px;object-fit:contain;background:#0A0A0B;}
 
@@ -489,10 +476,6 @@ a:focus:not(:focus-visible){outline:none;}
 .proof .product-visual{min-height:0;align-self:auto;}
 .proof .product-left .actions{margin:0;justify-content:center;}
 .proof .epath-video video{height:auto;width:100%;max-height:none;object-fit:contain;}
-
-.idx-mark{position:absolute;font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--fg-4);}
-.idx-tl{top:18px;left:18px;}
-.idx-br{bottom:16px;right:18px;}
 
 /* ===================================================
    TEAM
@@ -866,7 +849,7 @@ html[data-theme="light"] .footer{
   .page{width:auto !important;max-width:100% !important;margin:0 !important;}
   .page::before,.team::before,.hero::after,.hero .grid-bg,.hero h1 .accent::before{display:none !important;}
   .page-header,.skip-link,.nav,.theme-toggle,.hero .ctas,.product .actions,.footer-bottom .socials{display:none !important;}
-  .product-visual,.epath-video,.gsflow-canvas,.member .portrait,.partner .plogo .glyph,.footprint-canvas{display:none !important;}
+  .product-visual,.epath-video,.member .portrait,.partner .plogo .glyph,.footprint-canvas{display:none !important;}
   .hero{height:auto !important;padding:0 0 18pt !important;border:none !important;}
   .hero-inner{position:static !important;padding:0 !important;max-width:100% !important;}
   .credibility,.about,.products,.proof,.capabilities,.process,.team,.partners,.footprint,.work-with-us,.cta-band{padding:18pt 0 !important;border:none !important;}
