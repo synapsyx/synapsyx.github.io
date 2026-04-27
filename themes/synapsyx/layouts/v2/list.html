@@ -18,9 +18,36 @@
 {{ $teamGeorge := .Site.GetPage "/sections/team/george" }}
 {{ $teamMichael := .Site.GetPage "/sections/team/strudl" }}
 {{ $teamPetar := .Site.GetPage "/sections/team/petar" }}
-{{ $teamOrdered := slice $teamMathias $teamGeorge $teamMichael $teamPetar }}
+
+{{/* v2 inlines bios (and titles) here so the main site copy at /sections/team/*
+     stays untouched. Keys match the team markdown filename. */}}
+{{ $v2TeamCopy := dict
+  "george" (dict
+    "title" "Georg Thurnwalder, LL.B."
+    "role"  "Managing Director · AI strategy & project development"
+    "bio"   "Georg brings a business law background and focuses on AI design, context engineering, structured project development, project management, and the legal, accounting, and tax fine print around implementation. He coordinates multi-stakeholder work and helps translate complex project ideas into concrete AI systems and delivery plans.")
+  "strudl" (dict
+    "title" "Michael Strobl, BSc."
+    "role"  "Managing Director · AI systems & strategy"
+    "bio"   "Michael combines an economics background, Big Four forensic-tech experience, consulting perspective, and hands-on AI development. He focuses on coding, workflow architecture, AI design, evaluation logic, client contact, and implementation planning.")
+  "mathias" (dict
+    "title" "Mathias Baumgartinger, BSc."
+    "role"  "AI systems developer · product design"
+    "bio"   "Mathias brings a computer science background and focuses on coding, product design, prototype development, interfaces, and technical implementation. He helps turn AI concepts into usable systems, workflows, and product experiences.")
+  "petar" (dict
+    "title" "Petar Djordjevic-Ilic, BEng."
+    "role"  "Operations & delivery"
+    "bio"   "Petar brings an engineering background and international delivery experience across complex operational environments. He supports delivery structure, governance, risk management, and execution cadence for projects that need to move quickly without losing control.")
+}}
+{{ $teamSlugOrder := slice "george" "strudl" "mathias" "petar" }}
+{{ $teamPagesBySlug := dict "george" $teamGeorge "strudl" $teamMichael "mathias" $teamMathias "petar" $teamPetar }}
+
 {{ $contactEmail := .Site.Params.contact.email | default "contact@synapsyx.com" }}
 {{ $contactAddress := .Site.Params.contact.address | default "Steigenteschgasse 13, 1220 Wien" }}
+{{ $discussHref := printf "mailto:%s?subject=Project%%20discussion" $contactEmail }}
+{{ $introHref := printf "mailto:%s?subject=Introducing%%20myself" $contactEmail }}
+{{ $epathHref := printf "mailto:%s?subject=ePATH%%20case%%20study" $contactEmail }}
+{{ $approachHref := printf "mailto:%s?subject=Internal%%20AI%%20workflows" $contactEmail }}
 
 <div class="page" id="top" data-screen-label="synapsyx.com v2">
 
@@ -41,7 +68,7 @@
       <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
     </button>
-    <a class="cta" href="mailto:{{ $contactEmail }}?subject=AI%20project%20discussion">Discuss a project <span aria-hidden="true">→</span></a>
+    <a class="cta" href="{{ $discussHref }}">Discuss a project <span aria-hidden="true">→</span></a>
     <div class="progress" aria-hidden="true"><div class="bar-fill" id="navProgress"></div></div>
   </nav>
   </header>
@@ -59,10 +86,10 @@
         <span class="dot-sep"></span>
         <span>Vienna</span>
       </p>
-      <h1 id="hero-heading">Applied AI systems for <span class="accent">complex</span> workflows.</h1>
+      <h1 id="hero-heading">Applied AI systems for <span class="accent">complex&nbsp;workflows</span>.</h1>
       <p class="sub">We design, build, and implement AI pipelines, agents, internal tools, and platforms — from early prototypes to operational systems and funded innovation projects.</p>
       <div class="ctas">
-        <a class="btn primary" href="mailto:{{ $contactEmail }}?subject=AI%20project%20discussion">Discuss a project <span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn primary" href="{{ $discussHref }}">Discuss a project <span class="arr" aria-hidden="true">→</span></a>
         <a class="btn ghost" href="#capabilities">View capabilities <span class="arr" aria-hidden="true">→</span></a>
       </div>
       <div class="meta">
@@ -72,7 +99,7 @@
         </div>
         <div class="item">
           <span class="k">Internal AI workflows</span>
-          <span class="v"><span class="dot mg"></span>Research · documentation · quality review</span>
+          <span class="v">Research · documentation · quality review</span>
         </div>
         <div class="item">
           <span class="k">Location</span>
@@ -93,17 +120,21 @@
   </section>
 
   <!-- CREDIBILITY STRIP -->
-  <section class="credibility section" aria-label="Credibility strip" data-screen-label="credibility">
+  <section class="credibility section" aria-label="Capability summary">
     <div class="wrap">
-      <ul class="credibility-list">
-        <li>Austrian company</li>
-        <li>Applied AI R&amp;D</li>
-        <li>Custom AI systems</li>
-        <li>AI agents</li>
-        <li>Workflow automation</li>
-        <li>Internal tools</li>
-        <li>Strategy and implementation</li>
-      </ul>
+      <span class="item">Austrian company</span>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="item">Applied AI R&amp;D</span>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="item">Custom AI systems</span>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="item">AI agents</span>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="item">Workflow automation</span>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="item">Internal tools</span>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="item">Strategy and implementation</span>
     </div>
   </section>
 
@@ -114,50 +145,50 @@
         <div class="left">
           <p class="num"><span class="bar"></span> 01 · About</p>
           <h2 id="about-heading">A young Austrian AI company built for implementation.</h2>
-          <p class="lede">synapsyx GmbH is a Vienna-based applied AI R&amp;D and implementation company.</p>
+          <p class="lede">synapsyx GmbH is a Vienna-based applied AI R&amp;D and implementation company. We build custom AI systems for workflows where generic tools are not enough.</p>
         </div>
         <div class="right">
           <span class="count">2025</span>
-          Registered Austrian GmbH · Vienna, AT
+          Founded · Vienna, AT
         </div>
       </div>
 
       <div class="about-grid">
         <div class="about-body">
-          <p>synapsyx GmbH is a Vienna-based applied AI R&amp;D and implementation company. We build custom AI systems for workflows where generic tools are not enough: internal knowledge work, document-heavy processes, education platforms, research and innovation projects, and operational decision support.</p>
+          <p>We build custom AI systems for workflows where generic tools fall short: <span class="b">internal knowledge work, document-heavy processes, education platforms, research and innovation projects, and operational decision support</span>.</p>
           <p>Our work combines hands-on AI experimentation, software development, context engineering, structured evaluation, and project delivery. We do not only advise on AI — we build systems, test them in real workflows, and use our own internal tools to improve how we work.</p>
         </div>
 
         <div class="about-stats reveal reveal-delay-1">
           <div class="stat">
             <span class="corner-mark"></span>
-            <span class="k">2025</span>
+            <span class="k">Founded</span>
             <div>
-              <div class="v">GmbH</div>
+              <div class="v">2025</div>
               <p class="d">Registered Austrian GmbH, based in Vienna.</p>
             </div>
           </div>
           <div class="stat">
             <span class="corner-mark"></span>
-            <span class="k">Applied AI R&amp;D</span>
+            <span class="k">Focus</span>
             <div>
-              <div class="v">Systems</div>
+              <div class="v">Applied AI</div>
               <p class="d">Custom systems, agents, internal tools, platforms, and automation workflows.</p>
             </div>
           </div>
           <div class="stat">
             <span class="corner-mark"></span>
-            <span class="k">Live MVP</span>
+            <span class="k">Status</span>
             <div>
-              <div class="v">ePATH</div>
+              <div class="v">Live MVP</div>
               <p class="d">ePATH is deployed as an AI counseling MVP in an education-platform context.</p>
             </div>
           </div>
           <div class="stat">
             <span class="corner-mark"></span>
-            <span class="k">Internal tooling</span>
+            <span class="k">Operations</span>
             <div>
-              <div class="v">Review</div>
+              <div class="v">Internal&nbsp;tooling</div>
               <p class="d">Structured AI workflows for research, documentation, project development, and quality review.</p>
             </div>
           </div>
@@ -167,25 +198,25 @@
       <div class="about-pillars reveal reveal-delay-2">
         <div class="pillar">
           <p class="num">01 / Applied</p>
-          <h3>We build around real workflows.</h3>
+          <h3>Built around real workflows.</h3>
           <p>We build around real workflows, not generic AI demos. The goal is practical usefulness, reviewability, and fit with existing organizational processes.</p>
         </div>
         <div class="pillar">
           <p class="num">02 / Human-reviewable</p>
-          <h3>We make review points explicit.</h3>
+          <h3>Review points kept explicit.</h3>
           <p>Our systems are designed with explicit human review points, structured outputs, source awareness, and clear responsibility.</p>
         </div>
         <div class="pillar">
           <p class="num">03 / Implementation-focused</p>
-          <h3>We carry work into delivery.</h3>
+          <h3>Strategy through to adoption.</h3>
           <p>We combine strategy, technical prototyping, software development, evaluation, and adoption support in one small team.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CAPABILITIES -->
-  <section class="products capabilities section" id="capabilities" aria-labelledby="capabilities-heading" data-screen-label="capabilities">
+  <!-- 02 · CAPABILITIES -->
+  <section class="capabilities section" id="capabilities" aria-labelledby="capabilities-heading" data-screen-label="capabilities">
     <div class="wrap">
       <div class="section-head reveal">
         <div class="left">
@@ -195,76 +226,65 @@
         </div>
         <div class="right">
           <span class="count">04</span>
-          Capability areas
+          Practice areas
         </div>
       </div>
 
-      <div class="capability-grid reveal reveal-delay-1">
-        <article class="capability-card">
-          <div class="product-header">
-            <span class="mark">C-01</span>
-          </div>
+      <div class="cap-grid reveal reveal-delay-1">
+        <div class="cap">
+          <p class="num">01 / Build</p>
           <h3>AI systems development</h3>
           <p>Custom AI tools, platforms, pipelines, dashboards, internal applications, integrations, and workflow interfaces for organizations that need more than an off-the-shelf chatbot.</p>
-          <ul class="features">
-            <li><span class="tick"></span><span class="text"><span class="b">Custom AI applications</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Internal tools and dashboards</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Workflow interfaces</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">API and platform integrations</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Prototype-to-implementation development</span></span></li>
+          <ul>
+            <li>Custom AI applications</li>
+            <li>Internal tools and dashboards</li>
+            <li>Workflow interfaces</li>
+            <li>API and platform integrations</li>
+            <li>Prototype-to-implementation development</li>
           </ul>
-        </article>
-
-        <article class="capability-card">
-          <div class="product-header">
-            <span class="mark">C-02</span>
-          </div>
+        </div>
+        <div class="cap">
+          <p class="num">02 / Automate</p>
           <h3>AI agents and workflow automation</h3>
           <p>Controlled agent workflows for research, drafting, classification, document processing, information management, and expert review.</p>
-          <ul class="features">
-            <li><span class="tick"></span><span class="text"><span class="b">Research and document workflows</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Classification and structured outputs</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Drafting and comparison pipelines</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Human-in-the-loop review</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Automation of repetitive knowledge work</span></span></li>
+          <ul>
+            <li>Research and document workflows</li>
+            <li>Classification and structured outputs</li>
+            <li>Drafting and comparison pipelines</li>
+            <li>Human-in-the-loop review</li>
+            <li>Automation of repetitive knowledge work</li>
           </ul>
-        </article>
-
-        <article class="capability-card">
-          <div class="product-header">
-            <span class="mark">C-03</span>
-          </div>
+        </div>
+        <div class="cap">
+          <p class="num">03 / Strategy</p>
           <h3>AI strategy and opportunity discovery</h3>
           <p>We help teams identify where AI is useful, feasible, and worth implementing — then translate that into concrete prototypes, systems, and roadmaps.</p>
-          <ul class="features">
-            <li><span class="tick"></span><span class="text"><span class="b">AI readiness and workflow analysis</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Use-case selection</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Feasibility assessment</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Risk and constraint mapping</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Implementation roadmaps</span></span></li>
+          <ul>
+            <li>AI readiness and workflow analysis</li>
+            <li>Use-case selection</li>
+            <li>Feasibility assessment</li>
+            <li>Risk and constraint mapping</li>
+            <li>Implementation roadmaps</li>
           </ul>
-        </article>
-
-        <article class="capability-card">
-          <div class="product-header">
-            <span class="mark">C-04</span>
-          </div>
+        </div>
+        <div class="cap">
+          <p class="num">04 / R&amp;D</p>
           <h3>R&amp;D and innovation projects</h3>
           <p>We support AI innovation projects from concept to implementation: technical work packages, prototypes, evaluation logic, documentation, implementation planning, and partner coordination.</p>
-          <ul class="features">
-            <li><span class="tick"></span><span class="text"><span class="b">Prototype development</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Technical work packages</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Evaluation and quality control</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Documentation and implementation planning</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Funded innovation project support</span></span></li>
+          <ul>
+            <li>Prototype development</li>
+            <li>Technical work packages</li>
+            <li>Evaluation and quality control</li>
+            <li>Documentation and implementation planning</li>
+            <li>Funded innovation project support</li>
           </ul>
-        </article>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- PROOF -->
-  <section class="products proof section" id="proof" aria-labelledby="proof-heading" data-screen-label="proof">
+  <!-- 03 · PROOF -->
+  <section class="proof section" id="proof" aria-labelledby="proof-heading" data-screen-label="proof">
     <div class="wrap">
       <div class="section-head reveal">
         <div class="left">
@@ -274,18 +294,18 @@
         </div>
         <div class="right">
           <span class="count">05</span>
-          Selected proof points
+          Selected systems
         </div>
       </div>
 
-      <!-- ePATH -->
-      <div class="product reverse reveal" id="epath" data-screen-label="epath">
+      <!-- Featured: ePATH (single product block, with video) -->
+      <div class="product reveal" id="epath" data-screen-label="epath">
         <div class="product-grid">
           <div class="product-visual">
             <div class="toolbar">
               <div class="dots"><span></span><span></span><span></span></div>
               <span class="path"><b>ePATH</b> / LTI · MoodleCloud</span>
-              <span class="meta">live · MVP</span>
+              <span class="meta">live · demo</span>
             </div>
             <div class="epath-video">
               {{ $epathPoster := "" }}
@@ -301,7 +321,7 @@
               {{ if and $epathWebm $epathMp4 }}
               <video autoplay muted loop playsinline preload="metadata" width="1600" height="1268"
                 {{ with $epathPoster }}poster="{{ .RelPermalink }}"{{ end }}
-                aria-label="Demo of ePATH in use: AI counseling embedded in an education platform">
+                aria-label="Demo of ePATH in use: AI counseling tool embedded in a university learning environment">
                 <source src="{{ $epathWebm.RelPermalink }}" type="video/webm">
                 <source src="{{ $epathMp4.RelPermalink }}" type="video/mp4">
                 <p>Your browser does not support HTML5 video. <a href="{{ $epathMp4.RelPermalink }}">Download the MP4 demo</a>.</p>
@@ -312,11 +332,11 @@
 
           <div class="product-copy">
             <div class="product-header">
-              <span class="mark">PR-01</span>
-              <span class="status">Live MVP · deployed pilot</span>
+              <span class="mark">P-01</span>
+              <span class="status mg">Live MVP · deployed pilot</span>
             </div>
-            <h3>ePATH — AI counseling tool for entrepreneurship education</h3>
-            <p class="tagline">Entrepreneurship education</p>
+            <h3>ePATH</h3>
+            <p class="tagline">AI counseling tool for entrepreneurship education</p>
             <p class="lede">ePATH is an AI-guided student support tool developed for entrepreneurship education. It combines structured interaction, scoring logic, and an AI counselor experience to help students reflect on career direction and entrepreneurial potential.</p>
             <ul class="features">
               <li><span class="tick"></span><span class="text"><span class="b">AI-guided student counseling workflow</span></span></li>
@@ -326,242 +346,147 @@
               <li><span class="tick"></span><span class="text"><span class="b">Used as proof that we can move from concept to live implementation</span></span></li>
             </ul>
             <div class="actions">
-              <a class="inline-link" href="mailto:{{ $contactEmail }}?subject=ePATH%20case%20study">Request the case study <span class="arr" aria-hidden="true">→</span></a>
+              <a class="inline-link" href="{{ $epathHref }}">Request the case study <span class="arr" aria-hidden="true">→</span></a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Internal AI workflows -->
-      <div class="product reveal" id="internal-ai-workflows" data-screen-label="internal-ai-workflows">
-        <div class="product-grid">
-          <div class="product-copy">
-            <div class="product-header">
-              <span class="mark">PR-02</span>
-              <span class="status mg">Internal tool · operational workflow</span>
-            </div>
-            <h3>Internal AI workflows for project development</h3>
-            <p class="tagline">Operational workflow</p>
-            <p class="lede">We use structured AI workflows internally to support research, project development, documentation, quality review, and implementation planning. These systems help us structure complex information, compare assumptions, prepare implementation plans, and keep human review explicit.</p>
-            <ul class="features">
-              <li><span class="tick"></span><span class="text"><span class="b">Research and source organization</span></span></li>
-              <li><span class="tick"></span><span class="text"><span class="b">Requirements and work-package structuring</span></span></li>
-              <li><span class="tick"></span><span class="text"><span class="b">Documentation support</span></span></li>
-              <li><span class="tick"></span><span class="text"><span class="b">Review and quality-control steps</span></span></li>
-              <li><span class="tick"></span><span class="text"><span class="b">Human responsibility kept explicit</span></span></li>
-            </ul>
-            <div class="actions">
-              <a class="inline-link" href="mailto:{{ $contactEmail }}?subject=Internal%20AI%20workflow%20approach">Ask about our approach <span class="arr" aria-hidden="true">→</span></a>
-            </div>
-          </div>
-
-          <div class="product-visual">
-            <div class="toolbar">
-              <div class="dots"><span></span><span></span><span></span></div>
-              <span class="path"><b>Internal workflow</b> / research / planning / review</span>
-              <span class="meta">workflow · reviewable</span>
-            </div>
-            <div class="gsflow-canvas">
-              <span class="idx-mark idx-tl">stages · 06</span>
-              <span class="idx-mark idx-br">evals 124 / 124 · approved</span>
-
-              <svg viewBox="0 0 720 420" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-                <defs>
-                  <marker id="arrB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-                    <path d="M0,0 L10,5 L0,10 z" fill="rgba(237,237,238,0.6)"/>
-                  </marker>
-                  <marker id="arrBm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-                    <path d="M0,0 L10,5 L0,10 z" fill="#E61264"/>
-                  </marker>
-                </defs>
-
-                <g font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(237,237,238,0.45)" letter-spacing="1.5">
-                  <text x="20" y="18" text-anchor="start">01  INPUT</text>
-                  <text x="360" y="18" text-anchor="middle">02  REASON</text>
-                  <text x="700" y="18" text-anchor="end">03  REVIEW</text>
-                </g>
-
-                <g stroke="rgba(255,255,255,0.06)" stroke-width="0.75" stroke-dasharray="2 4">
-                  <line x1="200" y1="35" x2="200" y2="405"/>
-                  <line x1="520" y1="35" x2="520" y2="405"/>
-                </g>
-
-                <g stroke="rgba(237,237,238,0.55)" stroke-width="1.1" fill="rgba(255,255,255,0.015)">
-                  <rect x="30" y="50" width="120" height="58" rx="4"/>
-                  <rect x="30" y="130" width="120" height="58" rx="4"/>
-                  <rect x="30" y="210" width="120" height="58" rx="4"/>
-                  <rect x="30" y="310" width="120" height="70" rx="4" stroke-dasharray="3 3" opacity=".75"/>
-                </g>
-                <g stroke="rgba(237,237,238,0.35)" stroke-width="0.75" fill="none">
-                  <line x1="44" y1="70" x2="130" y2="70"/>
-                  <line x1="44" y1="80" x2="138" y2="80"/>
-                  <line x1="44" y1="90" x2="110" y2="90"/>
-                  <line x1="44" y1="150" x2="130" y2="150"/>
-                  <line x1="44" y1="160" x2="122" y2="160"/>
-                  <line x1="44" y1="170" x2="136" y2="170"/>
-                  <line x1="44" y1="230" x2="134" y2="230"/>
-                  <line x1="44" y1="240" x2="114" y2="240"/>
-                  <line x1="44" y1="250" x2="128" y2="250"/>
-                </g>
-                <g font-family="Inter, sans-serif" font-size="11" fill="rgba(237,237,238,0.65)">
-                  <text x="90" y="295" text-anchor="middle">Sources · 03</text>
-                </g>
-                <g font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(237,237,238,0.45)">
-                  <text x="90" y="398" text-anchor="middle">reference.library</text>
-                </g>
-
-                <g transform="translate(360,210)">
-                  <polygon points="0,-78 67.5,-39 67.5,39 0,78 -67.5,39 -67.5,-39" fill="rgba(230,18,100,0.04)" stroke="rgba(230,18,100,0.6)" stroke-width="1.2"/>
-                  <polygon points="0,-54 46.8,-27 46.8,27 0,54 -46.8,27 -46.8,-27" fill="none" stroke="rgba(237,237,238,0.25)" stroke-width="0.6"/>
-                  <circle cx="0" cy="0" r="5" fill="#E61264"/>
-                  <circle cx="0" cy="0" r="10" fill="none" stroke="rgba(230,18,100,0.4)"/>
-                  <text x="0" y="-22" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="14" font-weight="500" fill="#F4F4F5" letter-spacing="-0.3">synthesize</text>
-                  <text x="0" y="28" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(237,237,238,0.55)">stage.run()</text>
-                </g>
-
-                <g stroke="rgba(237,237,238,0.45)" stroke-width="0.9" fill="rgba(18,18,20,0.9)">
-                  <circle cx="270" cy="100" r="16"/>
-                  <circle cx="450" cy="100" r="16"/>
-                  <circle cx="270" cy="320" r="16"/>
-                  <circle cx="450" cy="320" r="16"/>
-                </g>
-                <g font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(237,237,238,0.8)" text-anchor="middle">
-                  <text x="270" y="104">ctx</text>
-                  <text x="450" y="104">eval</text>
-                  <text x="270" y="324">cite</text>
-                  <text x="450" y="324">chk</text>
-                </g>
-
-                <g stroke="rgba(237,237,238,0.55)" stroke-width="1.1" fill="rgba(255,255,255,0.015)">
-                  <rect x="555" y="80" width="140" height="120" rx="4"/>
-                  <rect x="555" y="230" width="140" height="90" rx="4" stroke="#E61264" stroke-width="1.25"/>
-                </g>
-                <g stroke="rgba(237,237,238,0.3)" stroke-width="0.75" fill="none">
-                  <line x1="572" y1="104" x2="678" y2="104"/>
-                  <line x1="572" y1="116" x2="684" y2="116"/>
-                  <line x1="572" y1="128" x2="660" y2="128"/>
-                  <line x1="572" y1="140" x2="680" y2="140"/>
-                  <line x1="572" y1="152" x2="670" y2="152"/>
-                  <line x1="572" y1="164" x2="678" y2="164"/>
-                  <line x1="572" y1="176" x2="648" y2="176"/>
-                  <line x1="572" y1="188" x2="672" y2="188"/>
-                </g>
-                <g font-family="Inter, sans-serif" font-size="11" fill="rgba(237,237,238,0.65)">
-                  <text x="625" y="72" text-anchor="middle">Draft plan</text>
-                </g>
-                <g font-family="JetBrains Mono, monospace" font-size="9" fill="#E61264" letter-spacing="1">
-                  <text x="625" y="253" text-anchor="middle">HUMAN REVIEW</text>
-                </g>
-                <g font-family="Inter, sans-serif" font-size="11" fill="rgba(237,237,238,0.7)">
-                  <text x="572" y="278" text-anchor="start">○ citations</text>
-                  <text x="572" y="298" text-anchor="start">○ scope fit</text>
-                </g>
-                <g fill="#E61264">
-                  <circle cx="577" cy="275" r="2.5"/>
-                  <circle cx="577" cy="295" r="2.5"/>
-                </g>
-
-                <g stroke="rgba(237,237,238,0.5)" stroke-width="0.9" fill="none" marker-end="url(#arrB)">
-                  <path d="M 150 79 C 210 79, 225 170, 285 195"/>
-                  <path d="M 150 159 C 210 159, 225 205, 285 210"/>
-                  <path d="M 150 239 C 210 239, 225 230, 285 225"/>
-                  <path d="M 150 345 C 250 340, 315 300, 350 275"/>
-                </g>
-                <g stroke="rgba(237,237,238,0.5)" stroke-width="0.9" fill="none" marker-end="url(#arrB)">
-                  <path d="M 436 180 C 490 160, 510 140, 555 140"/>
-                </g>
-                <g stroke="#E61264" stroke-width="1.1" fill="none" marker-end="url(#arrBm)">
-                  <path d="M 436 240 C 490 260, 510 270, 555 275"/>
-                </g>
-
-                <g font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(237,237,238,0.4)">
-                  <text x="20" y="415">stages: 06</text>
-                  <text x="360" y="415" text-anchor="middle">evals: 124 / 124</text>
-                  <text x="700" y="415" text-anchor="end">reviewer: approved</text>
-                </g>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <!-- 4 supporting proof cards (internal workflows / R&D / agentic / prototypes) -->
       <div class="proof-grid reveal reveal-delay-1">
-        <article class="capability-card proof-card" id="rd-discovery-workflows">
-            <div class="product-header">
-            <span class="mark">PR-03</span>
-            <span class="status mg">Internal R&amp;D workflow · under development</span>
-            </div>
-          <h3>R&amp;D discovery and feasibility workflows</h3>
-          <p>Internal workflows for exploring problem spaces, comparing solution paths, generating technical hypotheses, and identifying feasible AI project concepts.</p>
-            <ul class="features">
-            <li><span class="tick"></span><span class="text"><span class="b">Problem-space exploration</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Solution-path comparison</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Technical hypothesis generation</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Feasibility and implementation assessment</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Early-stage R&amp;D structuring</span></span></li>
-            </ul>
+        <article class="proof-card">
+          <span class="status">Internal tool · operational workflow</span>
+          <h3>Internal AI workflows for project development</h3>
+          <p>We use structured AI workflows internally to support research, project development, documentation, quality review, and implementation planning. These systems help us structure complex information, compare assumptions, prepare implementation plans, and keep human review explicit.</p>
+          <ul>
+            <li>Research and source organization</li>
+            <li>Requirements and work-package structuring</li>
+            <li>Documentation support</li>
+            <li>Review and quality-control steps</li>
+            <li>Human responsibility kept explicit</li>
+          </ul>
+          <div class="actions">
+            <a class="inline-link" href="{{ $approachHref }}">Ask about our approach <span class="arr" aria-hidden="true">→</span></a>
+          </div>
         </article>
 
-        <article class="capability-card proof-card" id="agentic-research-workflows">
-          <div class="product-header">
-            <span class="mark">PR-04</span>
-            <span class="status mg">Internal tooling · project capability</span>
-          </div>
-          <h3>Agentic research and drafting workflows</h3>
-          <p>Controlled agent workflows for repetitive research, classification, drafting, comparison, and information-management tasks — designed with review points rather than blind automation.</p>
-          <ul class="features">
-            <li><span class="tick"></span><span class="text"><span class="b">Multi-step research pipelines</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Classification and comparison workflows</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Structured drafting support</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Reviewable intermediate outputs</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Human-in-the-loop control</span></span></li>
+        <article class="proof-card">
+          <span class="status">Internal R&amp;D · under development</span>
+          <h3>R&amp;D discovery and feasibility workflows</h3>
+          <p>Internal workflows for exploring problem spaces, comparing solution paths, generating technical hypotheses, and identifying feasible AI project concepts.</p>
+          <ul>
+            <li>Problem-space exploration</li>
+            <li>Solution-path comparison</li>
+            <li>Technical hypothesis generation</li>
+            <li>Feasibility and implementation assessment</li>
+            <li>Early-stage R&amp;D structuring</li>
           </ul>
         </article>
 
-        <article class="capability-card proof-card" id="document-workflow-prototypes">
-          <div class="product-header">
-            <span class="mark">PR-05</span>
-            <span class="status">Prototype · capability demo</span>
-          </div>
+        <article class="proof-card">
+          <span class="status">Internal tooling · project capability</span>
+          <h3>Agentic research and drafting workflows</h3>
+          <p>Controlled agent workflows for repetitive research, classification, drafting, comparison, and information-management tasks — designed with review points rather than blind automation.</p>
+          <ul>
+            <li>Multi-step research pipelines</li>
+            <li>Classification and comparison workflows</li>
+            <li>Structured drafting support</li>
+            <li>Reviewable intermediate outputs</li>
+            <li>Human-in-the-loop control</li>
+          </ul>
+        </article>
+
+        <article class="proof-card">
+          <span class="status">Prototype · capability demo</span>
           <h3>Knowledge and document workflow prototypes</h3>
           <p>Prototype workflows combining document processing, retrieval, structured outputs, and human review for domain-specific decision support.</p>
-          <ul class="features">
-            <li><span class="tick"></span><span class="text"><span class="b">Document processing</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Retrieval and structured context</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Domain-specific output formats</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Review and correction loops</span></span></li>
-            <li><span class="tick"></span><span class="text"><span class="b">Decision-support interfaces</span></span></li>
+          <ul>
+            <li>Document processing</li>
+            <li>Retrieval and structured context</li>
+            <li>Domain-specific output formats</li>
+            <li>Review and correction loops</li>
+            <li>Decision-support interfaces</li>
           </ul>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- TEAM -->
+  <!-- 04 · APPROACH -->
+  <section class="process section" id="approach" aria-labelledby="approach-heading" data-screen-label="approach">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="left">
+          <p class="num"><span class="bar"></span> 04 · Approach</p>
+          <h2 id="approach-heading">Fast experimentation, disciplined implementation.</h2>
+          <p class="lede">AI projects move quickly, but serious implementation still needs structure. We work in short cycles that make assumptions visible, test technical feasibility early, and keep review points explicit.</p>
+        </div>
+        <div class="right">
+          <span class="count">05</span>
+          Steps
+        </div>
+      </div>
+
+      <ol class="process-grid reveal reveal-delay-1">
+        <li class="step">
+          <p class="num">Step 01</p>
+          <h3>Understand</h3>
+          <p>We map the workflow, users, constraints, available data, risks, and success criteria before choosing the technical path.</p>
+        </li>
+        <li class="step">
+          <p class="num">Step 02</p>
+          <h3>Prototype</h3>
+          <p>We build quickly to test assumptions, validate technical feasibility, and make the solution tangible.</p>
+        </li>
+        <li class="step">
+          <p class="num">Step 03</p>
+          <h3>Implement</h3>
+          <p>We develop pipelines, agents, interfaces, integrations, and internal tools that fit the real workflow.</p>
+        </li>
+        <li class="step">
+          <p class="num">Step 04</p>
+          <h3>Evaluate</h3>
+          <p>We test quality, reliability, usability, source handling, and business relevance before scaling the system.</p>
+        </li>
+        <li class="step">
+          <p class="num">Step 05</p>
+          <h3>Scale</h3>
+          <p>We improve, document, transfer knowledge, and support adoption so the system can become part of everyday work.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 05 · TEAM -->
   <section class="team section" id="team" aria-labelledby="team-heading" data-screen-label="team">
     <div class="wrap">
       <div class="section-head reveal">
         <div class="left">
-          <p class="num"><span class="bar"></span> 03 · Team</p>
-          <h2 id="team-heading">Builders, operators, and AI specialists.</h2>
-          <p class="lede">A close-knit Vienna-based team with backgrounds in computer science, engineering, economics, and law. Every member brings international experience and ships into production.</p>
+          <p class="num"><span class="bar"></span> 05 · Team</p>
+          <h2 id="team-heading">Builders, operators, and applied AI specialists.</h2>
+          <p class="lede">We are a small interdisciplinary team combining technical implementation, project development, AI experimentation, operations, economics, law, engineering, and international delivery experience. Our size allows us to move quickly, while our process keeps projects structured and reviewable.</p>
         </div>
         <div class="right">
           <span class="count">04</span>
-          Core team · Vienna
+          Vienna · Sydney
         </div>
       </div>
 
       <div class="team-grid reveal reveal-delay-1">
-        {{ range $i, $m := $teamOrdered }}
+        {{ range $i, $slug := $teamSlugOrder }}
+          {{ $m := index $teamPagesBySlug $slug }}
           {{ if $m }}
             {{ $idx := printf "%02d" (add $i 1) }}
+            {{ $copy := index $v2TeamCopy $slug }}
+            {{ $name := index $copy "title" | default $m.Params.name }}
+            {{ $role := index $copy "role" | default $m.Params.position }}
+            {{ $bio := index $copy "bio" | default $m.Params.bioShort }}
             {{ $photo := "" }}
             {{ with $m.Params.image }}
               {{ $photo = resources.Get . | fingerprint }}
             {{ end }}
             {{ $initials := "SX" }}
-            {{ with $m.Params.name }}
+            {{ with $name }}
               {{ $parts := split . " " }}
               {{ $a := substr (index $parts 0) 0 1 }}
               {{ $b := "" }}
@@ -577,14 +502,14 @@
                        download a 168×168 sized for high-DPR displays. */}}
                   {{ $cropped1x := $photo.Fill "84x84" }}
                   {{ $cropped2x := $photo.Fill "168x168" }}
-                  <img src="{{ $cropped1x.RelPermalink }}" srcset="{{ $cropped1x.RelPermalink }} 1x, {{ $cropped2x.RelPermalink }} 2x" width="{{ $cropped1x.Width }}" height="{{ $cropped1x.Height }}" alt="Portrait of {{ $m.Params.name }}" loading="lazy" decoding="async">
+                  <img src="{{ $cropped1x.RelPermalink }}" srcset="{{ $cropped1x.RelPermalink }} 1x, {{ $cropped2x.RelPermalink }} 2x" width="{{ $cropped1x.Width }}" height="{{ $cropped1x.Height }}" alt="Portrait of {{ $name }}" loading="lazy" decoding="async">
                 {{ else }}
                   {{ $initials }}
                 {{ end }}
               </div>
-              <h3>{{ $m.Params.name }}</h3>
-              <p class="role">{{ $m.Params.position }}</p>
-              <p>{{ with $m.Params.bioShort }}{{ . }}{{ else }}{{ $m.Params.bioSummary | truncate 220 "…" }}{{ end }}</p>
+              <h3>{{ $name }}</h3>
+              <p class="role">{{ $role }}</p>
+              <p>{{ $bio }}</p>
               <div class="links-row">
                 {{ with $m.Params.linkedin }}
                 <a class="icn" href="{{ . }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 4h4v16H4zM6 2.5A1.5 1.5 0 1 1 6 5.5a1.5 1.5 0 0 1 0-3zM10 8h4v2h.1c.6-1 2-2 4-2 4.3 0 5 2.8 5 6.5V20h-4v-5.5c0-1.3 0-3-2-3s-2.3 1.4-2.3 2.9V20H10z"/></svg></a>
@@ -603,14 +528,14 @@
     </div>
   </section>
 
-  <!-- PARTNERS -->
+  <!-- 06 · PARTNERS -->
   <section class="partners section" id="partners" aria-labelledby="partners-heading" data-screen-label="partners">
     <div class="wrap">
       <div class="section-head reveal">
         <div class="left">
-          <p class="num"><span class="bar"></span> 04 · Partners</p>
-          <h2 id="partners-heading">We ship inside EU programmes and university networks.</h2>
-          <p class="lede">Our work is embedded in funded consortia and institutional collaborations across Europe and Southeast Asia.</p>
+          <p class="num"><span class="bar"></span> 06 · Partners</p>
+          <h2 id="partners-heading">We work inside EU programmes, education platforms, and implementation networks.</h2>
+          <p class="lede">Our work is connected to education, innovation, and project-development contexts across Europe and Southeast Asia. Partner logos are shown for the relationships and deployment contexts where public reference is appropriate.</p>
         </div>
         <div class="right">
           <span class="count">{{ printf "%02d" (len .Site.Data.partners) }}</span>
@@ -655,12 +580,12 @@
     </div>
   </section>
 
-  <!-- FOOTPRINT -->
+  <!-- 07 · FOOTPRINT -->
   <section class="footprint section" id="footprint" aria-labelledby="footprint-heading" data-screen-label="footprint">
     <div class="wrap">
       <div class="section-head reveal">
         <div class="left">
-          <p class="num"><span class="bar"></span> 05 · Footprint</p>
+          <p class="num"><span class="bar"></span> 07 · Footprint</p>
           <h2 id="footprint-heading">From Vienna, into live AI workflows and education platforms.</h2>
           <p class="lede">synapsyx builds from Austria and collaborates across European and international project contexts. Our current footprint reflects where our team, partners, and deployed education work are active.</p>
         </div>
@@ -734,6 +659,46 @@
     </div>
   </section>
 
+  <!-- 08 · WORK WITH US -->
+  <section class="work-with-us section" id="work-with-us" aria-labelledby="work-with-us-heading" data-screen-label="work-with-us">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="left">
+          <p class="num"><span class="bar"></span> 08 · Work with us</p>
+          <h2 id="work-with-us-heading">Work with us.</h2>
+          <p class="lede">We are selectively expanding our team and collaborator network for applied AI systems, automation workflows, agents, and R&amp;D implementation.</p>
+        </div>
+      </div>
+
+      <div class="work-with-us-grid reveal reveal-delay-1">
+        <div class="work-with-us-body">
+          <p>We are interested in people who can think clearly, build quickly, and work responsibly with AI in real organizational contexts. We are especially open to AI systems builders, automation engineers, product-minded researchers, and collaborators with domain or implementation expertise.</p>
+          <div class="actions">
+            <a class="btn primary" href="{{ $introHref }}">Introduce yourself <span class="arr" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+        <ul class="work-with-us-list">
+          <li><span class="bullet" aria-hidden="true"></span>AI systems builders</li>
+          <li><span class="bullet" aria-hidden="true"></span>Automation engineers</li>
+          <li><span class="bullet" aria-hidden="true"></span>Product-minded researchers</li>
+          <li><span class="bullet" aria-hidden="true"></span>Domain &amp; implementation collaborators</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta-band section" aria-labelledby="cta-heading">
+    <div class="wrap">
+      <h2 id="cta-heading">Exploring an AI project, prototype, or implementation challenge?</h2>
+      <p>Contact us to discuss whether synapsyx can help design, build, or implement the right AI system for your workflow.</p>
+      <div class="ctas">
+        <a class="btn primary" href="{{ $discussHref }}">Discuss a project <span class="arr" aria-hidden="true">→</span></a>
+      </div>
+      <p class="secondary-line"><a href="mailto:{{ $contactEmail }}">{{ $contactEmail }}</a></p>
+    </div>
+  </section>
+
   </main>
 
   <!-- FOOTER -->
@@ -752,7 +717,6 @@
         <div>
           <h3>Sections</h3>
           <ul>
-            <li><a href="#about">About</a></li>
             <li><a href="#capabilities">Capabilities</a></li>
             <li><a href="#proof">Proof</a></li>
             <li><a href="#team">Team</a></li>
@@ -762,11 +726,11 @@
         </div>
 
         <div>
-          <h3>Proof</h3>
+          <h3>Legal</h3>
           <ul>
-            <li><a href="#epath">ePATH <span class="badge-live">Live MVP</span></a></li>
-            <li><a href="#internal-ai-workflows">Internal AI workflows <span class="badge-live mg">Operational</span></a></li>
-            {{ if .Params.preview }}<li><a href="/">Current site <span class="ext" aria-hidden="true">↗</span></a></li>{{ end }}
+            <li><a href="/imprint/">Imprint</a></li>
+            <li><a href="/privacy-policy/">Privacy</a></li>
+            <li><a href="/cookie-policy/">Cookies</a></li>
           </ul>
         </div>
 
@@ -774,15 +738,15 @@
           <h3>Contact</h3>
           <ul>
             <li><a href="mailto:{{ $contactEmail }}">{{ $contactEmail }}</a></li>
-            <li><a href="mailto:{{ $contactEmail }}?subject=AI%20project%20discussion">Discuss a project <span class="ext" aria-hidden="true">↗</span></a></li>
-            <li><a href="/imprint/">Imprint</a></li>
-            <li><a href="/privacy-policy/">Privacy</a></li>
+            <li><a href="{{ $discussHref }}">Discuss a project <span class="ext" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://www.linkedin.com/company/synapsyx/" target="_blank" rel="noopener noreferrer">LinkedIn <span class="ext" aria-hidden="true">↗</span></a></li>
+            {{ if .Params.preview }}<li><a href="/">Current site <span class="ext" aria-hidden="true">↗</span></a></li>{{ end }}
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <span>© {{ now.Year }} synapsy<span class="bx">x</span> · All rights reserved</span>
+        <span>© {{ now.Year }} synapsy<span class="bx">x</span> GmbH · All rights reserved</span>
         <span>Vienna, AT · 48.21°N</span>
         <div class="socials">
           <a href="https://www.linkedin.com/company/synapsyx/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 4h4v16H4zM6 2.5A1.5 1.5 0 1 1 6 5.5a1.5 1.5 0 0 1 0-3zM10 8h4v2h.1c.6-1 2-2 4-2 4.3 0 5 2.8 5 6.5V20h-4v-5.5c0-1.3 0-3-2-3s-2.3 1.4-2.3 2.9V20H10z"/></svg></a>
