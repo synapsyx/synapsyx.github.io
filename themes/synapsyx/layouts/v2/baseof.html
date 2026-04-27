@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <script>(function(){try{var s=localStorage.getItem('synx_v2_theme');if(s==='light'||s==='dark'){if(s==='light')document.documentElement.setAttribute('data-theme','light');}else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches){document.documentElement.setAttribute('data-theme','light');}if(sessionStorage.getItem('synx_v2_loaded_once')==='1')document.documentElement.setAttribute('data-loaded','');}catch(e){}})();</script>
-  {{ $title := "synapsyx v2 preview · AI products for institutional workflows" }}
-  {{ $desc := "Preview of the upcoming synapsyx.com — proprietary AI products for institutional workflows and education. Vienna." }}
+  {{ $title := "synapsyx v2 preview · Applied AI systems for complex workflows" }}
+  {{ $desc := "Preview of the upcoming synapsyx.com — applied AI R&D and implementation for custom AI systems, agents, platforms, internal tools, and workflow automation." }}
   {{ $url := "https://www.synapsyx.com/v2/" }}
   {{ $ogImage := resources.Get "v2/og-preview.png" | fingerprint }}
   <title>{{ $title }}</title>
@@ -28,7 +28,7 @@
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="synapsyx — AI products for institutional workflows and education. Vienna. G/S-Flow and ePATH in production.">
+  <meta property="og:image:alt" content="synapsyx — applied AI systems for complex workflows. Vienna. ePATH live MVP and internal AI workflows.">
   {{ end }}
 
   <meta name="twitter:card" content="summary_large_image">
@@ -61,8 +61,8 @@
     "legalName" "synapsyx GmbH"
     "url" "https://www.synapsyx.com/"
     "logo" "https://www.synapsyx.com/logo/logo_light.png"
-    "description" (.Site.Params.description | default "synapsyx builds proprietary AI products for education and institutional workflows — including ePATH and G/S-Flow.")
-    "foundingDate" "2024"
+    "description" (.Site.Params.description | default "synapsyx is an applied AI R&D and implementation company for custom AI systems, agents, platforms, internal tools, and workflow automation.")
+    "foundingDate" "2025-02-13"
     "email" (.Site.Params.contact.email | default "contact@synapsyx.com")
     "telephone" "+4369919217912"
     "vatID" "ATU82230578"
@@ -96,17 +96,16 @@
     "about" (dict "@id" $orgID)
     "inLanguage" "en"
   }}
-  {{ $gsflow := dict
+  {{ $internalWorkflows := dict
     "@type" "SoftwareApplication"
-    "@id" (printf "%s#gsflow" $url)
-    "name" "G/S-Flow"
-    "alternateName" "G/S-Flow AI Project Development Platform"
-    "description" "AI Project Development Platform — structured multi-stage workflows, curated internal reference library, and human review at critical checkpoints. Used internally for live cross-border proposal work."
+    "@id" (printf "%s#internal-ai-workflows" $url)
+    "name" "Internal AI workflows"
+    "description" "Structured AI workflows for research, documentation, project development, quality review, and implementation planning."
     "applicationCategory" "BusinessApplication"
     "operatingSystem" "Web"
     "creator" (dict "@id" $orgID)
     "publisher" (dict "@id" $orgID)
-    "url" (printf "%s#gsflow" $url)
+    "url" (printf "%s#internal-ai-workflows" $url)
   }}
   {{ $epath := dict
     "@type" "SoftwareApplication"
@@ -167,7 +166,7 @@
   {{ if gt (len $areaServed) 0 }}
     {{ $org = merge $org (dict "areaServed" $areaServed) }}
   {{ end }}
-  {{ $entities := slice $org $website $webpage $gsflow $epath }}
+  {{ $entities := slice $org $website $webpage $internalWorkflows $epath }}
   {{ range $places }}{{ $entities = $entities | append . }}{{ end }}
   {{ $teamSlugs := slice "mathias" "george" "strudl" "petar" }}
   {{ range $teamSlugs }}

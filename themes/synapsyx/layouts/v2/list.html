@@ -33,8 +33,8 @@
   <nav class="nav" id="nav" aria-label="Primary">
     <a class="logo" href="#top" aria-label="synapsyx home"><span aria-hidden="true">{{ $logoUse | safeHTML }}</span></a>
     <div class="links">
-      <a href="#products" data-target="products">Products</a>
-      <a href="#about" data-target="about">About</a>
+      <a href="#capabilities" data-target="capabilities">Capabilities</a>
+      <a href="#proof" data-target="proof">Proof</a>
       <a href="#team" data-target="team">Team</a>
       <a href="#partners" data-target="partners">Partners</a>
     </div>
@@ -42,7 +42,7 @@
       <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
     </button>
-    <a class="cta" href="mailto:{{ $contactEmail }}">Contact <span aria-hidden="true">→</span></a>
+    <a class="cta" href="mailto:{{ $contactEmail }}?subject=AI%20project%20discussion">Discuss a project <span aria-hidden="true">→</span></a>
     <div class="progress" aria-hidden="true"><div class="bar-fill" id="navProgress"></div></div>
   </nav>
   </header>
@@ -56,28 +56,32 @@
     <div class="hero-inner">
       <p class="eyebrow">
         <span class="bar"></span>
-        <span>AI Product Company</span>
+        <span>Applied AI R&amp;D</span>
         <span class="dot-sep"></span>
         <span>Vienna</span>
       </p>
-      <h1 id="hero-heading">AI products for <span class="accent">institutional</span> workflows and&nbsp;education.</h1>
-      <p class="sub">We build proprietary AI platforms used inside cross-border education programmes and universities. Our current products are <span class="b">G/S-Flow</span> and <span class="b">ePATH</span>.</p>
+      <h1 id="hero-heading">Applied AI systems for <span class="accent">complex</span> workflows.</h1>
+      <p class="sub">We design, build, and implement AI pipelines, agents, internal tools, and platforms — from early prototypes to operational systems and funded innovation projects.</p>
       <div class="ctas">
-        <a class="btn primary" href="#products">Explore our products <span class="arr" aria-hidden="true">→</span></a>
-        <a class="btn ghost" href="#team">Meet the team <span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn primary" href="mailto:{{ $contactEmail }}?subject=AI%20project%20discussion">Discuss a project <span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn ghost" href="#capabilities">View capabilities <span class="arr" aria-hidden="true">→</span></a>
       </div>
       <div class="meta">
         <div class="item">
-          <span class="k">G/S-Flow</span>
-          <span class="v"><span class="dot mg"></span>Deployed · cross-border programmes</span>
+          <span class="k">ePATH</span>
+          <span class="v"><span class="dot"></span>Live MVP · deployed pilot</span>
         </div>
         <div class="item">
-          <span class="k">ePATH</span>
-          <span class="v"><span class="dot"></span>Launched · LTI 1.3 · VN &amp; TH</span>
+          <span class="k">Internal AI workflows</span>
+          <span class="v"><span class="dot mg"></span>Research · documentation · quality review</span>
         </div>
         <div class="item">
           <span class="k">Location</span>
-          <span class="v">Vienna, AT · 48.21°N</span>
+          <span class="v">Vienna, AT · Sydney, AU</span>
+        </div>
+        <div class="item">
+          <span class="k">Focus</span>
+          <span class="v">Custom AI systems · agents · automation</span>
         </div>
       </div>
     </div>
@@ -89,59 +93,73 @@
     {{ end }}
   </section>
 
+  <!-- CREDIBILITY STRIP -->
+  <section class="credibility section" aria-label="Credibility strip" data-screen-label="credibility">
+    <div class="wrap">
+      <ul class="credibility-list">
+        <li>Austrian company</li>
+        <li>Applied AI R&amp;D</li>
+        <li>Custom AI systems</li>
+        <li>AI agents</li>
+        <li>Workflow automation</li>
+        <li>Internal tools</li>
+        <li>Strategy and implementation</li>
+      </ul>
+    </div>
+  </section>
+
   <!-- ABOUT -->
   <section class="about section" id="about" aria-labelledby="about-heading" data-screen-label="about">
     <div class="wrap">
       <div class="section-head reveal">
         <div class="left">
           <p class="num"><span class="bar"></span> 01 · About</p>
-          <h2 id="about-heading">A Vienna-based team building proprietary AI, not wrappers.</h2>
-          <p class="lede">synapsyx builds AI products that live inside institutional workflows — cross-border project teams, university career offices, EU consortia — where the work is specific, the standards are high, and generic assistants fall short.</p>
+          <h2 id="about-heading">A young Austrian AI company built for implementation.</h2>
+          <p class="lede">synapsyx GmbH is a Vienna-based applied AI R&amp;D and implementation company.</p>
         </div>
         <div class="right">
-          <span class="count">2024</span>
-          Founded · Vienna, AT
+          <span class="count">2025</span>
+          Registered Austrian GmbH · Vienna, AT
         </div>
       </div>
 
       <div class="about-grid">
         <div class="about-body">
-          <p>We build proprietary AI products for institutional project teams, universities, and education consortia. Our practice is grounded in <span class="b">context engineering, evals, and iteration on live user feedback</span> — not prompt tricks, not off-the-shelf RAG.</p>
-          <p>The team combines computer science, engineering, economics, and law, with hands-on experience shipping agentic systems into environments where accuracy, citation, and human review are non-negotiable.</p>
-          <p>We work in English and German, ship into EU and international programmes, and prefer small focused products over broad platforms. Our two current products — <span class="b">G/S-Flow</span> and <span class="b">ePATH</span> — are both in active production use.</p>
+          <p>synapsyx GmbH is a Vienna-based applied AI R&amp;D and implementation company. We build custom AI systems for workflows where generic tools are not enough: internal knowledge work, document-heavy processes, education platforms, research and innovation projects, and operational decision support.</p>
+          <p>Our work combines hands-on AI experimentation, software development, context engineering, structured evaluation, and project delivery. We do not only advise on AI — we build systems, test them in real workflows, and use our own internal tools to improve how we work.</p>
         </div>
 
         <div class="about-stats reveal reveal-delay-1">
           <div class="stat">
             <span class="corner-mark"></span>
-            <span class="k">Products in production</span>
+            <span class="k">2025</span>
             <div>
-              <div class="v">02</div>
-              <p class="d">G/S-Flow &amp; ePATH, both with live users today.</p>
+              <div class="v">GmbH</div>
+              <p class="d">Registered Austrian GmbH, based in Vienna.</p>
             </div>
           </div>
           <div class="stat">
             <span class="corner-mark"></span>
-            <span class="k">Partner universities</span>
+            <span class="k">Applied AI R&amp;D</span>
             <div>
-              <div class="v">06<span class="unit">institutions</span></div>
-              <p class="d">Vietnam and Thailand, via Green Edu Seeds.</p>
+              <div class="v">Systems</div>
+              <p class="d">Custom systems, agents, internal tools, platforms, and automation workflows.</p>
             </div>
           </div>
           <div class="stat">
             <span class="corner-mark"></span>
-            <span class="k">Programme</span>
+            <span class="k">Live MVP</span>
             <div>
-              <div class="v">Erasmus+<span class="unit">CBHE</span></div>
-              <p class="d">EU-funded, cross-border capacity building.</p>
+              <div class="v">ePATH</div>
+              <p class="d">ePATH is deployed as an AI counseling MVP in an education-platform context.</p>
             </div>
           </div>
           <div class="stat">
             <span class="corner-mark"></span>
-            <span class="k">LMS integration</span>
+            <span class="k">Internal tooling</span>
             <div>
-              <div class="v">LTI 1.3</div>
-              <p class="d">ePATH embeds natively into MoodleCloud.</p>
+              <div class="v">Review</div>
+              <p class="d">Structured AI workflows for research, documentation, project development, and quality review.</p>
             </div>
           </div>
         </div>
@@ -149,19 +167,19 @@
 
       <div class="about-pillars reveal reveal-delay-2">
         <div class="pillar">
-          <p class="num">01 / Proprietary</p>
-          <h3>We build, not resell.</h3>
-          <p>End-to-end product teams — context engineering, evals, UX, deployment — under one roof in Vienna.</p>
+          <p class="num">01 / Applied</p>
+          <h3>We build around real workflows.</h3>
+          <p>We build around real workflows, not generic AI demos. The goal is practical usefulness, reviewability, and fit with existing organizational processes.</p>
         </div>
         <div class="pillar">
-          <p class="num">02 / Institutional</p>
-          <h3>Serious reader, serious work.</h3>
-          <p>Our users are university career offices and cross-border project teams. We design for their standards.</p>
+          <p class="num">02 / Human-reviewable</p>
+          <h3>We make review points explicit.</h3>
+          <p>Our systems are designed with explicit human review points, structured outputs, source awareness, and clear responsibility.</p>
         </div>
         <div class="pillar">
-          <p class="num">03 / Measured</p>
-          <h3>Evals over vibes.</h3>
-          <p>Every shipped feature is gated on benchmarks: O*NET for ePATH, internal rubrics for G/S-Flow.</p>
+          <p class="num">03 / Implementation-focused</p>
+          <h3>We carry work into delivery.</h3>
+          <p>We combine strategy, technical prototyping, software development, evaluation, and adoption support in one small team.</p>
         </div>
       </div>
     </div>

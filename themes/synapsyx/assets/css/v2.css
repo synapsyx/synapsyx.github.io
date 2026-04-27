@@ -352,6 +352,11 @@ a:focus:not(:focus-visible){outline:none;}
 /* ===================================================
    ABOUT
 =================================================== */
+.credibility{border-bottom:1px solid var(--line);background:var(--bg);}
+.credibility .wrap{padding-top:26px;padding-bottom:26px;}
+.credibility-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px;}
+.credibility-list li{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--fg-3);padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:rgba(255,255,255,0.018);}
+
 .about{padding:120px 0;border-bottom:1px solid var(--line);}
 .about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:88px;align-items:flex-start;}
 .about-body p{font-size:17px;line-height:1.6;color:var(--fg-2);margin:0 0 24px;text-wrap:pretty;}
@@ -621,6 +626,7 @@ html[data-theme="light"] .footer{
      single-column stack. Tighten vertical spacing, reduce the oversized
      product heading, and drop the product-visual min-height so the collapsed
      layout doesn't leave a 520px empty box below each product. */
+  .credibility .wrap{padding-top:22px;padding-bottom:22px;}
   .about{padding:88px 0;}
   .products{padding:88px 0 96px;}
   .team{padding:88px 0;}
@@ -674,7 +680,7 @@ html[data-theme="light"] .footer{
   .nav{gap:14px;padding:0 12px;}
   .nav .links{gap:12px;margin-left:10px;}
   .nav .links a{font-size:12.5px;}
-  .nav .links a[data-target="about"],
+  .nav .links a[data-target="team"],
   .nav .links a[data-target="partners"]{display:none;}
 }
 
@@ -701,7 +707,7 @@ html[data-theme="light"] .footer{
   .product-visual,.epath-video,.gsflow-canvas,.member .portrait,.partner .plogo .glyph,.footprint-canvas{display:none !important;}
   .hero{height:auto !important;padding:0 0 18pt !important;border:none !important;}
   .hero-inner{position:static !important;padding:0 !important;max-width:100% !important;}
-  .about,.products,.team,.partners,.footprint{padding:18pt 0 !important;border:none !important;}
+  .credibility,.about,.products,.team,.partners,.footprint{padding:18pt 0 !important;border:none !important;}
   .product{margin-bottom:18pt !important;}
   .wrap,.footer-inner{padding:0 !important;max-width:100% !important;}
   .about-grid,.product-grid,.product.reverse .product-grid{display:block !important;}
