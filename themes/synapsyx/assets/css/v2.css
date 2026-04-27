@@ -377,7 +377,7 @@ a:focus:not(:focus-visible){outline:none;}
 /* Oversized faint hex mark, partially clipped off the right edge.
    Strokes self-draw via stroke-dasharray on viewport entry (.in is
    added by the shared .reveal IntersectionObserver in v2.js). */
-.about-mark{position:absolute;top:-4%;right:-10%;width:clamp(320px,38vw,540px);aspect-ratio:110/128;pointer-events:none;z-index:0;color:rgba(var(--magenta-rgb),0.07);
+.about-mark{position:absolute;top:-4%;right:-10%;width:clamp(320px,38vw,540px);aspect-ratio:110/128;pointer-events:none;z-index:0;color:rgba(var(--magenta-rgb),0.10);
   /* The .reveal class normally hides the element with opacity:0/translateY;
      override here so only the path strokes animate, not the container. */
   opacity:1;transform:none;transition:none;
@@ -414,7 +414,7 @@ a:focus:not(:focus-visible){outline:none;}
 .about-mark .pw-spin{transform-box:view-box;transform-origin:134.484px 447.55px;}
 .about-mark.in .pw-spin{animation:synx-pw-spin 100s linear 1.6s infinite;}
 @keyframes synx-pw-spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
-html[data-theme="light"] .about-mark{color:rgba(var(--magenta-rgb),0.11);}
+html[data-theme="light"] .about-mark{color:rgba(var(--magenta-rgb),0.13);}
 .about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:88px;align-items:flex-start;}
 .about-body p{font-size:17px;line-height:1.6;color:var(--fg-2);margin:0 0 24px;text-wrap:pretty;}
 .about-body p:last-child{margin:0;}
