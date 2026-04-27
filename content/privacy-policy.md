@@ -2,6 +2,8 @@
 title: "Privacy Policy"
 date: 2025-07-04
 draft: false
+layout: "legal"
+description: "Privacy notice for synapsyx.com — what data is collected, how it's used, and your rights under GDPR."
 ---
 
 # Privacy Notice  

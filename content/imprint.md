@@ -2,6 +2,8 @@
 title: "Imprint"
 date: 2025-07-04
 draft: false
+layout: "legal"
+description: "Legal imprint of synapsyx GmbH — company details, managing directors, and regulatory information."
 ---
 
 # Imprint
