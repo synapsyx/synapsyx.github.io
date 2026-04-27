@@ -1,0 +1,69 @@
+{{/* v2 footer — used by the homepage and the legal pages.
+     Inputs (via dict context):
+       .logoUse    the inline <svg><use href="#brand-logo"/></svg> snippet
+                   (rendered against a sprite emitted once per page)
+       .logoHref   destination for the brand-logo link. Home passes "#top"
+                   to trigger smooth-scroll-to-top via v2.js; legal pages
+                   pass "/" (default) to navigate back to the homepage.
+       .discussHref / .contactEmail / .contactAddress
+                   resolved at the call site so the footer doesn't
+                   re-derive them.
+*/}}
+{{ $contactEmail := .contactEmail }}
+{{ $contactAddress := .contactAddress }}
+{{ $discussHref := .discussHref }}
+{{ $logoUse := .logoUse }}
+{{ $logoHref := .logoHref | default "/" }}
+<footer class="footer" data-screen-label="footer">
+  <div class="footer-inner">
+    <div class="footer-grid reveal">
+      <div class="footer-brand">
+        <a href="{{ $logoHref }}" class="logo" aria-label="synapsyx home"><span aria-hidden="true">{{ $logoUse | safeHTML }}</span></a>
+        <p>Applied AI R&amp;D and implementation company for custom AI systems, agents, platforms, and workflow automation.</p>
+        <div class="addr">
+          {{ range (split $contactAddress ", ") }}<span>{{ . }}</span>{{ end }}
+          <span>Austria</span>
+        </div>
+      </div>
+
+      <div>
+        <h3>Sections</h3>
+        <ul>
+          <li><a href="/#capabilities">Capabilities</a></li>
+          <li><a href="/#proof">Proof</a></li>
+          <li><a href="/#team">Team</a></li>
+          <li><a href="/#partners">Partners</a></li>
+          <li><a href="mailto:{{ $contactEmail }}">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="/imprint/">Imprint</a></li>
+          <li><a href="/privacy-policy/">Privacy</a></li>
+          <li><a href="/cookie-policy/">Cookies</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="mailto:{{ $contactEmail }}">{{ $contactEmail }}</a></li>
+          <li><a href="{{ $discussHref }}">Discuss a project <span class="ext" aria-hidden="true">↗</span></a></li>
+          <li><a href="https://www.linkedin.com/company/synapsyx/" target="_blank" rel="noopener noreferrer">LinkedIn <span class="ext" aria-hidden="true">↗</span></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© {{ now.Year }} synapsy<span class="bx">x</span> GmbH · All rights reserved</span>
+      <span>Vienna, AT · 48.21°N</span>
+      <div class="socials">
+        <a href="https://www.linkedin.com/company/synapsyx/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 4h4v16H4zM6 2.5A1.5 1.5 0 1 1 6 5.5a1.5 1.5 0 0 1 0-3zM10 8h4v2h.1c.6-1 2-2 4-2 4.3 0 5 2.8 5 6.5V20h-4v-5.5c0-1.3 0-3-2-3s-2.3 1.4-2.3 2.9V20H10z"/></svg></a>
+        <a href="https://github.com/synapsyx" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8 0-.6.3-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.5 9.5 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg></a>
+        <a href="mailto:{{ $contactEmail }}" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
