@@ -772,7 +772,7 @@ html[data-theme="light"] .footer{
   .hero-inner{position:relative;padding:96px 32px 56px;}
   .wrap{padding:0 32px;}
   .footer-inner{padding:0 32px;}
-  .about-grid,.product-grid,.product.reverse .product-grid{grid-template-columns:1fr;gap:40px;}
+  .about-grid,.product-grid,.product.reverse .product-grid,.proof .product-grid{grid-template-columns:1fr;gap:40px;}
   .product.reverse .product-visual{order:0;}
   .about-stats,.team-grid,.partners-row,.footer-grid,.capability-grid,.proof-grid{grid-template-columns:1fr 1fr;}
   .about-pillars{grid-template-columns:1fr;}
