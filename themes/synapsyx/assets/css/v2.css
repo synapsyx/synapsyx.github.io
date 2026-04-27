@@ -179,6 +179,9 @@ body, .page, .nav, .stat, .member, .partner, .pillar, .product-visual, .btn, .fo
   }
   .reveal{opacity:1;transform:none;}
   html{scroll-behavior:auto;}
+  /* The wildcard rule above would just snap the rotation through 360°
+     in 0.01ms over and over — worse than running it. Disable explicitly. */
+  .about-mark .pw-spin{animation:none !important;}
 }
 
 /* ===== Loading splash =====
@@ -369,7 +372,49 @@ a:focus:not(:focus-visible){outline:none;}
 .credibility-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px;}
 .credibility-list li{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--fg-3);padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:rgba(255,255,255,0.018);}
 
-.about{padding:120px 0;border-bottom:1px solid var(--line);}
+.about{padding:120px 0;border-bottom:1px solid var(--line);position:relative;overflow:hidden;}
+
+/* Oversized faint hex mark, partially clipped off the right edge.
+   Strokes self-draw via stroke-dasharray on viewport entry (.in is
+   added by the shared .reveal IntersectionObserver in v2.js). */
+.about-mark{position:absolute;top:-4%;right:-10%;width:clamp(320px,38vw,540px);aspect-ratio:110/128;pointer-events:none;z-index:0;color:rgba(var(--magenta-rgb),0.07);
+  /* The .reveal class normally hides the element with opacity:0/translateY;
+     override here so only the path strokes animate, not the container. */
+  opacity:1;transform:none;transition:none;
+  /* JS in v2.js writes a translate3d() to the inline style on scroll for
+     the backdrop parallax — promote to its own compositing layer so the
+     paint stays on the GPU. */
+  will-change:transform;
+  /* Soft fade where the mark passes behind the stats grid / section bottom,
+     so the strokes don't get sliced by a hard horizontal edge. */
+  -webkit-mask-image:linear-gradient(to bottom,#000 60%,transparent 95%);
+          mask-image:linear-gradient(to bottom,#000 60%,transparent 95%);}
+.about-mark svg{width:100%;height:100%;display:block;overflow:visible;}
+/* pathLength="1" is set on each path but browsers don't reliably normalize
+   CSS dasharray/dashoffset to it — values are read in user units. So the
+   dash values match each path's actual length: hex perimeter ≈ 650 (two
+   sub-paths), pinwheel quads ≈ 162 each. */
+.about-mark path{fill:none;stroke:currentColor;stroke-width:0.4;stroke-linecap:round;stroke-linejoin:round;transition:stroke-dashoffset 1.4s cubic-bezier(0.16,1,0.3,1);}
+.about-mark .hex{stroke-dasharray:660;stroke-dashoffset:660;}
+.about-mark .pw{stroke-dasharray:165;stroke-dashoffset:165;}
+.about-mark.in .hex{stroke-dashoffset:0;}
+.about-mark.in .pw{stroke-dashoffset:0;transition-duration:0.95s;}
+.about-mark.in .pw-1{transition-delay:0.22s;}
+.about-mark.in .pw-2{transition-delay:0.30s;}
+.about-mark.in .pw-3{transition-delay:0.38s;}
+.about-mark.in .pw-4{transition-delay:0.46s;}
+.about-mark.in .pw-5{transition-delay:0.54s;}
+.about-mark.in .pw-6{transition-delay:0.62s;}
+/* Ambient rotation of the inner pinwheel only (the hex outline stays put).
+   Pivot is set in SVG user-space coordinates: the hex centroid is at
+   (134.484, 447.55) in the viewBox. The animation only attaches once
+   .about-mark gets .in (added by the IntersectionObserver), and the
+   1.6s delay holds until the entry draw — the last pw stroke finishes
+   at 0.62s + 0.95s ≈ 1.57s — completes before rotation starts. */
+.about-mark .pw-spin{transform-box:view-box;transform-origin:134.484px 447.55px;}
+.about-mark.in .pw-spin{animation:synx-pw-spin 100s linear 1.6s infinite;}
+@keyframes synx-pw-spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+html[data-theme="light"] .about-mark{color:rgba(var(--magenta-rgb),0.11);}
 .about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:88px;align-items:flex-start;}
 .about-body p{font-size:17px;line-height:1.6;color:var(--fg-2);margin:0 0 24px;text-wrap:pretty;}
 .about-body p:last-child{margin:0;}
@@ -767,6 +812,19 @@ html[data-theme="light"] .footer{
      layout doesn't leave a 520px empty box below each product. */
   .credibility .wrap{padding-top:22px;padding-bottom:22px;}
   .about{padding:88px 0;}
+  /* Keep the backdrop mark on mobile but shrink it and tuck further off-screen
+     so it's a faint peek behind the section heading rather than a competitor
+     for the now single-column content. The `top` shifts from desktop's -4%
+     to a positive value: the .about section is ~2.5x taller on mobile, so
+     the JS scroll parallax (rate 0.3 of section height) translates the mark
+     ~225px up at the section-top scroll state. Anchoring the mark lower in
+     the section lets that upward shift bring it back into the visible band
+     near the heading rather than off the top of the viewport. Mask tightened
+     so the strokes dissolve before colliding with the stacked .about-body /
+     .about-stats below. */
+  .about-mark{width:clamp(180px,50vw,320px);top:12%;right:-20%;
+    -webkit-mask-image:linear-gradient(to bottom,#000 42%,transparent 82%);
+            mask-image:linear-gradient(to bottom,#000 42%,transparent 82%);}
   .products{padding:88px 0 96px;}
   .team{padding:88px 0;}
   .partners{padding:80px 0 88px;}
@@ -998,7 +1056,7 @@ html[data-theme="light"] .footer{
   }
   html,body,.page,.footer{background:#fff !important;color:#000 !important;box-shadow:none !important;}
   .page{width:auto !important;max-width:100% !important;margin:0 !important;}
-  .page::before,.team::before,.hero::after,.hero .grid-bg,.hero h1 .accent::before{display:none !important;}
+  .page::before,.team::before,.hero::after,.hero .grid-bg,.hero h1 .accent::before,.about-mark{display:none !important;}
   .page-header,.skip-link,.nav,.theme-toggle,.hero .ctas,.product .actions,.footer-bottom .socials{display:none !important;}
   .product-visual,.epath-video,.member .portrait,.partner .plogo .glyph,.footprint-canvas{display:none !important;}
   .hero{height:auto !important;padding:0 0 18pt !important;border:none !important;}

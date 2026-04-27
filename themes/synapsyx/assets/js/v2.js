@@ -144,6 +144,8 @@
   // Nav scroll behavior: shrink on scroll + hide on scroll-down + progress bar + active section
   var nav = document.getElementById('nav');
   var progress = document.getElementById('navProgress');
+  var aboutSection = document.getElementById('about');
+  var aboutMark = document.querySelector('.about-mark');
   var lastY = 0;
   function onScroll(){
     if (!nav) return;
@@ -174,6 +176,16 @@
       if (isActive) a.setAttribute('aria-current', 'location');
       else a.removeAttribute('aria-current');
     });
+
+    // Backdrop parallax for the about-mark hex/pinwheel: drift opposite
+    // to scroll at 30% rate, anchored on the about section's center. Live
+    // matchMedia read so a mid-session preference change takes effect on
+    // the next scroll tick.
+    if (aboutMark && aboutSection && !(reducedMotionMQ && reducedMotionMQ.matches)) {
+      var aRect = aboutSection.getBoundingClientRect();
+      var aboutDelta = (aRect.top + aRect.height/2) - window.innerHeight/2;
+      aboutMark.style.transform = 'translate3d(0,' + (-aboutDelta * 0.3).toFixed(1) + 'px,0)';
+    }
   }
   // Coalesce scroll-driven DOM writes to one per frame — the raw scroll
   // event fires dozens of times/sec and onScroll does classList toggles,
