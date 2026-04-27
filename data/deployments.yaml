@@ -7,7 +7,7 @@ hq:
   lat: 48.2082
   lng: 16.3738
   role: Headquarters
-  description: synapsyx GmbH — product, engineering, deployment.
+  description: synapsyx GmbH — applied AI R&D, systems development, project delivery, and company operations.
   # Satellites travel with HQ on the globe + list — same magenta pin
   # style as primary HQ, merged into the single "HQ" entry below.
   satellites:
@@ -16,19 +16,19 @@ hq:
       country: AU
       lat: -33.8688
       lng: 151.2093
-      role: Operations Lead
-      description: Petar Djordjevic-Ilic — operations and delivery, currently based in Australia.
+      role: Operations presence
+      description: Petar Djordjevic-Ilic — operations and delivery support, currently based in Australia.
 
 deployments:
   - region: Vietnam
     country: VN
     lat: 21.0285
     lng: 105.8542
-    role: ePATH at partner universities
-    description: Career guidance via Green Edu Seeds (Erasmus+ CBHE).
+    role: ePATH deployment context
+    description: AI-guided entrepreneurship and career-support workflows via the Green-Edu-Seeds education-platform context.
   - region: Thailand
     country: TH
     lat: 13.7563
     lng: 100.5018
-    role: ePATH at partner universities
-    description: Career guidance via Green Edu Seeds (Erasmus+ CBHE).
+    role: ePATH deployment context
+    description: AI-guided entrepreneurship and career-support workflows via the Green-Edu-Seeds education-platform context.

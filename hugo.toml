@@ -7,7 +7,7 @@ theme = 'synapsyx'
   favicon = 'favicon.ico'
   brandword = "synapsyx"
   brandhtml = "synapsy<span class=\"brand-highlight\">x</span>"
-  description = "synapsyx builds proprietary AI products for education and institutional workflows — including ePATH and G/S-Flow."
+  description = "Applied AI R&D and implementation company for custom AI systems, agents, platforms, and workflow automation."
   canonifyURLs = true
   [params.contact]
     email = "contact@synapsyx.com"
@@ -25,7 +25,7 @@ theme = 'synapsyx'
     url = "#epath"
     weight = 15
   [[menu.main]]
-    name = "Products"
+    name = "Capabilities"
     url = "#services"
     weight = 20
   [[menu.main]]
