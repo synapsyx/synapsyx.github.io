@@ -7,6 +7,7 @@
   {{ $title := printf "%s · synapsyx" .Title }}
   {{ $desc := .Params.description | default (printf "%s — synapsyx GmbH, Vienna." .Title) }}
   {{ $url := .Permalink }}
+  {{ $ogImage := resources.Get "v2/og-preview.png" | fingerprint }}
   <title>{{ $title }}</title>
   <meta name="description" content="{{ $desc }}">
   <link rel="canonical" href="{{ $url }}">
@@ -20,6 +21,19 @@
   <meta property="og:description" content="{{ $desc }}">
   <meta property="og:url" content="{{ $url }}">
   <meta property="og:locale" content="en_US">
+  {{ with $ogImage }}
+  <meta property="og:image" content="{{ .Permalink }}">
+  <meta property="og:image:secure_url" content="{{ .Permalink }}">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="synapsyx — applied AI systems for complex workflows. Vienna.">
+  {{ end }}
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ $title }}">
+  <meta name="twitter:description" content="{{ $desc }}">
+  {{ with $ogImage }}<meta name="twitter:image" content="{{ .Permalink }}">{{ end }}
 
   {{ $interTightLatinPreload := resources.Get "v2/fonts/inter-tight-latin.woff2" | fingerprint }}
   {{ $interLatinPreload := resources.Get "v2/fonts/inter-latin.woff2" | fingerprint }}
