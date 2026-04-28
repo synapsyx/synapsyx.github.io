@@ -377,7 +377,7 @@ a:focus:not(:focus-visible){outline:none;}
 /* Oversized faint hex mark, partially clipped off the right edge.
    Strokes self-draw via stroke-dasharray on viewport entry (.in is
    added by the shared .reveal IntersectionObserver in v2.js). */
-.about-mark{position:absolute;top:-4%;right:-10%;width:clamp(320px,38vw,540px);aspect-ratio:110/128;pointer-events:none;z-index:0;color:rgba(var(--magenta-rgb),0.10);
+.about-mark{position:absolute;top:-4%;right:-10%;width:clamp(320px,38vw,540px);aspect-ratio:110/128;pointer-events:none;z-index:0;color:rgba(var(--magenta-rgb),0.15);
   /* The .reveal class normally hides the element with opacity:0/translateY;
      override here so only the path strokes animate, not the container. */
   opacity:1;transform:none;transition:none;
