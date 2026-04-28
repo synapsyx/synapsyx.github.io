@@ -802,7 +802,7 @@ html[data-theme="light"] .footer{
   .product.reverse .product-visual{order:0;}
   .about-stats,.team-grid,.partners-row,.footer-grid,.capability-grid,.proof-grid{grid-template-columns:1fr 1fr;}
   .about-pillars{grid-template-columns:1fr;}
-  .pillar{padding:24px 0;}
+  .pillar{padding:24px 22px;}
   .section-head{flex-direction:column;align-items:flex-start;gap:24px;padding-bottom:32px;margin-bottom:40px;}
   .section-head .right{order:-1;text-align:left;padding-bottom:0;}
   .hero h1{font-size:54px;}
