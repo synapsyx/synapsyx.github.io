@@ -557,6 +557,9 @@ html[data-theme="light"] .about-mark{color:rgba(var(--magenta-rgb),0.13);}
 .partner .plogo .glyph{transition:border-color .3s ease;}
 .partner .plogo{min-height:60px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
 .partner .plogo .glyph{width:60px;height:60px;border:1px solid var(--line-strong);border-radius:8px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;background:var(--ghost-bg);padding:8px;}
+a.glyph{text-decoration:none;color:inherit;cursor:pointer;}
+a.glyph:hover{border-color:rgba(var(--magenta-rgb),0.7);}
+a.glyph:focus-visible{outline:2px solid rgba(var(--magenta-rgb),0.7);outline-offset:2px;}
 .partner .plogo .glyph img{max-width:100%;max-height:100%;object-fit:contain;}
 .partner .plogo .glyph .init{font-family:var(--display);font-size:22px;font-weight:500;letter-spacing:-0.02em;color:var(--fg-2);line-height:1;}
 .partner .plogo .wordmark{font-family:var(--display);font-size:19px;font-weight:500;letter-spacing:-0.015em;color:var(--fg);}

@@ -745,6 +745,7 @@
         {{ range .Site.Data.partners }}
           {{ $pname := .name }}
           {{ $pdesc := .description }}
+          {{ $purl := .url }}
           {{ $logo := resources.Get .logo }}
           {{ with $logo }}
             {{/* Partner logos render in a 60×60 glyph; ship a fitted raster
@@ -765,10 +766,17 @@
           {{ end }}
           <div class="partner">
             <div class="plogo">
-              <span class="glyph">
-                {{ if $logo }}<img src="{{ $logo.RelPermalink }}" width="{{ $logo.Width }}" height="{{ $logo.Height }}" alt="" loading="lazy" decoding="async">
-                {{ else }}<span class="init" aria-hidden="true">{{ $initials }}</span>{{ end }}
-              </span>
+              {{ if $purl }}
+                <a class="glyph" href="{{ $purl }}" target="_blank" rel="noopener noreferrer" aria-label="Visit {{ $pname }} website (opens in new tab)">
+                  {{ if $logo }}<img src="{{ $logo.RelPermalink }}" width="{{ $logo.Width }}" height="{{ $logo.Height }}" alt="" loading="lazy" decoding="async">
+                  {{ else }}<span class="init" aria-hidden="true">{{ $initials }}</span>{{ end }}
+                </a>
+              {{ else }}
+                <span class="glyph">
+                  {{ if $logo }}<img src="{{ $logo.RelPermalink }}" width="{{ $logo.Width }}" height="{{ $logo.Height }}" alt="" loading="lazy" decoding="async">
+                  {{ else }}<span class="init" aria-hidden="true">{{ $initials }}</span>{{ end }}
+                </span>
+              {{ end }}
               <span class="wordmark">{{ $pname }}</span>
             </div>
             <p>{{ $pdesc }}</p>
