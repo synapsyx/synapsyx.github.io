@@ -1,4 +1,7 @@
 ---
 title: "Our Products"
+build:
+  render: never
+  list: never
 ---
-Our products are in the hands of real users. ePATH is used by students at partner universities across Southeast Asia, and G/S-Flow powers automated project development and proposal work inside ongoing cross-border initiatives. Each one targets a specific problem for a specific audience.
+synapsyx develops custom AI systems and reusable workflows across client and funded projects. ePATH — our AI-supported career-orientation tool — is live with students in an Erasmus+ education context. Selected components from our project work are progressively developed into reusable products.

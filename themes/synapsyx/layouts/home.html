@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>(function(){try{var s=localStorage.getItem('synx_v2_theme');if(s==='light'||s==='dark'){if(s==='light')document.documentElement.setAttribute('data-theme','light');}else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches){document.documentElement.setAttribute('data-theme','light');}if(sessionStorage.getItem('synx_v2_loaded_once')==='1')document.documentElement.setAttribute('data-loaded','');}catch(e){}})();</script>
-  {{ $title := "synapsyx · Applied AI systems for complex workflows" }}
-  {{ $desc := "synapsyx is an applied AI R&D and implementation company for custom AI systems, agents, platforms, internal tools, and workflow automation." }}
+  {{ $title := "synapsyx · Applied AI systems, strategy, and AI literacy" }}
+  {{ $desc := "synapsyx is a Vienna-based AI company building custom AI systems, with AI strategy, implementation, and AI-literacy education for organizations across Austria and the DACH region." }}
   {{ $url := "https://www.synapsyx.com/" }}
   {{ $ogImage := resources.Get "v2/og-preview.png" | fingerprint }}
   <title>{{ $title }}</title>
@@ -27,7 +27,7 @@
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="synapsyx — applied AI systems for complex workflows. Vienna. ePATH live MVP and internal AI workflows.">
+  <meta property="og:image:alt" content="synapsyx — applied AI systems, strategy, and AI literacy. Vienna and the DACH region.">
   {{ end }}
 
   <meta name="twitter:card" content="summary_large_image">
@@ -111,7 +111,7 @@
     "@id" (printf "%s#epath" $url)
     "name" "ePATH"
     "alternateName" "ePATH AI counseling tool"
-    "description" "AI counseling tool for entrepreneurship education — combines structured interaction, scoring logic, and an AI counselor experience. Live MVP integrated into MoodleCloud via LTI 1.3 in the Green-Edu-Seeds education-platform context."
+    "description" "AI-supported tool for career orientation and entrepreneurship reflection — combines structured self-assessment logic with an AI counselor experience. Live MVP integrated into MoodleCloud via LTI 1.3 in the Green-Edu-Seeds Erasmus+ education context. Supports reflection and orientation; does not make high-stakes decisions."
     "applicationCategory" "EducationalApplication"
     "operatingSystem" "Web"
     "creator" (dict "@id" $orgID)
@@ -167,7 +167,7 @@
   {{ end }}
   {{ $entities := slice $org $website $webpage $internalWorkflows $epathSchema }}
   {{ range $places }}{{ $entities = $entities | append . }}{{ end }}
-  {{ $teamSlugsLD := slice "mathias" "george" "strudl" "petar" }}
+  {{ $teamSlugsLD := slice "george" "strudl" }}
   {{ range $teamSlugsLD }}
     {{ $slug := . }}
     {{ $m := $.Site.GetPage (printf "/sections/team/%s" $slug) }}
@@ -216,33 +216,23 @@
   }}
 {{ end }}
 {{ $epath := .Site.GetPage "/sections/services/ai-software-applications" }}
-{{ $teamMathias := .Site.GetPage "/sections/team/mathias" }}
 {{ $teamGeorge := .Site.GetPage "/sections/team/george" }}
 {{ $teamMichael := .Site.GetPage "/sections/team/strudl" }}
-{{ $teamPetar := .Site.GetPage "/sections/team/petar" }}
 
 {{/* Bios (and titles) inlined here so the team copy at /sections/team/*
      stays untouched. Keys match the team markdown filename. */}}
 {{ $teamCopy := dict
   "george" (dict
     "title" "Georg Thurnwalder, LL.B."
-    "role"  "Managing Director · AI strategy & project development"
+    "role"  "Co-founder & Managing Director · AI strategy"
     "bio"   "International business law background with three years of independent work in AI and international startup experience. Co-founder of an Austrian NGO.")
   "strudl" (dict
     "title" "Michael Strobl, BSc."
-    "role"  "Managing Director · AI systems & strategy"
+    "role"  "Co-founder & Managing Director · AI systems"
     "bio"   "Drives digital-transformation and AI projects, combining a degree in Economics, Big 4 forensic-tech, and international startup experience.")
-  "mathias" (dict
-    "title" "Mathias Baumgartinger, BSc."
-    "role"  "AI systems developer · product design"
-    "bio"   "Computer scientist with 6+ years in software development, geospatial analytics, and machine learning. MSc candidate in Computer Science at University of Vienna.")
-  "petar" (dict
-    "title" "Petar Djordjevic-Ilic, BEng."
-    "role"  "Operations & delivery"
-    "bio"   "Chemical engineer with a track record of delivering US $40 million-plus engineering programs and international startup experience across Australia and Korea.")
 }}
-{{ $teamSlugOrder := slice "george" "strudl" "mathias" "petar" }}
-{{ $teamPagesBySlug := dict "george" $teamGeorge "strudl" $teamMichael "mathias" $teamMathias "petar" $teamPetar }}
+{{ $teamSlugOrder := slice "george" "strudl" }}
+{{ $teamPagesBySlug := dict "george" $teamGeorge "strudl" $teamMichael }}
 
 {{ $contactEmail := .Site.Params.contact.email | default "contact@synapsyx.com" }}
 {{ $contactAddress := .Site.Params.contact.address | default "Steigenteschgasse 13, 1220 Wien" }}
@@ -273,7 +263,7 @@
         <span>Vienna</span>
       </p>
       <h1 id="hero-heading">Applied AI systems for <span class="accent">complex&nbsp;workflows</span>.</h1>
-      <p class="sub">We design, build, and implement AI pipelines, agents, internal tools, and platforms — from early prototypes to operational systems and funded innovation projects.</p>
+      <p class="sub">We build custom AI systems, guide AI strategy and implementation, and teach AI literacy — from prototypes to operational systems and funded innovation projects.</p>
       <div class="ctas">
         <a class="btn primary" href="{{ $discussHref }}">Discuss a project <span class="arr" aria-hidden="true">→</span></a>
         <a class="btn ghost" href="#capabilities">View capabilities <span class="arr" aria-hidden="true">→</span></a>
@@ -282,14 +272,6 @@
         <div class="item">
           <span class="k">ePATH</span>
           <span class="v"><span class="dot"></span>Live MVP · deployed pilot</span>
-        </div>
-        <div class="item">
-          <span class="k">Internal AI workflows</span>
-          <span class="v">Research · documentation · quality review</span>
-        </div>
-        <div class="item">
-          <span class="k">Location</span>
-          <span class="v">Vienna, AT · Sydney, AU</span>
         </div>
         <div class="item">
           <span class="k">Focus</span>
@@ -304,17 +286,13 @@
     <div class="wrap">
       <span class="item">Austrian company</span>
       <span class="sep" aria-hidden="true"></span>
-      <span class="item">Applied AI R&amp;D</span>
-      <span class="sep" aria-hidden="true"></span>
       <span class="item">Custom AI systems</span>
       <span class="sep" aria-hidden="true"></span>
-      <span class="item">AI agents</span>
+      <span class="item">AI agents &amp; automation</span>
       <span class="sep" aria-hidden="true"></span>
-      <span class="item">Workflow automation</span>
+      <span class="item">Strategy &amp; implementation</span>
       <span class="sep" aria-hidden="true"></span>
-      <span class="item">Internal tools</span>
-      <span class="sep" aria-hidden="true"></span>
-      <span class="item">Strategy and implementation</span>
+      <span class="item">AI literacy &amp; education</span>
     </div>
   </section>
 
@@ -343,7 +321,7 @@
         <div class="left">
           <p class="num"><span class="bar"></span> 01 · About</p>
           <h2 id="about-heading">A young Austrian AI company built for implementation.</h2>
-          <p class="lede">synapsyx GmbH is a Vienna-based applied AI R&amp;D and implementation company. We build custom AI systems for workflows where generic tools are not enough.</p>
+          <p class="lede">synapsyx GmbH is a Vienna-based AI company working across development, strategy, and education. We work mainly with education, research, social-sector, and publicly funded organizations across Austria and the DACH region.</p>
         </div>
         <div class="right">
           <span class="count">2025</span>
@@ -354,7 +332,7 @@
       <div class="about-grid">
         <div class="about-body">
           <p>We build custom AI systems for workflows where generic tools fall short: <span class="b">internal knowledge work, document-heavy processes, education platforms, research and innovation projects, and operational decision support</span>.</p>
-          <p>Our work combines hands-on AI experimentation, software development, context engineering, structured evaluation, and project delivery. We do not only advise on AI — we build systems, test them in real workflows, and use our own internal tools to improve how we work.</p>
+          <p>Our work combines hands-on AI experimentation, software development, context engineering, structured evaluation, and project delivery. We combine strategy, implementation, and education — from identifying suitable use cases to building systems, evaluating them, supporting adoption, and gradually turning proven components into reusable products.</p>
         </div>
 
         <div class="about-stats reveal reveal-delay-1">
@@ -419,62 +397,49 @@
       <div class="section-head reveal">
         <div class="left">
           <p class="num"><span class="bar"></span> 02 · Capabilities</p>
-          <h2 id="capabilities-heading">What we build.</h2>
-          <p class="lede">We work where AI has to fit into real processes, sensitive information flows, and practical implementation constraints.</p>
+          <h2 id="capabilities-heading">What we do.</h2>
+          <p class="lede">We work where AI has to fit into real processes, sensitive information flows, and practical implementation constraints — across development, strategy, and education.</p>
         </div>
         <div class="right">
-          <span class="count">04</span>
-          Practice areas
+          <span class="count">03</span>
+          Pillars
         </div>
       </div>
 
       <div class="cap-grid reveal reveal-delay-1">
         <div class="cap">
-          <p class="num">01 / Build</p>
-          <h3>AI systems development</h3>
-          <p>Custom AI tools, platforms, pipelines, dashboards, internal applications, integrations, and workflow interfaces for organizations that need more than an off-the-shelf chatbot.</p>
+          <p class="num">01 / Develop</p>
+          <h3>AI solution development</h3>
+          <p>Custom AI tools, platforms, pipelines, internal applications, agents, and workflow automation for organizations that need more than an off-the-shelf chatbot.</p>
           <ul>
-            <li>Custom AI applications</li>
+            <li>Custom AI applications and platforms</li>
+            <li>AI agents and workflow automation</li>
             <li>Internal tools and dashboards</li>
-            <li>Workflow interfaces</li>
             <li>API and platform integrations</li>
             <li>Prototype-to-implementation development</li>
           </ul>
         </div>
         <div class="cap">
-          <p class="num">02 / Automate</p>
-          <h3>AI agents and workflow automation</h3>
-          <p>Controlled agent workflows for research, drafting, classification, document processing, information management, and expert review.</p>
+          <p class="num">02 / Implement</p>
+          <h3>AI strategy and implementation</h3>
+          <p>We help teams identify where AI is useful and feasible, then deliver it — including R&amp;D and funded innovation projects, with evaluation built in.</p>
           <ul>
-            <li>Research and document workflows</li>
-            <li>Classification and structured outputs</li>
-            <li>Drafting and comparison pipelines</li>
-            <li>Human-in-the-loop review</li>
-            <li>Automation of repetitive knowledge work</li>
-          </ul>
-        </div>
-        <div class="cap">
-          <p class="num">03 / Strategy</p>
-          <h3>AI strategy and opportunity discovery</h3>
-          <p>We help teams identify where AI is useful, feasible, and worth implementing — then translate that into concrete prototypes, systems, and roadmaps.</p>
-          <ul>
-            <li>AI readiness and workflow analysis</li>
-            <li>Use-case selection</li>
-            <li>Feasibility assessment</li>
-            <li>Risk and constraint mapping</li>
+            <li>AI readiness and use-case selection</li>
+            <li>Feasibility and risk mapping</li>
             <li>Implementation roadmaps</li>
+            <li>R&amp;D and technical work packages</li>
+            <li>Evaluation, quality control, and funded-project support</li>
           </ul>
         </div>
         <div class="cap">
-          <p class="num">04 / R&amp;D</p>
-          <h3>R&amp;D and innovation projects</h3>
-          <p>We support AI innovation projects from concept to implementation: technical work packages, prototypes, evaluation logic, documentation, implementation planning, and partner coordination.</p>
+          <p class="num">03 / Educate</p>
+          <h3>AI literacy and education</h3>
+          <p>We build AI capability inside teams and institutions through hands-on, practical formats grounded in real implementation experience.</p>
           <ul>
-            <li>Prototype development</li>
-            <li>Technical work packages</li>
-            <li>Evaluation and quality control</li>
-            <li>Documentation and implementation planning</li>
-            <li>Funded innovation project support</li>
+            <li>AI-literacy workshops and guest teaching</li>
+            <li>Prompt- and context-engineering training</li>
+            <li>AI-supported project-management formats</li>
+            <li>Adoption and enablement support</li>
           </ul>
         </div>
       </div>
@@ -486,9 +451,9 @@
     <div class="wrap">
       <div class="section-head reveal">
         <div class="left">
-          <p class="num"><span class="bar"></span> 03 · Proof</p>
-          <h2 id="proof-heading">Selected systems, workflows, and capability proof.</h2>
-          <p class="lede">Many AI implementation projects involve sensitive workflows, data, or strategic plans. We therefore show selected public examples, anonymized project snapshots, and internal capability proof. Additional details and walkthroughs are available where appropriate.</p>
+          <p class="num"><span class="bar"></span> 03 · Our work</p>
+          <h2 id="proof-heading">Selected systems and work.</h2>
+          <p class="lede">Many AI projects involve sensitive workflows, data, or strategic plans, so we show selected public examples, anonymized project snapshots, and internal systems we use ourselves. More detail is available where appropriate.</p>
         </div>
         <div class="right">
           <span class="count">05</span>
@@ -539,8 +504,8 @@
               <span class="status mg">Live MVP · deployed pilot</span>
             </div>
             <h3>ePATH</h3>
-            <p class="tagline">AI counseling tool for entrepreneurship education</p>
-            <p class="lede">ePATH is an AI-guided student support tool developed for entrepreneurship education. It combines structured interaction, scoring logic, and an AI counselor experience to help students reflect on career direction and entrepreneurial potential.</p>
+            <p class="tagline">AI-supported career orientation and entrepreneurship reflection</p>
+            <p class="lede">ePATH is an AI-supported tool for career orientation and entrepreneurship reflection. It combines structured self-assessment logic with an AI counselor experience to help students explore career direction. Deployed via LTI 1.3 in MoodleCloud within an Erasmus+ education context, ePATH supports reflection and orientation — it does not make admissions, employment, or other high-stakes decisions.</p>
             <ul class="features">
               <li><span class="tick"></span><span class="text"><span class="b">Hybrid design combining skippable modular questionnaires with open-ended AI counselor dialogue</span></span></li>
               <li><span class="tick"></span><span class="text"><span class="b">Questionnaire and AI recommendations benchmarked against O*NET occupational data during development</span></span></li>
@@ -617,7 +582,7 @@
         <div class="left">
           <p class="num"><span class="bar"></span> 04 · Approach</p>
           <h2 id="approach-heading">Fast experimentation, disciplined implementation.</h2>
-          <p class="lede">AI projects move quickly, but serious implementation still needs structure. We work in short cycles that make assumptions visible, test technical feasibility early, and keep review points explicit.</p>
+          <p class="lede">AI projects move quickly, but serious implementation still needs structure. We work in short cycles that make assumptions visible, test technical feasibility early, and keep review points explicit. We keep people in control of meaningful decisions, design for privacy and accessibility, and avoid training proprietary models.</p>
         </div>
         <div class="right">
           <span class="count">05</span>
@@ -660,13 +625,13 @@
     <div class="wrap">
       <div class="section-head reveal">
         <div class="left">
-          <p class="num"><span class="bar"></span> 05 · Team</p>
-          <h2 id="team-heading">Builders, operators, and applied AI specialists.</h2>
-          <p class="lede">We are a small interdisciplinary team combining technical implementation, project development, AI experimentation, operations, economics, law, engineering, and international delivery experience. Our size allows us to move quickly, while our process keeps projects structured and reviewable.</p>
+          <p class="num"><span class="bar"></span> 05 · Founders</p>
+          <h2 id="team-heading">Founder-led and implementation-focused.</h2>
+          <p class="lede">synapsyx is led by its two founders, who combine AI systems development, product work, and AI strategy with backgrounds in economics, law, and organization-building. We operate as a small core team and bring in specialist collaborators and partners on individual projects.</p>
         </div>
         <div class="right">
-          <span class="count">04</span>
-          Vienna · Sydney
+          <span class="count">02</span>
+          Vienna
         </div>
       </div>
 
