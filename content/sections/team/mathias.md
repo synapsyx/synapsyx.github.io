@@ -1,4 +1,5 @@
 ---
+draft: true
 name: "Mathias Baumgartinger, BSc."
 image: "/images/team/mathias_nobg_new.png"
 position: "AI systems developer · product design"

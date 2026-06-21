@@ -8,16 +8,6 @@ hq:
   lng: 16.3738
   role: Headquarters
   description: synapsyx GmbH — applied AI R&D, systems development, project delivery, and company operations.
-  # Satellites travel with HQ on the globe + list — same magenta pin
-  # style as primary HQ, merged into the single "HQ" entry below.
-  satellites:
-    - city: Sydney
-      region: Australia
-      country: AU
-      lat: -33.8688
-      lng: 151.2093
-      role: Operations presence
-      description: Petar Djordjevic-Ilic — operations and delivery support, currently based in Australia.
 
 deployments:
   - region: Vietnam

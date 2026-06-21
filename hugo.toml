@@ -7,7 +7,7 @@ theme = 'synapsyx'
   favicon = 'favicon.ico'
   brandword = "synapsyx"
   brandhtml = "synapsy<span class=\"brand-highlight\">x</span>"
-  description = "Applied AI R&D and implementation company for custom AI systems, agents, platforms, and workflow automation."
+  description = "Vienna-based AI company for custom AI systems, AI strategy and implementation, and AI-literacy education across Austria and the DACH region."
   canonifyURLs = true
   [params.contact]
     email = "contact@synapsyx.com"

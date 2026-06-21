@@ -1,4 +1,5 @@
 ---
+draft: true
 name: "Petar Djordjevic-Ilic, BEng."
 image: "/images/team/petar_nobg_newnew.png"
 position: "Operations & delivery"
