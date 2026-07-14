@@ -515,7 +515,7 @@ html[data-theme="light"] .about-mark{color:rgba(var(--magenta-rgb),0.13);}
 /* Featured ePATH inside .proof: the right-column copy is naturally taller
    than the demo's ~5:4 aspect. Don't stretch the visual to match — that
    produced a framed empty area below the video. Wrap the visual + CTA in
-   a .product-left flex column so the "Request the case study" link sits
+   a .product-left flex column so the "Request a deployment" link sits
    directly below the video instead of trailing under the right-column
    bullets, which would otherwise leave a big gap below the visual frame. */
 /* Visual is the centerpiece of this card, so the demo gets the wider
