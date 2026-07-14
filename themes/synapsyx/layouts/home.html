@@ -111,7 +111,7 @@
     "@id" (printf "%s#epath" $url)
     "name" "ePATH"
     "alternateName" "ePATH AI counseling tool"
-    "description" "AI-supported tool for career orientation and entrepreneurship reflection — combines structured self-assessment logic with an AI counselor experience. Live MVP integrated into MoodleCloud via LTI 1.3 in the Green-Edu-Seeds Erasmus+ education context. Supports reflection and orientation; does not make high-stakes decisions."
+    "description" "AI-supported tool for career orientation and entrepreneurship reflection — combines structured self-assessment logic with an AI counselor experience. In production within the Green Edu Seeds Erasmus+ project, integrated into MoodleCloud via LTI 1.3 and used by students in Vietnam, Thailand, Germany, and Italy. Supports reflection and orientation; does not make high-stakes decisions."
     "applicationCategory" "EducationalApplication"
     "operatingSystem" "Web"
     "creator" (dict "@id" $orgID)
@@ -238,7 +238,7 @@
 {{ $contactAddress := .Site.Params.contact.address | default "Steigenteschgasse 13, 1220 Wien" }}
 {{ $discussHref := printf "mailto:%s?subject=Project%%20discussion" $contactEmail }}
 {{ $introHref := printf "mailto:%s?subject=Introducing%%20myself" $contactEmail }}
-{{ $epathHref := printf "mailto:%s?subject=ePATH%%20case%%20study" $contactEmail }}
+{{ $epathHref := printf "mailto:%s?subject=ePATH%%20deployment" $contactEmail }}
 {{ $approachHref := printf "mailto:%s?subject=Internal%%20AI%%20workflows" $contactEmail }}
 
 <div class="page" id="top" data-screen-label="synapsyx.com">
@@ -271,7 +271,7 @@
       <div class="meta">
         <div class="item">
           <span class="k">ePATH</span>
-          <span class="v"><span class="dot"></span>Live MVP · deployed pilot</span>
+          <span class="v"><span class="dot"></span>Live · 4 countries</span>
         </div>
         <div class="item">
           <span class="k">Focus</span>
@@ -354,10 +354,10 @@
           </div>
           <div class="stat">
             <span class="corner-mark"></span>
-            <span class="k">Status</span>
+            <span class="k">Delivery</span>
             <div>
-              <div class="v">Live MVP</div>
-              <p class="d">ePATH is deployed as an AI counseling MVP in an education-platform context.</p>
+              <div class="v">In production</div>
+              <p class="d">Our systems reach production — ePATH runs live for students in four countries within an Erasmus+ project.</p>
             </div>
           </div>
           <div class="stat">
@@ -494,18 +494,18 @@
               </div>
             </div>
             <div class="actions">
-              <a class="inline-link" href="{{ $epathHref }}">Request the case study <span class="arr" aria-hidden="true">→</span></a>
+              <a class="inline-link" href="{{ $epathHref }}">Request a deployment <span class="arr" aria-hidden="true">→</span></a>
             </div>
           </div>
 
           <div class="product-copy">
             <div class="product-header">
               <span class="mark">P-01</span>
-              <span class="status mg">Live MVP · deployed pilot</span>
+              <span class="status mg">In production · 4 countries</span>
             </div>
             <h3>ePATH</h3>
             <p class="tagline">AI-supported career orientation and entrepreneurship reflection</p>
-            <p class="lede">ePATH is an AI-supported tool for career orientation and entrepreneurship reflection. It combines structured self-assessment logic with an AI counselor experience to help students explore career direction. Deployed via LTI 1.3 in MoodleCloud within an Erasmus+ education context, ePATH supports reflection and orientation — it does not make admissions, employment, or other high-stakes decisions.</p>
+            <p class="lede">ePATH is an AI-supported tool for career orientation and entrepreneurship reflection. It combines structured self-assessment logic with an AI counselor experience to help students explore career direction. ePATH is live in production within the Green Edu Seeds Erasmus+ project, used by students in Vietnam, Thailand, Germany, and Italy — embedded into MoodleCloud via LTI 1.3. It supports reflection and orientation; it does not make admissions, employment, or other high-stakes decisions.</p>
             <ul class="features">
               <li><span class="tick"></span><span class="text"><span class="b">Hybrid design combining skippable modular questionnaires with open-ended AI counselor dialogue</span></span></li>
               <li><span class="tick"></span><span class="text"><span class="b">Questionnaire and AI recommendations benchmarked against O*NET occupational data during development</span></span></li>

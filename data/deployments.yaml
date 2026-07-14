@@ -14,11 +14,23 @@ deployments:
     country: VN
     lat: 21.0285
     lng: 105.8542
-    role: ePATH deployment context
-    description: AI-guided entrepreneurship and career-support workflows via the Green-Edu-Seeds education-platform context.
+    role: ePATH deployment
+    description: ePATH live for students within the Green Edu Seeds Erasmus+ project.
   - region: Thailand
     country: TH
     lat: 13.7563
     lng: 100.5018
-    role: ePATH deployment context
-    description: AI-guided entrepreneurship and career-support workflows via the Green-Edu-Seeds education-platform context.
+    role: ePATH deployment
+    description: ePATH live for students within the Green Edu Seeds Erasmus+ project.
+  - region: Germany
+    country: DE
+    lat: 52.5200
+    lng: 13.4050
+    role: ePATH deployment
+    description: ePATH live for students within the Green Edu Seeds Erasmus+ project.
+  - region: Italy
+    country: IT
+    lat: 41.9028
+    lng: 12.4964
+    role: ePATH deployment
+    description: ePATH live for students within the Green Edu Seeds Erasmus+ project.
