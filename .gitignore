@@ -23,3 +23,7 @@ hugo.linux
 /about-*.png
 /final-*.png
 /theme-marker-*.png
+
+# Handoff exchanges stay private in this public repo; only the pointer README is tracked
+/_handoffs/*
+!/_handoffs/README.md
